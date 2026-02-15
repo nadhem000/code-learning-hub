@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="document.title">About Us – Code Learning Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/other-about.css">
+</head>
+<body>
+    <!-- ===== HEADER (shared) ===== -->
+    <header class="DHE-index-header">
+        <div class="DHE-index-header-container">
+            <div class="DHE-index-logo-container">
+                <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+            </div>
+            <div class="DHE-index-title-container">
+                <h1 data-i18n="index.header.title">Code Learning Platform</h1>
+                <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
+            </div>
+            <div class="DHE-index-hamburg-container">
+                <button class="DHE-index-hamburg-btn" id="hamburgBtn">
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                </button>
+                <div class="DHE-index-dropdown" id="dropdownMenu">
+                    <!-- Language -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.language">Language</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="language" data-value="en" data-i18n="index.dropdown.en">EN</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="fr" data-i18n="index.dropdown.fr">FR</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="ar" data-i18n="index.dropdown.ar">AR</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="language" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Mode -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.mode">Mode</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="mode" data-value="light" data-i18n="index.dropdown.light">Light</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="dark" data-i18n="index.dropdown.dark">Dark</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="highcontrast" data-i18n="index.dropdown.highcontrast">High Contrast</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="mode" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Fullscreen -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fullscreen">Fullscreen</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fullscreen" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fullscreen" data-value="no" data-i18n="index.dropdown.no">No</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fullscreen" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Font Size -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fontsize">Font Size</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="increase" data-i18n="index.dropdown.increase">Increase</button>
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="decrease" data-i18n="index.dropdown.decrease">Decrease</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fontsize" data-value="reset" data-i18n="index.dropdown.reset">Reset</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fontsize" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Export Data -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.export">Export Data</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="pdf" data-i18n="index.dropdown.pdf">PDF</button>
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="sheet" data-i18n="index.dropdown.sheet">Sheet</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="export" data-value="txt" data-i18n="index.dropdown.txt">TXT</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="export" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Notifications -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.notifications">Notifications</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="notifications" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="no" data-i18n="index.dropdown.no">No</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="important" data-i18n="index.dropdown.important">Only Important</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="notifications" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN: ABOUT US ===== -->
+    <main class="DHE-other-about-container">
+        <article class="DHE-other-about-paper">
+            <header class="DHE-other-about-header">
+                <h1 class="DHE-other-about-title" data-i18n="page.title">About Us</h1>
+                <p class="DHE-other-about-subtitle" data-i18n="page.subtitle">Building the future of code education</p>
+            </header>
+
+            <!-- Mission & Vision -->
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="mission.title">Our Mission</h2>
+                <div class="DHE-other-about-section-content">
+                    <p data-i18n="mission.text">To democratize coding education by providing high-quality, interactive learning experiences that empower individuals to build the digital future.</p>
+                </div>
+            </section>
+
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="vision.title">Our Vision</h2>
+                <div class="DHE-other-about-section-content">
+                    <p data-i18n="vision.text">To become the world's most inclusive and effective coding education platform, reaching millions of learners and transforming lives through technology education.</p>
+                </div>
+            </section>
+
+            <!-- Developer -->
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="developer.title">Meet Our Developer</h2>
+                <div class="DHE-other-about-developer">
+                    <div class="DHE-other-about-developer-image">
+                        <img src="assets/images/developer.png" alt="Mejri Ziad" onerror="this.src='https://via.placeholder.com/400x500/4b6cb7/ffffff?text=Developer+Image'">
+                    </div>
+                    <div class="DHE-other-about-developer-info">
+                        <h3 class="DHE-other-about-developer-name" data-i18n="developer.name">Mejri Ziad</h3>
+                        <p class="DHE-other-about-developer-bio" data-i18n="developer.bio1">Passionate full‑stack developer and educator with over 5 years of experience in web development and online education.</p>
+                        <p class="DHE-other-about-developer-bio" data-i18n="developer.bio2">His philosophy combines technical excellence with pedagogical effectiveness, ensuring every lesson is practical, engaging, and immediately applicable.</p>
+                        <div class="DHE-other-about-developer-contact">
+                            <span class="DHE-other-about-contact-item" data-i18n="developer.contact.phone">📞 +216 26 021 287</span>
+                            <span class="DHE-other-about-contact-item" data-i18n="developer.contact.location">📍 Tunisia, North Africa</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="features.title">Platform Features</h2>
+                <div class="DHE-other-about-features-grid">
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.interactive.title">Interactive Lessons</h3>
+                        <p data-i18n="features.list.interactive.desc">Step‑by‑step tutorials with live code examples and immediate feedback.</p>
+                    </div>
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.practice.title">Hands‑on Practice</h3>
+                        <p data-i18n="features.list.practice.desc">Built‑in code editor for real‑time coding practice.</p>
+                    </div>
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.projects.title">Real Projects</h3>
+                        <p data-i18n="features.list.projects.desc">Build portfolio‑worthy projects with guided instructions.</p>
+                    </div>
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.tracking.title">Progress Tracking</h3>
+                        <p data-i18n="features.list.tracking.desc">Monitor your learning journey with detailed analytics.</p>
+                    </div>
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.community.title">Community Support</h3>
+                        <p data-i18n="features.list.community.desc">Connect with fellow learners and mentors.</p>
+                    </div>
+                    <div class="DHE-other-about-feature-item">
+                        <h3 class="DHE-other-about-feature-title" data-i18n="features.list.mobile.title">Mobile Friendly</h3>
+                        <p data-i18n="features.list.mobile.desc">Learn on any device, anywhere, anytime.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Philosophy -->
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="philosophy.title">Development Philosophy</h2>
+                <div class="DHE-other-about-section-content">
+                    <ul>
+                        <li data-i18n="philosophy.items.accessibility"><strong>Accessibility First:</strong> We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.</li>
+                        <li data-i18n="philosophy.items.learningByDoing"><strong>Learning by Doing:</strong> The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.</li>
+                        <li data-i18n="philosophy.items.progressive"><strong>Progressive Complexity:</strong> Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.</li>
+                        <li data-i18n="philosophy.items.realWorld"><strong>Real‑World Relevance:</strong> Every lesson and project prepares learners for actual development scenarios.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Technology Stack -->
+            <section class="DHE-other-about-section">
+                <h2 class="DHE-other-about-section-title" data-i18n="tech.title">Technology Stack</h2>
+                <div class="DHE-other-about-tech-grid">
+                    <div class="DHE-other-about-tech-col">
+                        <h4 data-i18n="tech.frontend.title">Frontend</h4>
+                        <ul>
+                            <li data-i18n="tech.frontend.items.html">HTML5 & CSS3</li>
+                            <li data-i18n="tech.frontend.items.js">Vanilla JavaScript</li>
+                            <li data-i18n="tech.frontend.items.responsive">Responsive Design</li>
+                            <li data-i18n="tech.frontend.items.a11y">Accessibility Standards</li>
+                        </ul>
+                    </div>
+                    <div class="DHE-other-about-tech-col">
+                        <h4 data-i18n="tech.features.title">Features</h4>
+                        <ul>
+                            <li data-i18n="tech.features.items.editor">Interactive Code Editor</li>
+                            <li data-i18n="tech.features.items.progress">Progress Tracking</li>
+                            <li data-i18n="tech.features.items.mode">Dark/Light Mode</li>
+                            <li data-i18n="tech.features.items.mobile">Mobile Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <div class="DHE-other-about-cta">
+                <h2 data-i18n="cta.title">Start Your Coding Journey Today</h2>
+                <p data-i18n="cta.subtitle">Join thousands of learners who have transformed their careers with our platform.</p>
+                <div class="DHE-other-about-cta-buttons">
+                    <a href="index.html" class="DHE-other-about-cta-btn" data-i18n="cta.primary">Explore Courses</a>
+                    <a href="#" class="DHE-other-about-cta-btn secondary" data-i18n="cta.secondary">Contact Us</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ===== FOOTER (shared) ===== -->
+    <footer class="DHE-index-footer">
+        <div class="DHE-index-footer-container">
+            <div class="DHE-index-footer-column">
+                <div class="DHE-index-footer-logo">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-footer-logo-img">
+                    <p data-i18n="index.footer.briefDescription">
+                        Your go-to platform for mastering web development and programming languages.
+                    </p>
+                </div>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.communityTitle">Community</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.facebook">Facebook</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.twitter">Twitter</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.github">GitHub</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.youtube">YouTube</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.upscrolled">UpScrolled</a></li>
+                </ul>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="about.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+                    <li><a href="contact.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+                    <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="DHE-index-footer-bottom">
+            <p data-i18n="index.footer.copyright" data-i18n-params='[2026]'>
+                © 2026 Code Learning Platform. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="DHE-index-notification-container"></div>
+
+    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-about) ===== -->
+    <script>
+        window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
+
+        // ----- English -----
+        window.DHEtranslations.en['other-about'] = {
+            'document': { 'title': 'About Us – Code Learning Platform' },
+            'page': { 'title': 'About Us', 'subtitle': 'Building the future of code education' },
+            'mission': { 'title': 'Our Mission', 'text': 'To democratize coding education by providing high-quality, interactive learning experiences that empower individuals to build the digital future.' },
+            'vision': { 'title': 'Our Vision', 'text': 'To become the world\'s most inclusive and effective coding education platform, reaching millions of learners and transforming lives through technology education.' },
+            'developer': {
+                'title': 'Meet Our Developer',
+                'name': 'Mejri Ziad',
+                'bio1': 'Passionate full‑stack developer and educator with over 5 years of experience in web development and online education.',
+                'bio2': 'His philosophy combines technical excellence with pedagogical effectiveness, ensuring every lesson is practical, engaging, and immediately applicable.',
+                'contact': { 'phone': '📞 +216 26 021 287', 'location': '📍 Tunisia, North Africa' }
+            },
+            'features': {
+                'title': 'Platform Features',
+                'list': {
+                    'interactive': { 'title': 'Interactive Lessons', 'desc': 'Step‑by‑step tutorials with live code examples and immediate feedback.' },
+                    'practice': { 'title': 'Hands‑on Practice', 'desc': 'Built‑in code editor for real‑time coding practice.' },
+                    'projects': { 'title': 'Real Projects', 'desc': 'Build portfolio‑worthy projects with guided instructions.' },
+                    'tracking': { 'title': 'Progress Tracking', 'desc': 'Monitor your learning journey with detailed analytics.' },
+                    'community': { 'title': 'Community Support', 'desc': 'Connect with fellow learners and mentors.' },
+                    'mobile': { 'title': 'Mobile Friendly', 'desc': 'Learn on any device, anywhere, anytime.' }
+                }
+            },
+            'philosophy': {
+                'title': 'Development Philosophy',
+                'items': {
+                    'accessibility': '<strong>Accessibility First:</strong> We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.',
+                    'learningByDoing': '<strong>Learning by Doing:</strong> The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.',
+                    'progressive': '<strong>Progressive Complexity:</strong> Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.',
+                    'realWorld': '<strong>Real‑World Relevance:</strong> Every lesson and project prepares learners for actual development scenarios.'
+                }
+            },
+            'tech': {
+                'title': 'Technology Stack',
+                'frontend': { 'title': 'Frontend', 'items': { 'html': 'HTML5 & CSS3', 'js': 'Vanilla JavaScript', 'responsive': 'Responsive Design', 'a11y': 'Accessibility Standards' } },
+                'features': { 'title': 'Features', 'items': { 'editor': 'Interactive Code Editor', 'progress': 'Progress Tracking', 'mode': 'Dark/Light Mode', 'mobile': 'Mobile Optimization' } }
+            },
+            'cta': { 'title': 'Start Your Coding Journey Today', 'subtitle': 'Join thousands of learners who have transformed their careers with our platform.', 'primary': 'Explore Courses', 'secondary': 'Contact Us' },
+            // Shared notifications (reused from other pages)
+            'notifications': {
+                'welcome': 'Welcome to Code Learning Platform!',
+                'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
+                'doAction': 'Activating "{0}" with value "{1}" - Coming soon! Feature is under development.',
+                'exportPDF': 'Opening PDF export...',
+                'exportTXT': 'Text export completed.',
+                'exportSheet': 'CSV export completed.',
+                'comingSoonGeneric': 'Coming soon! This feature is under development.',
+                'done': 'Done! {0} set to {1}.'
+            },
+            // Shared header/footer/dropdown (reused from index)
+            'index': {
+                'header': { 'title': 'Code Learning Platform', 'subtitle': 'Master Web Development & Programming Languages' },
+                'dropdown': {
+                    'language': 'Language', 'mode': 'Mode', 'fullscreen': 'Fullscreen', 'fontsize': 'Font Size',
+                    'export': 'Export Data', 'notifications': 'Notifications', 'en': 'EN', 'fr': 'FR', 'ar': 'AR',
+                    'light': 'Light', 'dark': 'Dark', 'highcontrast': 'High Contrast', 'yes': 'Yes', 'no': 'No',
+                    'increase': 'Increase', 'decrease': 'Decrease', 'reset': 'Reset', 'pdf': 'PDF', 'sheet': 'Sheet',
+                    'txt': 'TXT', 'important': 'Only Important', 'do': 'Do', 'close': 'Close'
+                },
+                'footer': {
+                    'briefDescription': 'Your go-to platform for mastering web development and programming languages.',
+                    'communityTitle': 'Community',
+                    'community': { 'facebook': 'Facebook', 'twitter': 'Twitter', 'github': 'GitHub', 'youtube': 'YouTube', 'upscrolled': 'UpScrolled' },
+                    'aboutSupportTitle': 'About & Support',
+                    'aboutSupport': { 'aboutUs': 'About Us', 'contactSupport': 'Contact Support', 'privacyPolicy': 'Privacy Policy', 'termsOfService': 'Terms of Service' },
+                    'copyright': '© 2026 Code Learning Platform. All rights reserved.'
+                }
+            }
+        };
+
+        // ----- French -----
+        window.DHEtranslations.fr['other-about'] = {
+            'document': { 'title': 'À propos – Code Learning Platform' },
+            'page': { 'title': 'À propos', 'subtitle': 'Construire l\'avenir de l\'éducation au code' },
+            'mission': { 'title': 'Notre mission', 'text': 'Démocratiser l\'apprentissage du code en offrant des expériences interactives de haute qualité qui permettent à chacun de bâtir le futur numérique.' },
+            'vision': { 'title': 'Notre vision', 'text': 'Devenir la plateforme d\'apprentissage du code la plus inclusive et efficace au monde, touchant des millions d\'apprenants et transformant des vies par l\'éducation technologique.' },
+            'developer': {
+                'title': 'Rencontrez notre développeur',
+                'name': 'Mejri Ziad',
+                'bio1': 'Développeur full‑stack et formateur passionné avec plus de 5 ans d\'expérience dans le développement web et l\'enseignement en ligne.',
+                'bio2': 'Sa philosophie allie excellence technique et efficacité pédagogique, garantissant des leçons pratiques, engageantes et immédiatement applicables.',
+                'contact': { 'phone': '📞 +216 26 021 287', 'location': '📍 Tunisie, Afrique du Nord' }
+            },
+            'features': {
+                'title': 'Fonctionnalités',
+                'list': {
+                    'interactive': { 'title': 'Leçons interactives', 'desc': 'Tutoriels pas à pas avec exemples de code en direct et retour immédiat.' },
+                    'practice': { 'title': 'Pratique concrète', 'desc': 'Éditeur de code intégré pour coder en temps réel.' },
+                    'projects': { 'title': 'Projets réels', 'desc': 'Créez des projets dignes d\'un portfolio avec des instructions guidées.' },
+                    'tracking': { 'title': 'Suivi de progression', 'desc': 'Visualisez votre parcours grâce à des analyses détaillées.' },
+                    'community': { 'title': 'Support communautaire', 'desc': 'Connectez-vous avec d\'autres apprenants et mentors.' },
+                    'mobile': { 'title': 'Mobile friendly', 'desc': 'Apprenez sur n\'importe quel appareil, partout, à tout moment.' }
+                }
+            },
+            'philosophy': {
+                'title': 'Philosophie de développement',
+                'items': {
+                    'accessibility': '<strong>Accessibilité d\'abord :</strong> Nous concevons pour tous, en assurant une plateforme utilisable par des personnes aux capacités et équipements variés.',
+                    'learningByDoing': '<strong>Apprendre en faisant :</strong> La meilleure façon d\'apprendre le code est d\'écrire du code. Notre plateforme met l\'accent sur l\'expérience pratique.',
+                    'progressive': '<strong>Complexité progressive :</strong> Les leçons s\'enchaînent naturellement, passant des concepts de base aux applications avancées.',
+                    'realWorld': '<strong>Pertinence dans le monde réel :</strong> Chaque leçon prépare aux scénarios de développement réels.'
+                }
+            },
+            'tech': {
+                'title': 'Stack technologique',
+                'frontend': { 'title': 'Frontend', 'items': { 'html': 'HTML5 & CSS3', 'js': 'JavaScript pur', 'responsive': 'Design responsive', 'a11y': 'Normes d\'accessibilité' } },
+                'features': { 'title': 'Fonctionnalités', 'items': { 'editor': 'Éditeur de code interactif', 'progress': 'Suivi de progression', 'mode': 'Mode sombre/clair', 'mobile': 'Optimisation mobile' } }
+            },
+            'cta': { 'title': 'Commencez votre parcours dès aujourd\'hui', 'subtitle': 'Rejoignez des milliers d\'apprenants qui ont transformé leur carrière.', 'primary': 'Explorer les cours', 'secondary': 'Nous contacter' },
+            'notifications': {
+                'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
+                'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'exportPDF': 'Ouverture de l\'export PDF...',
+                'exportTXT': 'Export texte terminé.',
+                'exportSheet': 'Export CSV terminé.',
+                'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
+                'done': 'Terminé ! {0} défini sur {1}.'
+            },
+            'index': {
+                'header': { 'title': 'Plateforme d\'Apprentissage du Code', 'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation' },
+                'dropdown': {
+                    'language': 'Langue', 'mode': 'Mode', 'fullscreen': 'Plein écran', 'fontsize': 'Taille de police',
+                    'export': 'Exporter les données', 'notifications': 'Notifications', 'en': 'EN', 'fr': 'FR', 'ar': 'AR',
+                    'light': 'Clair', 'dark': 'Sombre', 'highcontrast': 'Contraste élevé', 'yes': 'Oui', 'no': 'Non',
+                    'increase': 'Augmenter', 'decrease': 'Diminuer', 'reset': 'Réinitialiser', 'pdf': 'PDF', 'sheet': 'Feuille',
+                    'txt': 'TXT', 'important': 'Important uniquement', 'do': 'Faire', 'close': 'Fermer'
+                },
+                'footer': {
+                    'briefDescription': 'Votre plateforme de référence pour maîtriser le développement web et les langages de programmation.',
+                    'communityTitle': 'Communauté',
+                    'community': { 'facebook': 'Facebook', 'twitter': 'Twitter', 'github': 'GitHub', 'youtube': 'YouTube', 'upscrolled': 'UpScrolled' },
+                    'aboutSupportTitle': 'À propos et support',
+                    'aboutSupport': { 'aboutUs': 'À propos', 'contactSupport': 'Contacter le support', 'privacyPolicy': 'Politique de confidentialité', 'termsOfService': 'Conditions d\'utilisation' },
+                    'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
+                }
+            }
+        };
+
+        // ----- Arabic -----
+        window.DHEtranslations.ar['other-about'] = {
+            'document': { 'title': 'من نحن – منصة تعلم البرمجة' },
+            'page': { 'title': 'من نحن', 'subtitle': 'بناء مستقبل تعليم البرمجة' },
+            'mission': { 'title': 'مهمتنا', 'text': 'إضفاء الطابع الديمقراطي على تعليم البرمجة من خلال توفير تجارب تعليمية تفاعلية عالية الجودة تمكن الأفراد من بناء المستقبل الرقمي.' },
+            'vision': { 'title': 'رؤيتنا', 'text': 'أن نصبح منصة تعليم البرمجة الأكثر شمولاً وفعالية في العالم، نصل إلى ملايين المتعلمين ونغير حياتهم من خلال التعليم التقني.' },
+            'developer': {
+                'title': 'تعرف على مطورنا',
+                'name': 'Mejri Ziad',
+                'bio1': 'مطور full‑stack ومعلم شغوف يتمتع بأكثر من 5 سنوات من الخبرة في تطوير الويب والتعليم عبر الإنترنت.',
+                'bio2': 'تجمع فلسفته بين التميز التقني والفعالية التربوية، مما يضمن أن كل درس عملي وجذور وقابل للتطبيق الفوري.',
+                'contact': { 'phone': '📞 +216 26 021 287', 'location': '📍 تونس، شمال أفريقيا' }
+            },
+            'features': {
+                'title': 'ميزات المنصة',
+                'list': {
+                    'interactive': { 'title': 'دروس تفاعلية', 'desc': 'دروس خطوة بخطوة مع أمثلة حية وردود فورية.' },
+                    'practice': { 'title': 'تطبيق عملي', 'desc': 'محرر أكواد مدمج للممارسة في الوقت الفعلي.' },
+                    'projects': { 'title': 'مشاريع حقيقية', 'desc': 'قم ببناء مشاريع جديرة بالمحفظة مع إرشادات موجهة.' },
+                    'tracking': { 'title': 'تتبع التقدم', 'desc': 'راقب رحلتك التعليمية من خلال تحليلات مفصلة.' },
+                    'community': { 'title': 'دعم المجتمع', 'desc': 'تواصل مع زملائك المتعلمين والموجهين.' },
+                    'mobile': { 'title': 'متوافق مع الجوال', 'desc': 'تعلم على أي جهاز، في أي مكان، في أي وقت.' }
+                }
+            },
+            'philosophy': {
+                'title': 'فلسفة التطوير',
+                'items': {
+                    'accessibility': '<strong>إمكانية الوصول أولاً:</strong> نصمم للجميع، لضمان أن منصتنا قابلة للاستخدام من قبل أشخاص ذوي قدرات وأجهزة متنوعة.',
+                    'learningByDoing': '<strong>التعلم بالممارسة:</strong> أفضل طريقة لتعلم البرمجة هي كتابة الكود. تركز منصتنا على الخبرة العملية.',
+                    'progressive': '<strong>التعقيد التدريجي:</strong> تبني الدروس على بعضها البعض، وتأخذ المتعلمين من المفاهيم الأساسية إلى التطبيقات المتقدمة بشكل طبيعي.',
+                    'realWorld': '<strong>الصلة بالواقع:</strong> كل درس ومشروع يعد المتعلمين لسيناريوهات التطوير الفعلية.'
+                }
+            },
+            'tech': {
+                'title': 'التقنيات المستخدمة',
+                'frontend': { 'title': 'الواجهة الأمامية', 'items': { 'html': 'HTML5 & CSS3', 'js': 'جافاسكريبت خالص', 'responsive': 'تصميم متجاوب', 'a11y': 'معايير إمكانية الوصول' } },
+                'features': { 'title': 'الميزات', 'items': { 'editor': 'محرر أكواد تفاعلي', 'progress': 'تتبع التقدم', 'mode': 'وضع داكن/فاتح', 'mobile': 'تحسين للجوال' } }
+            },
+            'cta': { 'title': 'ابدأ رحلة البرمجة اليوم', 'subtitle': 'انضم إلى آلاف المتعلمين الذين غيروا مسارهم المهني.', 'primary': 'استكشف الدورات', 'secondary': 'اتصل بنا' },
+            'notifications': {
+                'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
+                'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
+                'doAction': 'تفعيل "{0}" بالقيمة "{1}" - الميزة قيد التطوير. قريبًا',
+                'exportPDF': 'جاري فتح تصدير PDF...',
+                'exportTXT': 'تم تصدير النص بنجاح.',
+                'exportSheet': 'تم تصدير CSV بنجاح.',
+                'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
+                'done': 'تم! تعيين {0} إلى {1}.'
+            },
+            'index': {
+                'header': { 'title': 'منصة تعلم البرمجة', 'subtitle': 'إتقان تطوير الويب ولغات البرمجة' },
+                'dropdown': {
+                    'language': 'اللغة', 'mode': 'الوضع', 'fullscreen': 'ملء الشاشة', 'fontsize': 'حجم الخط',
+                    'export': 'تصدير البيانات', 'notifications': 'الإشعارات', 'en': 'الإنجليزية', 'fr': 'الفرنسية', 'ar': 'العربية',
+                    'light': 'فاتح', 'dark': 'داكن', 'highcontrast': 'تباين عال', 'yes': 'نعم', 'no': 'لا',
+                    'increase': 'زيادة', 'decrease': 'تقليل', 'reset': 'إعادة تعيين', 'pdf': 'PDF', 'sheet': 'ورقة',
+                    'txt': 'نص', 'important': 'المهم فقط', 'do': 'تنفيذ', 'close': 'إغلاق'
+                },
+                'footer': {
+                    'briefDescription': 'منصتك المثالية لإتقان تطوير الويب ولغات البرمجة.',
+                    'communityTitle': 'المجتمع',
+                    'community': { 'facebook': 'فيسبوك', 'twitter': 'تويتر', 'github': 'جيت‌هب', 'youtube': 'يوتيوب', 'upscrolled': 'أب‌سكرولد' },
+                    'aboutSupportTitle': 'حول والدعم',
+                    'aboutSupport': { 'aboutUs': 'معلومات عنا', 'contactSupport': 'اتصل بالدعم', 'privacyPolicy': 'سياسة الخصوصية', 'termsOfService': 'شروط الخدمة' },
+                    'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
+                }
+            }
+        };
+
+        // Set the page prefix
+        window.DHEPagePrefix = 'other-about';
+    </script>
+
+    <!-- ===== GLOBAL SCRIPTS ===== -->
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/notifications.js"></script>
+    <script src="scripts/modes.js"></script>
+    <script src="scripts/screen.js"></script>
+    <script src="scripts/font.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/options.js"></script>
+
+</body>
+</html>

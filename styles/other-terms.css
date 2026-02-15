@@ -1,0 +1,213 @@
+/* ===== other-terms.css – Page‑specific styles for Terms of Service ===== */
+/* All classes prefixed with DHE-other-terms- (unique to this page)   */
+
+.DHE-other-terms-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.DHE-other-terms-paper {
+    background: var(--DHE-index-card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid #4b6cb7; /* primary blue */
+}
+
+.DHE-other-terms-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--DHE-index-border-color);
+}
+
+.DHE-other-terms-title {
+    font-size: 2.2rem;
+    color: #4b6cb7;
+    margin: 0 0 0.5rem 0;
+}
+
+.DHE-other-terms-last-updated {
+    color: var(--DHE-index-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.DHE-other-terms-summary {
+    background: #f0f4ff;
+    border-left: 4px solid #4b6cb7;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.1rem;
+    color: #182848;
+    text-align: left;
+}
+
+.DHE-other-terms-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--DHE-index-border-color);
+}
+
+.DHE-other-terms-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.DHE-other-terms-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.6rem;
+    color: #182848;
+    margin: 0 0 1.2rem 0;
+}
+
+.DHE-other-terms-section-number {
+    background: #4b6cb7;
+    color: white;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.DHE-other-terms-section-content {
+    padding-left: 3rem;
+    line-height: 1.7;
+    color: var(--DHE-index-text-color);
+}
+
+.DHE-other-terms-section-content ul {
+    margin: 0.8rem 0 0 1.2rem;
+    padding-left: 0;
+}
+
+.DHE-other-terms-section-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Agreement box (accept button) */
+.DHE-other-terms-agreement-box {
+    background: #f0f7ff;
+    border: 2px solid #4b6cb7;
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin: 2.5rem 0 1rem;
+    text-align: center;
+}
+
+.DHE-other-terms-agreement-box p {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+}
+
+.DHE-other-terms-agree-btn {
+    background: #4b6cb7;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.DHE-other-terms-agree-btn:hover {
+    background: #182848;
+}
+
+.DHE-other-terms-agree-btn:active {
+    transform: translateY(1px);
+}
+
+.DHE-other-terms-agree-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Dark mode adjustments */
+.DHE-index-mode-dark .DHE-other-terms-paper {
+    background: #2d2d2d;
+    border-top-color: #5d8aff;
+}
+.DHE-index-mode-dark .DHE-other-terms-title {
+    color: #5d8aff;
+}
+.DHE-index-mode-dark .DHE-other-terms-summary {
+    background: #3a3f5e;
+    border-left-color: #5d8aff;
+    color: #e0e0e0;
+}
+.DHE-index-mode-dark .DHE-other-terms-section-title {
+    color: #cccccc;
+}
+.DHE-index-mode-dark .DHE-other-terms-section-number {
+    background: #5d8aff;
+}
+.DHE-index-mode-dark .DHE-other-terms-agreement-box {
+    background: #2d3748;
+    border-color: #5d8aff;
+}
+.DHE-index-mode-dark .DHE-other-terms-agree-btn {
+    background: #5d8aff;
+}
+.DHE-index-mode-dark .DHE-other-terms-agree-btn:hover {
+    background: #3a5f9e;
+}
+
+/* High contrast mode */
+.DHE-index-mode-highcontrast .DHE-other-terms-paper {
+    border: 2px solid #000;
+    border-top: 5px solid #000;
+}
+.DHE-index-mode-highcontrast .DHE-other-terms-title {
+    color: #000;
+}
+.DHE-index-mode-highcontrast .DHE-other-terms-summary {
+    border: 2px solid #000;
+    background: #fff;
+}
+.DHE-index-mode-highcontrast .DHE-other-terms-section-number {
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+.DHE-index-mode-highcontrast .DHE-other-terms-agreement-box {
+    border: 2px solid #000;
+    background: #fff;
+}
+.DHE-index-mode-highcontrast .DHE-other-terms-agree-btn {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+/* RTL adjustments */
+html[dir="rtl"] .DHE-other-terms-summary {
+    border-left: none;
+    border-right: 4px solid #4b6cb7;
+    text-align: right;
+}
+html[dir="rtl"] .DHE-other-terms-section-title {
+    flex-direction: row-reverse;
+}
+html[dir="rtl"] .DHE-other-terms-section-content {
+    padding-left: 0;
+    padding-right: 3rem;
+}
+html[dir="rtl"] .DHE-other-terms-agree-btn {
+    flex-direction: row-reverse;
+}

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="document.title">HTML5 Course – Code Learning Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/card-html.css">
+</head>
+<body>
+    <!-- ===== HEADER – now using relative keys (index.xxx) ===== -->
+    <header class="DHE-index-header">
+        <div class="DHE-index-header-container">
+            <div class="DHE-index-logo-container">
+                <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+            </div>
+            <div class="DHE-index-title-container">
+                <h1 data-i18n="index.header.title">Code Learning Platform</h1>
+                <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
+            </div>
+            <div class="DHE-index-hamburg-container">
+                <button class="DHE-index-hamburg-btn" id="hamburgBtn">
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                </button>
+                <!-- Dropdown Menu – all keys now relative -->
+                <div class="DHE-index-dropdown" id="dropdownMenu">
+                    <!-- Language -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.language">Language</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="language" data-value="en" data-i18n="index.dropdown.en">EN</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="fr" data-i18n="index.dropdown.fr">FR</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="ar" data-i18n="index.dropdown.ar">AR</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="language" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Mode -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.mode">Mode</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="mode" data-value="light" data-i18n="index.dropdown.light">Light</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="dark" data-i18n="index.dropdown.dark">Dark</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="highcontrast" data-i18n="index.dropdown.highcontrast">High Contrast</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="mode" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Fullscreen -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fullscreen">Fullscreen</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fullscreen" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fullscreen" data-value="no" data-i18n="index.dropdown.no">No</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fullscreen" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Font Size -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fontsize">Font Size</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="increase" data-i18n="index.dropdown.increase">Increase</button>
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="decrease" data-i18n="index.dropdown.decrease">Decrease</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fontsize" data-value="reset" data-i18n="index.dropdown.reset">Reset</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fontsize" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Export Data -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.export">Export Data</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="pdf" data-i18n="index.dropdown.pdf">PDF</button>
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="sheet" data-i18n="index.dropdown.sheet">Sheet</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="export" data-value="txt" data-i18n="index.dropdown.txt">TXT</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="export" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Notifications -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.notifications">Notifications</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="notifications" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="no" data-i18n="index.dropdown.no">No</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="important" data-i18n="index.dropdown.important">Only Important</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="notifications" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN: HTML5 COURSE OUTLINE (keys already relative) ===== -->
+    <main class="DHE-card-courses-container DHE-card-html-container">
+        <!-- Chapter 1 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch01.title">Getting Started with HTML</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch01-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch01.les01">What is HTML?</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch01-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch01.les02">Your first HTML page</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch01-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch01.les03">HTML document structure</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch01-les04.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch01.les04">Comments and doctype</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 2 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch02.title">Text Formatting and Hyperlinks</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch02-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch02.les01">Headings and paragraphs</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch02-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch02.les02">Bold, italic, and emphasis</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch02-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch02.les03">Links (anchors)</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch02-les04.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch02.les04">Relative vs absolute URLs</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 3 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch03.title">Lists, Images, and Tables</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch03-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch03.les01">Unordered and ordered lists</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch03-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch03.les02">Embedding images</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch03-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch03.les03">Image formats and accessibility</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch03-les04.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch03.les04">Basic tables</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 4 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch04.title">Forms and User Input</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch04-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch04.les01">The form element</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch04-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch04.les02">Input types (text, password, email, etc.)</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch04-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch04.les03">Checkboxes, radio buttons, selects</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch04-les04.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch04.les04">Form validation basics</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 5 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch05.title">Multimedia and Embedding</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch05-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch05.les01">Audio element</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch05-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch05.les02">Video element</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch05-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch05.les03">Embedding maps and iframes</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 6 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch06.title">Semantic HTML and Accessibility</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch06-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch06.les01">header, nav, main, footer</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch06-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch06.les02">article, section, aside</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch06-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch06.les03">ARIA roles and accessibility</a>
+                </li>
+            </ul>
+        </section>
+        <!-- Chapter 7 -->
+        <section class="DHE-card-courses-chapter DHE-card-html-chapter">
+            <h2 class="DHE-card-courses-chapter-title DHE-card-html-chapter-title" 
+                data-i18n="chapters.ch07.title">Modern HTML Features</h2>
+            <ul class="DHE-card-courses-lesson-list DHE-card-html-lesson-list">
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch07-les01.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch07.les01">Canvas basics</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch07-les02.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch07.les02">SVG in HTML</a>
+                </li>
+                <li class="DHE-card-courses-lesson-item DHE-card-html-lesson-item">
+                    <a href="DHE-cardHtml-ch07-les03.html" class="DHE-card-courses-lesson-link DHE-card-html-lesson-link" data-flag="coming-soon" 
+                       data-i18n="lessons.ch07.les03">HTML APIs (Geolocation, Drag & Drop)</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER – now using relative keys (index.xxx) ===== -->
+    <footer class="DHE-index-footer">
+        <div class="DHE-index-footer-container">
+            <div class="DHE-index-footer-column">
+                <div class="DHE-index-footer-logo">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-footer-logo-img">
+                    <p data-i18n="index.footer.briefDescription">
+                        Your go-to platform for mastering web development and programming languages.
+                    </p>
+                </div>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.communityTitle">Community</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.facebook">Facebook</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.twitter">Twitter</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.github">GitHub</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.youtube">YouTube</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.upscrolled">UpScrolled</a></li>
+                </ul>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="about.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+                    <li><a href="contact.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+                    <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="DHE-index-footer-bottom">
+            <p data-i18n="index.footer.copyright" data-i18n-params='[2026]'>
+                © 2026 Code Learning Platform. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="DHE-index-notification-container"></div>
+
+    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (card-html) – corrected structure ===== -->
+    <script>
+        window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
+
+        // ----- English -----
+        window.DHEtranslations.en['card-html'] = {
+            // Page‑specific
+            'document': { 'title': 'HTML5 Course – Code Learning Platform' },
+            'chapters': {
+                'ch01': { 'title': 'Getting Started with HTML' },
+                'ch02': { 'title': 'Text Formatting and Hyperlinks' },
+                'ch03': { 'title': 'Lists, Images, and Tables' },
+                'ch04': { 'title': 'Forms and User Input' },
+                'ch05': { 'title': 'Multimedia and Embedding' },
+                'ch06': { 'title': 'Semantic HTML and Accessibility' },
+                'ch07': { 'title': 'Modern HTML Features' }
+            },
+            'lessons': {
+                'ch01': {
+                    'les01': 'What is HTML?',
+                    'les02': 'Your first HTML page',
+                    'les03': 'HTML document structure',
+                    'les04': 'Comments and doctype'
+                },
+                'ch02': {
+                    'les01': 'Headings and paragraphs',
+                    'les02': 'Bold, italic, and emphasis',
+                    'les03': 'Links (anchors)',
+                    'les04': 'Relative vs absolute URLs'
+                },
+                'ch03': {
+                    'les01': 'Unordered and ordered lists',
+                    'les02': 'Embedding images',
+                    'les03': 'Image formats and accessibility',
+                    'les04': 'Basic tables'
+                },
+                'ch04': {
+                    'les01': 'The form element',
+                    'les02': 'Input types (text, password, email, etc.)',
+                    'les03': 'Checkboxes, radio buttons, selects',
+                    'les04': 'Form validation basics'
+                },
+                'ch05': {
+                    'les01': 'Audio element',
+                    'les02': 'Video element',
+                    'les03': 'Embedding maps and iframes'
+                },
+                'ch06': {
+                    'les01': 'header, nav, main, footer',
+                    'les02': 'article, section, aside',
+                    'les03': 'ARIA roles and accessibility'
+                },
+                'ch07': {
+                    'les01': 'Canvas basics',
+                    'les02': 'SVG in HTML',
+                    'les03': 'HTML APIs (Geolocation, Drag & Drop)'
+                }
+            },
+            // Notifications (directly under page root, because they are used with key "notifications.xxx")
+            'notifications': {
+                'welcome': 'Welcome to Code Learning Platform!',
+                'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
+                'doAction': 'Activating "{0}" with value "{1}" - Coming soon! Feature is under development.',
+                'exportPDF': 'Opening PDF export...',
+                'exportTXT': 'Text export completed.',
+                'exportSheet': 'CSV export completed.',
+                'comingSoonGeneric': 'Coming soon! This feature is under development.',
+                'done': 'Done! {0} set to {1}.'
+            },
+            // Shared header/footer/dropdown strings (under "index" because we use keys like "index.header.title")
+            'index': {
+                'header': {
+                    'title': 'Code Learning Platform',
+                    'subtitle': 'Master Web Development & Programming Languages'
+                },
+                'dropdown': {
+                    'language': 'Language',
+                    'mode': 'Mode',
+                    'fullscreen': 'Fullscreen',
+                    'fontsize': 'Font Size',
+                    'export': 'Export Data',
+                    'notifications': 'Notifications',
+                    'en': 'EN',
+                    'fr': 'FR',
+                    'ar': 'AR',
+                    'light': 'Light',
+                    'dark': 'Dark',
+                    'highcontrast': 'High Contrast',
+                    'yes': 'Yes',
+                    'no': 'No',
+                    'increase': 'Increase',
+                    'decrease': 'Decrease',
+                    'reset': 'Reset',
+                    'pdf': 'PDF',
+                    'sheet': 'Sheet',
+                    'txt': 'TXT',
+                    'important': 'Only Important',
+                    'do': 'Do',
+                    'close': 'Close'
+                },
+                'footer': {
+                    'briefDescription': 'Your go-to platform for mastering web development and programming languages.',
+                    'communityTitle': 'Community',
+                    'community': {
+                        'facebook': 'Facebook',
+                        'twitter': 'Twitter',
+                        'github': 'GitHub',
+                        'youtube': 'YouTube',
+                        'upscrolled': 'UpScrolled'
+                    },
+                    'aboutSupportTitle': 'About & Support',
+                    'aboutSupport': {
+                        'aboutUs': 'About Us',
+                        'contactSupport': 'Contact Support',
+                        'privacyPolicy': 'Privacy Policy',
+                        'termsOfService': 'Terms of Service'
+                    },
+                    'copyright': '© 2026 Code Learning Platform. All rights reserved.'
+                }
+            }
+        };
+
+        // ----- French -----
+        window.DHEtranslations.fr['card-html'] = {
+            'document': { 'title': 'Cours HTML5 – Plateforme d\'Apprentissage du Code' },
+            'chapters': {
+                'ch01': { 'title': 'Premiers pas avec HTML' },
+                'ch02': { 'title': 'Formatage du texte et hyperliens' },
+                'ch03': { 'title': 'Listes, images et tableaux' },
+                'ch04': { 'title': 'Formulaires et saisie utilisateur' },
+                'ch05': { 'title': 'Multimédia et intégration' },
+                'ch06': { 'title': 'HTML sémantique et accessibilité' },
+                'ch07': { 'title': 'Fonctionnalités HTML modernes' }
+            },
+            'lessons': {
+                'ch01': {
+                    'les01': 'Qu\'est-ce que HTML?',
+                    'les02': 'Votre première page HTML',
+                    'les03': 'Structure d\'un document HTML',
+                    'les04': 'Commentaires et doctype'
+                },
+                'ch02': {
+                    'les01': 'Titres et paragraphes',
+                    'les02': 'Gras, italique et emphase',
+                    'les03': 'Liens (ancres)',
+                    'les04': 'URL relatives vs absolues'
+                },
+                'ch03': {
+                    'les01': 'Listes non ordonnées et ordonnées',
+                    'les02': 'Intégrer des images',
+                    'les03': 'Formats d\'image et accessibilité',
+                    'les04': 'Tableaux simples'
+                },
+                'ch04': {
+                    'les01': 'L\'élément form',
+                    'les02': 'Types de saisie (texte, mot de passe, email, etc.)',
+                    'les03': 'Cases à cocher, boutons radio, listes déroulantes',
+                    'les04': 'Bases de la validation de formulaire'
+                },
+                'ch05': {
+                    'les01': 'Élément audio',
+                    'les02': 'Élément vidéo',
+                    'les03': 'Intégrer des cartes et des iframes'
+                },
+                'ch06': {
+                    'les01': 'header, nav, main, footer',
+                    'les02': 'article, section, aside',
+                    'les03': 'Rôles ARIA et accessibilité'
+                },
+                'ch07': {
+                    'les01': 'Bases de Canvas',
+                    'les02': 'SVG en HTML',
+                    'les03': 'API HTML (Géolocalisation, Glisser-déposer)'
+                }
+            },
+            'notifications': {
+                'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
+                'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'exportPDF': 'Ouverture de l\'export PDF...',
+                'exportTXT': 'Export texte terminé.',
+                'exportSheet': 'Export CSV terminé.',
+                'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
+                'done': 'Terminé ! {0} défini sur {1}.'
+            },
+            'index': {
+                'header': {
+                    'title': 'Plateforme d\'Apprentissage du Code',
+                    'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation'
+                },
+                'dropdown': {
+                    'language': 'Langue',
+                    'mode': 'Mode',
+                    'fullscreen': 'Plein écran',
+                    'fontsize': 'Taille de police',
+                    'export': 'Exporter les données',
+                    'notifications': 'Notifications',
+                    'en': 'EN',
+                    'fr': 'FR',
+                    'ar': 'AR',
+                    'light': 'Clair',
+                    'dark': 'Sombre',
+                    'highcontrast': 'Contraste élevé',
+                    'yes': 'Oui',
+                    'no': 'Non',
+                    'increase': 'Augmenter',
+                    'decrease': 'Diminuer',
+                    'reset': 'Réinitialiser',
+                    'pdf': 'PDF',
+                    'sheet': 'Feuille',
+                    'txt': 'TXT',
+                    'important': 'Important uniquement',
+                    'do': 'Faire',
+                    'close': 'Fermer'
+                },
+                'footer': {
+                    'briefDescription': 'Votre plateforme de référence pour maîtriser le développement web et les langages de programmation.',
+                    'communityTitle': 'Communauté',
+                    'community': {
+                        'facebook': 'Facebook',
+                        'twitter': 'Twitter',
+                        'github': 'GitHub',
+                        'youtube': 'YouTube',
+                        'upscrolled': 'UpScrolled'
+                    },
+                    'aboutSupportTitle': 'À propos et support',
+                    'aboutSupport': {
+                        'aboutUs': 'À propos',
+                        'contactSupport': 'Contacter le support',
+                        'privacyPolicy': 'Politique de confidentialité',
+                        'termsOfService': 'Conditions d\'utilisation'
+                    },
+                    'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
+                }
+            }
+        };
+
+        // ----- Arabic -----
+        window.DHEtranslations.ar['card-html'] = {
+            'document': { 'title': 'دورة HTML5 – منصة تعلم البرمجة' },
+            'chapters': {
+                'ch01': { 'title': 'البدء مع HTML' },
+                'ch02': { 'title': 'تنسيق النص والروابط التشعبية' },
+                'ch03': { 'title': 'القوائم والصور والجداول' },
+                'ch04': { 'title': 'النماذج وإدخال المستخدم' },
+                'ch05': { 'title': 'الوسائط المتعددة والتضمين' },
+                'ch06': { 'title': 'HTML الدلالي وإمكانية الوصول' },
+                'ch07': { 'title': 'ميزات HTML الحديثة' }
+            },
+            'lessons': {
+                'ch01': {
+                    'les01': 'ما هو HTML؟',
+                    'les02': 'صفحة HTML الأولى لك',
+                    'les03': 'هيكل مستند HTML',
+                    'les04': 'التعليقات و doctype'
+                },
+                'ch02': {
+                    'les01': 'العناوين والفقرات',
+                    'les02': 'عريض ومائل وتأكيد',
+                    'les03': 'الروابط (المراسي)',
+                    'les04': 'عناوين URL نسبية مقابل مطلقة'
+                },
+                'ch03': {
+                    'les01': 'القوائم غير المرتبة والمرتبة',
+                    'les02': 'تضمين الصور',
+                    'les03': 'تنسيقات الصور وإمكانية الوصول',
+                    'les04': 'الجداول الأساسية'
+                },
+                'ch04': {
+                    'les01': 'عنصر النموذج',
+                    'les02': 'أنواع الإدخال (نص، كلمة مرور، بريد إلكتروني، إلخ)',
+                    'les03': 'مربعات الاختيار، أزرار الراديو، القوائم المنسدلة',
+                    'les04': 'أساسيات التحقق من صحة النموذج'
+                },
+                'ch05': {
+                    'les01': 'عنصر الصوت',
+                    'les02': 'عنصر الفيديو',
+                    'les03': 'تضمين الخرائط و iframes'
+                },
+                'ch06': {
+                    'les01': 'header, nav, main, footer',
+                    'les02': 'article, section, aside',
+                    'les03': 'أدوار ARIA وإمكانية الوصول'
+                },
+                'ch07': {
+                    'les01': 'أساسيات Canvas',
+                    'les02': 'SVG في HTML',
+                    'les03': 'واجهات برمجة تطبيقات HTML (تحديد الموقع، السحب والإفلات)'
+                }
+            },
+            'notifications': {
+                'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
+                'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
+                'doAction': 'تفعيل "{0}" بالقيمة "{1}" - الميزة قيد التطوير. قريبًا',
+                'exportPDF': 'جاري فتح تصدير PDF...',
+                'exportTXT': 'تم تصدير النص بنجاح.',
+                'exportSheet': 'تم تصدير CSV بنجاح.',
+                'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
+                'done': 'تم! تعيين {0} إلى {1}.'
+            },
+            'index': {
+                'header': {
+                    'title': 'منصة تعلم البرمجة',
+                    'subtitle': 'إتقان تطوير الويب ولغات البرمجة'
+                },
+                'dropdown': {
+                    'language': 'اللغة',
+                    'mode': 'الوضع',
+                    'fullscreen': 'ملء الشاشة',
+                    'fontsize': 'حجم الخط',
+                    'export': 'تصدير البيانات',
+                    'notifications': 'الإشعارات',
+                    'en': 'الإنجليزية',
+                    'fr': 'الفرنسية',
+                    'ar': 'العربية',
+                    'light': 'فاتح',
+                    'dark': 'داكن',
+                    'highcontrast': 'تباين عال',
+                    'yes': 'نعم',
+                    'no': 'لا',
+                    'increase': 'زيادة',
+                    'decrease': 'تقليل',
+                    'reset': 'إعادة تعيين',
+                    'pdf': 'PDF',
+                    'sheet': 'ورقة',
+                    'txt': 'نص',
+                    'important': 'المهم فقط',
+                    'do': 'تنفيذ',
+                    'close': 'إغلاق'
+                },
+                'footer': {
+                    'briefDescription': 'منصتك المثالية لإتقان تطوير الويب ولغات البرمجة.',
+                    'communityTitle': 'المجتمع',
+                    'community': {
+                        'facebook': 'فيسبوك',
+                        'twitter': 'تويتر',
+                        'github': 'جيت‌هب',
+                        'youtube': 'يوتيوب',
+                        'upscrolled': 'أب‌سكرولد'
+                    },
+                    'aboutSupportTitle': 'حول والدعم',
+                    'aboutSupport': {
+                        'aboutUs': 'معلومات عنا',
+                        'contactSupport': 'اتصل بالدعم',
+                        'privacyPolicy': 'سياسة الخصوصية',
+                        'termsOfService': 'شروط الخدمة'
+                    },
+                    'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
+                }
+            }
+        };
+
+        // Set the page prefix
+        window.DHEPagePrefix = 'card-html';
+    </script>
+
+    <!-- ===== GLOBAL SCRIPTS (unchanged) ===== -->
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/notifications.js"></script>
+    <script src="scripts/modes.js"></script>
+    <script src="scripts/screen.js"></script>
+    <script src="scripts/font.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/options.js"></script>
+</body>
+</html>

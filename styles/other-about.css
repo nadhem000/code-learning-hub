@@ -1,0 +1,394 @@
+/* ===== other-about.css – Page‑specific styles for About Us ===== */
+/* All classes prefixed with DHE-other-about- (unique to this page)   */
+
+/* ------------------------------------------------------------------
+   Font scaling – apply to the main containers so that everything scales
+   ------------------------------------------------------------------ */
+.DHE-other-about-container,
+.DHE-other-about-paper {
+    font-size: calc(1rem * var(--DHE-other-about-font-scale, 1));
+}
+
+/* ------------------------------------------------------------------
+   Base layout (unchanged, but using page‑specific prefix)
+   ------------------------------------------------------------------ */
+.DHE-other-about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.DHE-other-about-paper {
+    background: var(--DHE-index-card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid var(--DHE-index-primary-color, #4b6cb7);
+}
+
+.DHE-other-about-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--DHE-index-border-color);
+}
+
+.DHE-other-about-title {
+    font-size: 2.2rem;
+    color: var(--DHE-index-primary-color, #4b6cb7);
+    margin: 0 0 0.5rem 0;
+}
+
+.DHE-other-about-subtitle {
+    color: var(--DHE-index-text-light);
+    font-size: 1.1rem;
+}
+
+.DHE-other-about-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--DHE-index-border-color);
+}
+
+.DHE-other-about-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.DHE-other-about-section-title {
+    font-size: 1.8rem;
+    color: var(--DHE-index-secondary-color, #182848);
+    margin: 0 0 1.2rem 0;
+}
+
+.DHE-other-about-section-content {
+    line-height: 1.7;
+    color: var(--DHE-index-text-color);
+}
+
+/* ------------------------------------------------------------------
+   Developer section
+   ------------------------------------------------------------------ */
+.DHE-other-about-developer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.DHE-other-about-developer-image {
+    flex: 1 1 300px;
+}
+
+.DHE-other-about-developer-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.DHE-other-about-developer-info {
+    flex: 2 1 400px;
+}
+
+.DHE-other-about-developer-name {
+    font-size: 1.8rem;
+    color: var(--DHE-index-primary-color, #4b6cb7);
+    margin-bottom: 0.5rem;
+}
+
+.DHE-other-about-developer-bio {
+    margin-bottom: 1rem;
+    color: var(--DHE-index-text-color);
+}
+
+.DHE-other-about-developer-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.DHE-other-about-contact-item {
+    background: var(--DHE-index-light-bg-highlight, #f0f4ff);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--DHE-index-text-color);
+    font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------------
+   Features grid
+   ------------------------------------------------------------------ */
+.DHE-other-about-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.DHE-other-about-feature-item {
+    background: var(--DHE-index-light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--DHE-index-primary-color, #4b6cb7);
+}
+
+.DHE-other-about-feature-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--DHE-index-secondary-color, #182848);
+}
+
+.DHE-other-about-feature-item p {
+    color: var(--DHE-index-text-color);
+}
+
+/* ------------------------------------------------------------------
+   Technology stack
+   ------------------------------------------------------------------ */
+.DHE-other-about-tech-grid {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.DHE-other-about-tech-col {
+    flex: 1 1 200px;
+    background: var(--DHE-index-light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.DHE-other-about-tech-col h4 {
+    color: var(--DHE-index-primary-color, #4b6cb7);
+    margin-bottom: 1rem;
+}
+
+.DHE-other-about-tech-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.DHE-other-about-tech-col li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+    color: var(--DHE-index-text-color);
+}
+
+.DHE-other-about-tech-col li::before {
+    content: "•";
+    color: var(--DHE-index-primary-color, #4b6cb7);
+    position: absolute;
+    left: 0;
+}
+
+/* ------------------------------------------------------------------
+   Call to action
+   ------------------------------------------------------------------ */
+.DHE-other-about-cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--DHE-index-primary-color, #4b6cb7), var(--DHE-index-secondary-color, #182848));
+    color: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.DHE-other-about-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.DHE-other-about-cta p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.DHE-other-about-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.DHE-other-about-cta-btn {
+    background: white;
+    color: var(--DHE-index-primary-color, #4b6cb7);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.DHE-other-about-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.DHE-other-about-cta-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.DHE-other-about-cta-btn.secondary:hover {
+    background: white;
+    color: var(--DHE-index-primary-color, #4b6cb7);
+}
+
+/* ==================================================================
+   DARK MODE – now using the page‑specific prefix (DHE-other-about-)
+   ================================================================== */
+.DHE-other-about-mode-dark .DHE-other-about-paper {
+    background: #2d2d2d;
+    border-top-color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-title {
+    color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-section-title {
+    color: #cccccc;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-developer-name {
+    color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-contact-item {
+    background: #3a3f5e;
+    color: #e0e0e0;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-feature-item {
+    background: #3a3f5e;
+    border-left-color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-feature-title {
+    color: #e0e0e0;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-tech-col {
+    background: #3a3f5e;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-tech-col h4 {
+    color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-tech-col li::before {
+    color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-cta {
+    background: linear-gradient(135deg, #5d8aff, #2a3a6b);
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-cta-btn {
+    background: #3a3f5e;
+    color: white;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-cta-btn:hover {
+    background: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-cta-btn.secondary {
+    background: transparent;
+    color: white;
+    border-color: #5d8aff;
+}
+
+.DHE-other-about-mode-dark .DHE-other-about-cta-btn.secondary:hover {
+    background: #5d8aff;
+    color: white;
+}
+
+/* ==================================================================
+   HIGH CONTRAST MODE – using page‑specific prefix
+   ================================================================== */
+.DHE-other-about-mode-highcontrast .DHE-other-about-paper {
+    border: 2px solid #000;
+    border-top: 5px solid #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-title {
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-section-title {
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-contact-item {
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-feature-item {
+    border: 1px solid #000;
+    border-left: 4px solid #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-tech-col {
+    border: 1px solid #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-tech-col li::before {
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-cta {
+    background: #fff;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-cta h2,
+.DHE-other-about-mode-highcontrast .DHE-other-about-cta p {
+    color: #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-cta-btn {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.DHE-other-about-mode-highcontrast .DHE-other-about-cta-btn.secondary {
+    background: #fff;
+    color: #000;
+}
+
+/* ==================================================================
+   RTL ADJUSTMENTS
+   ================================================================== */
+html[dir="rtl"] .DHE-other-about-developer {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .DHE-other-about-feature-item {
+    border-left: none;
+    border-right: 4px solid var(--DHE-index-primary-color, #4b6cb7);
+}
+
+html[dir="rtl"] .DHE-other-about-tech-col li {
+    padding-left: 0;
+    padding-right: 1.2rem;
+}
+
+html[dir="rtl"] .DHE-other-about-tech-col li::before {
+    left: auto;
+    right: 0;
+}

@@ -1,0 +1,131 @@
+/* ===== card-html.css – Page‑specific styles for HTML5 course ===== */
+/* All classes are prefixed with DHE-card-html- (unique to this page)   */
+
+/* ----- Container (overrides generic courses container if needed) ----- */
+.DHE-card-html-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ----- Chapter card – distinct HTML5 identity (orange accent) ----- */
+.DHE-card-html-chapter {
+    border-top: 5px solid #e34c26;  /* HTML5 orange */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--DHE-index-card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.DHE-card-html-chapter:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(227, 76, 38, 0.15);
+}
+
+/* ----- Chapter title ----- */
+.DHE-card-html-chapter-title {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    color: #e34c26;
+    border-bottom: 2px solid #f0c0a0;
+    padding-bottom: 0.5rem;
+}
+
+/* ----- Lesson list – remove default bullets, add spacing ----- */
+.DHE-card-html-lesson-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.DHE-card-html-lesson-item {
+    margin: 0.75rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+/* Custom bullet (HTML tag–like) */
+.DHE-card-html-lesson-item::before {
+    content: "</>";
+    position: absolute;
+    left: -0.2rem;
+    color: #e34c26;
+    font-weight: bold;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* ----- Lesson links ----- */
+.DHE-card-html-lesson-link {
+    color: var(--DHE-index-text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: inline-block;
+    border-bottom: 1px dotted transparent;
+}
+
+.DHE-card-html-lesson-link:hover {
+    color: #e34c26;
+    border-bottom-color: #e34c26;
+}
+
+/* ----- Coming soon style (subtle grey, with "soon" indicator) ----- */
+.DHE-card-html-lesson-link[data-flag="coming-soon"] {
+    color: #888;
+    font-style: italic;
+    position: relative;
+    padding-right: 4.2em;
+}
+
+.DHE-card-html-lesson-link[data-flag="coming-soon"]::after {
+    font-size: 0.7rem;
+    background: #ddd;
+    color: #555;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+/* Dark mode adjustments */
+.DHE-index-mode-dark .DHE-card-html-chapter {
+    background: #2d2d2d;
+    border-top-color: #ff8c5a;
+}
+.DHE-index-mode-dark .DHE-card-html-chapter-title {
+    color: #ff8c5a;
+    border-bottom-color: #555;
+}
+.DHE-index-mode-dark .DHE-card-html-lesson-link:hover {
+    color: #ff8c5a;
+}
+.DHE-index-mode-dark .DHE-card-html-lesson-item::before {
+    color: #ff8c5a;
+}
+
+/* High contrast mode */
+.DHE-index-mode-highcontrast .DHE-card-html-chapter {
+    border: 2px solid #000;
+    border-top: 5px solid #000;
+}
+.DHE-index-mode-highcontrast .DHE-card-html-chapter-title {
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+.DHE-index-mode-highcontrast .DHE-card-html-lesson-link {
+    color: #000;
+    text-decoration: underline;
+}
+.DHE-index-mode-highcontrast .DHE-card-html-lesson-link[data-flag="coming-soon"]::after {
+    background: #000;
+    color: #fff;
+}

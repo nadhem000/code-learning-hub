@@ -1,0 +1,116 @@
+**all options/features** regardless of status (working, placeholder, coming soon, or just named):
+
+## **Navigation & User Interface**
+1. **Dark/Light Mode Toggle** (Working)
+2. **Fullscreen Mode** (Working)
+3. **Print Page** (Working)
+4. **Scroll to Top** (Working)
+5. **Skip to Main Content** (Accessibility - Working)
+6. **Mobile Hamburger Menu** (Navigation.js - Working)
+7. **Breadcrumb Navigation** (Navigation.js - Working)
+8. **Keyboard Navigation Shortcuts** (Working)
+9. **Back/Next/Home Navigation Buttons** (Navigation.js - Working)
+10. **Language Cards Navigation** (Index page - Working)
+
+## **Learning Features**
+11. **Chapter-based Learning Structure** (Working)
+12. **Interactive Lessons with Content** (Working)
+13. **Lesson Completion Tracking** (Working)
+14. **Progress Bar & Statistics** (Working)
+15. **Previous/Next Lesson Navigation** (Working)
+16. **Mark Lesson as Complete** (Working)
+17. **Lesson Duration Display** (Working)
+18. **Chapter Statistics Display** (Working)
+
+## **Code Examples & Compilation**
+19. **Examples Compilation Grid** (Working)
+20. **Example Filtering** (by category - Working)
+21. **Run Code Examples** (in iframe - Working)
+22. **Code Syntax Highlighting** (Working)
+23. **Example Preview Modal** (Working)
+24. **Tabbed Code/Result Viewer** (Working)
+25. **Side-by-Side Code/Result View** (Working)
+26. **Example Cards with Preview** (Working)
+
+## **Settings & Customization**
+27. **Font Size Adjustment** (Working)
+28. **Progress Reset** (Working)
+29. **Dark Mode Preference Saving** (Working)
+30. **Font Size Preference Saving** (Working)
+
+## **Placeholder/Coming Soon Features**
+31. **Export Data** (Placeholder - "coming soon" alert)
+32. **Discussion Forum** (Placeholder - "#" link)
+33. **Help Center** (Placeholder - "#" link)
+34. **Blog & Tutorials** (Placeholder - "#" link)
+35. **Share Platform** (Placeholder - "#" link)
+36. **About Us** (Placeholder - "#" link)
+37. **Contact Support** (Placeholder - "#" link)
+38. **Privacy Policy** (Placeholder - "#" link)
+39. **Terms of Service** (Placeholder - "#" link)
+40. **Social Media Links** (Placeholder - "#" links)
+41. **Track Progress** (Footer link - likely placeholder)
+42. **All Courses** (Navigation - partial implementation)
+43. **Show All Courses** (Function exists but limited)
+
+## **Accessibility Features**
+44. **Screen Reader Support** (ARIA labels - Working)
+45. **Keyboard Navigation Support** (Working)
+46. **High Contrast Mode** (via Dark Mode - Working)
+47. **Focus Indicators** (Working)
+48. **Skip Navigation Links** (Working)
+
+## **Statistics & Analytics**
+49. **Platform Statistics Display** (Working - Index page)
+50. **Learning Statistics** (Completed lessons count - Working)
+51. **Example Statistics** (Count and filtering - Working)
+52. **Chapter Statistics** (Lessons count, duration - Working)
+
+## **Content Features**
+53. **Multiple Chapter Support** (7 chapters defined)
+54. **Lesson Content with HTML Examples** (Working)
+55. **Code Block Formatting** (Working)
+56. **Example Extraction from Lessons** (Working)
+57. **Dynamic Content Loading** (Working)
+
+## **Technical Features**
+58. **Local Storage Integration** (Working)
+59. **History State Management** (Navigation.js - Working)
+60. **Debounce/Throttle Utilities** (Main.js - Working)
+61. **Smooth Scrolling** (Working)
+62. **Modal Management** (Working)
+63. **Iframe Sandboxing** (Working)
+64. **Dynamic Height Adjustment** (Iframes - Working)
+
+## **Mobile/Responsive Features**
+65. **Responsive Design** (Working)
+66. **Mobile-specific Modal Handling** (Working)
+67. **Touch-friendly Interactions** (Working)
+68. **Mobile Menu Overlay** (Navigation.js - Working)
+
+## **Visual Features**
+69. **Gradient Headers/Footers** (Working)
+70. **Animated Transitions** (Working)
+71. **Hover Effects** (Working)
+72. **Card-based Layouts** (Working)
+73. **Icon Integration** (Font Awesome - Working)
+74. **Progress Visualization** (Working)
+
+## **Language Course Pages** (Mostly placeholders beyond HTML)
+75. **HTML Course** (Fully implemented)
+76. **CSS Course** (Placeholder - card-css.html)
+77. **JavaScript Course** (Placeholder - card-js.html)
+78. **React Course** (Placeholder - card-react.html)
+79. **Python Course** (Placeholder - card-python.html)
+80. **SQL Course** (Placeholder - card-sql.html)
+
+## **Chapter Content** (Partially implemented)
+81. **Chapter 1: HTML Basics** (6 lessons, detailed)
+82. **Chapter 2: HTML5 Semantic Elements** (1 placeholder lesson)
+83. **Chapter 3: Forms and Input Elements** (1 placeholder lesson)
+84. **Chapter 4: Multimedia and Graphics** (1 placeholder lesson)
+85. **Chapter 5: Advanced HTML5 APIs** (1 placeholder lesson)
+86. **Chapter 6: Accessibility and Best Practices** (1 placeholder lesson)
+87. **Chapter 7: HTML5 Project Development** (1 placeholder lesson)
+
+**Total Features Listed: 87** (Mix of fully working, partially implemented, and placeholder features)
