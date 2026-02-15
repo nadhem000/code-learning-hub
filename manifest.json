@@ -1,0 +1,21 @@
+{
+  "name": "Code Learning Hub",
+  "short_name": "CodeHub",
+  "description": "Interactive web development learning platform with HTML5, CSS, and JavaScript courses.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#4b6cb7",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
