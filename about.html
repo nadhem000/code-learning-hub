@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="document.title">About Us – Code Learning Platform</title>
+	<link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/other-about.css">
 </head>
@@ -25,6 +26,7 @@
                     <span class="DHE-index-hamburg-line"></span>
                 </button>
                 <div class="DHE-index-dropdown" id="dropdownMenu">
+				<button id="installAppBtn" style="display: none;">Install App</button>
                     <!-- Language -->
                     <div class="DHE-index-dropdown-group">
                         <h3 data-i18n="index.dropdown.language">Language</h3>
@@ -479,6 +481,7 @@
     <script src="scripts/export.js"></script>
     <script src="scripts/options.js"></script>
 <script>
+  // Register service worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
@@ -486,6 +489,40 @@
         .catch(err => console.error('SW registration failed:', err));
     });
   }
+
+  // Install prompt handling
+  let deferredPrompt;
+  const installButton = document.getElementById('installAppBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67+ from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show the install button (if it exists)
+    if (installButton) installButton.style.display = 'inline-block';
+  });
+
+  if (installButton) {
+    installButton.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to install prompt: ${outcome}`);
+      // We no longer need the prompt. Clear it.
+      deferredPrompt = null;
+      // Hide the button – it can't be used again
+      installButton.style.display = 'none';
+    });
+  }
+
+  // Optionally, hide the button if the app is already installed
+  window.addEventListener('appinstalled', () => {
+    console.log('App was installed.');
+    if (installButton) installButton.style.display = 'none';
+  });
 </script>
 
 </body>
