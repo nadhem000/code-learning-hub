@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="document.title">About Us – Code Learning Platform</title>
-	<link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/other-about.css">
 </head>
@@ -13,7 +13,9 @@
     <header class="DHE-index-header">
         <div class="DHE-index-header-container">
             <div class="DHE-index-logo-container">
-                <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+                <a href="index.html" aria-label="Return to Home">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+                </a>
             </div>
             <div class="DHE-index-title-container">
                 <h1 data-i18n="index.header.title">Code Learning Platform</h1>
@@ -26,7 +28,7 @@
                     <span class="DHE-index-hamburg-line"></span>
                 </button>
                 <div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" style="display: none;">Install App</button>
+                    <button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
                     <!-- Language -->
                     <div class="DHE-index-dropdown-group">
                         <h3 data-i18n="index.dropdown.language">Language</h3>
@@ -90,7 +92,6 @@
             </div>
         </div>
     </header>
-
     <!-- ===== MAIN: ABOUT US ===== -->
     <main class="DHE-other-about-container">
         <article class="DHE-other-about-paper">
@@ -98,7 +99,6 @@
                 <h1 class="DHE-other-about-title" data-i18n="page.title">About Us</h1>
                 <p class="DHE-other-about-subtitle" data-i18n="page.subtitle">Building the future of code education</p>
             </header>
-
             <!-- Mission & Vision -->
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="mission.title">Our Mission</h2>
@@ -106,14 +106,12 @@
                     <p data-i18n="mission.text">To democratize coding education by providing high-quality, interactive learning experiences that empower individuals to build the digital future.</p>
                 </div>
             </section>
-
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="vision.title">Our Vision</h2>
                 <div class="DHE-other-about-section-content">
                     <p data-i18n="vision.text">To become the world's most inclusive and effective coding education platform, reaching millions of learners and transforming lives through technology education.</p>
                 </div>
             </section>
-
             <!-- Developer -->
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="developer.title">Meet Our Developer</h2>
@@ -132,7 +130,6 @@
                     </div>
                 </div>
             </section>
-
             <!-- Features -->
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="features.title">Platform Features</h2>
@@ -163,20 +160,30 @@
                     </div>
                 </div>
             </section>
-
             <!-- Philosophy -->
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="philosophy.title">Development Philosophy</h2>
                 <div class="DHE-other-about-section-content">
                     <ul>
-                        <li data-i18n="philosophy.items.accessibility"><strong>Accessibility First:</strong> We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.</li>
-                        <li data-i18n="philosophy.items.learningByDoing"><strong>Learning by Doing:</strong> The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.</li>
-                        <li data-i18n="philosophy.items.progressive"><strong>Progressive Complexity:</strong> Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.</li>
-                        <li data-i18n="philosophy.items.realWorld"><strong>Real‑World Relevance:</strong> Every lesson and project prepares learners for actual development scenarios.</li>
+                        <li>
+                            <strong data-i18n="philosophy.items.accessibility.title">Accessibility First:</strong>
+                            <span data-i18n="philosophy.items.accessibility.text">We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.</span>
+                        </li>
+                        <li>
+                            <strong data-i18n="philosophy.items.learningByDoing.title">Learning by Doing:</strong>
+                            <span data-i18n="philosophy.items.learningByDoing.text">The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.</span>
+                        </li>
+                        <li>
+                            <strong data-i18n="philosophy.items.progressive.title">Progressive Complexity:</strong>
+                            <span data-i18n="philosophy.items.progressive.text">Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.</span>
+                        </li>
+                        <li>
+                            <strong data-i18n="philosophy.items.realWorld.title">Real‑World Relevance:</strong>
+                            <span data-i18n="philosophy.items.realWorld.text">Every lesson and project prepares learners for actual development scenarios.</span>
+                        </li>
                     </ul>
                 </div>
             </section>
-
             <!-- Technology Stack -->
             <section class="DHE-other-about-section">
                 <h2 class="DHE-other-about-section-title" data-i18n="tech.title">Technology Stack</h2>
@@ -201,7 +208,6 @@
                     </div>
                 </div>
             </section>
-
             <!-- Call to Action -->
             <div class="DHE-other-about-cta">
                 <h2 data-i18n="cta.title">Start Your Coding Journey Today</h2>
@@ -213,7 +219,6 @@
             </div>
         </article>
     </main>
-
     <!-- ===== FOOTER (shared) ===== -->
     <footer class="DHE-index-footer">
         <div class="DHE-index-footer-container">
@@ -238,10 +243,10 @@
             <div class="DHE-index-footer-column">
                 <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
                 <ul class="DHE-index-footer-links">
-                    <li><a href="about.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
-                    <li><a href="contact.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+                    <li><a href="about.html" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+                    <li><a href="contact.html" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
                     <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+                    <li><a href="terms.html" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
                 </ul>
             </div>
         </div>
@@ -251,14 +256,11 @@
             </p>
         </div>
     </footer>
-
     <!-- Notification Container -->
     <div id="notificationContainer" class="DHE-index-notification-container"></div>
-
     <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-about) ===== -->
     <script>
         window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
-
         // ----- English -----
         window.DHEtranslations.en['other-about'] = {
             'document': { 'title': 'About Us – Code Learning Platform' },
@@ -286,10 +288,22 @@
             'philosophy': {
                 'title': 'Development Philosophy',
                 'items': {
-                    'accessibility': '<strong>Accessibility First:</strong> We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.',
-                    'learningByDoing': '<strong>Learning by Doing:</strong> The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.',
-                    'progressive': '<strong>Progressive Complexity:</strong> Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.',
-                    'realWorld': '<strong>Real‑World Relevance:</strong> Every lesson and project prepares learners for actual development scenarios.'
+                    'accessibility': {
+                        'title': 'Accessibility First:',
+                        'text': 'We design for everyone, ensuring our platform is usable by people with diverse abilities and devices.'
+                    },
+                    'learningByDoing': {
+                        'title': 'Learning by Doing:',
+                        'text': 'The best way to learn coding is by writing code. Our platform emphasizes practical, hands‑on experience.'
+                    },
+                    'progressive': {
+                        'title': 'Progressive Complexity:',
+                        'text': 'Lessons build upon each other, taking learners from basic concepts to advanced applications naturally.'
+                    },
+                    'realWorld': {
+                        'title': 'Real‑World Relevance:',
+                        'text': 'Every lesson and project prepares learners for actual development scenarios.'
+                    }
                 }
             },
             'tech': {
@@ -298,7 +312,6 @@
                 'features': { 'title': 'Features', 'items': { 'editor': 'Interactive Code Editor', 'progress': 'Progress Tracking', 'mode': 'Dark/Light Mode', 'mobile': 'Mobile Optimization' } }
             },
             'cta': { 'title': 'Start Your Coding Journey Today', 'subtitle': 'Join thousands of learners who have transformed their careers with our platform.', 'primary': 'Explore Courses', 'secondary': 'Contact Us' },
-            // Shared notifications (reused from other pages)
             'notifications': {
                 'welcome': 'Welcome to Code Learning Platform!',
                 'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
@@ -309,7 +322,6 @@
                 'comingSoonGeneric': 'Coming soon! This feature is under development.',
                 'done': 'Done! {0} set to {1}.'
             },
-            // Shared header/footer/dropdown (reused from index)
             'index': {
                 'header': { 'title': 'Code Learning Platform', 'subtitle': 'Master Web Development & Programming Languages' },
                 'dropdown': {
@@ -329,7 +341,6 @@
                 }
             }
         };
-
         // ----- French -----
         window.DHEtranslations.fr['other-about'] = {
             'document': { 'title': 'À propos – Code Learning Platform' },
@@ -357,10 +368,22 @@
             'philosophy': {
                 'title': 'Philosophie de développement',
                 'items': {
-                    'accessibility': '<strong>Accessibilité d\'abord :</strong> Nous concevons pour tous, en assurant une plateforme utilisable par des personnes aux capacités et équipements variés.',
-                    'learningByDoing': '<strong>Apprendre en faisant :</strong> La meilleure façon d\'apprendre le code est d\'écrire du code. Notre plateforme met l\'accent sur l\'expérience pratique.',
-                    'progressive': '<strong>Complexité progressive :</strong> Les leçons s\'enchaînent naturellement, passant des concepts de base aux applications avancées.',
-                    'realWorld': '<strong>Pertinence dans le monde réel :</strong> Chaque leçon prépare aux scénarios de développement réels.'
+                    'accessibility': {
+                        'title': 'Accessibilité d\'abord :',
+                        'text': 'Nous concevons pour tous, en assurant une plateforme utilisable par des personnes aux capacités et équipements variés.'
+                    },
+                    'learningByDoing': {
+                        'title': 'Apprendre en faisant :',
+                        'text': 'La meilleure façon d\'apprendre le code est d\'écrire du code. Notre plateforme met l\'accent sur l\'expérience pratique.'
+                    },
+                    'progressive': {
+                        'title': 'Complexité progressive :',
+                        'text': 'Les leçons s\'enchaînent naturellement, passant des concepts de base aux applications avancées.'
+                    },
+                    'realWorld': {
+                        'title': 'Pertinence dans le monde réel :',
+                        'text': 'Chaque leçon prépare aux scénarios de développement réels.'
+                    }
                 }
             },
             'tech': {
@@ -398,7 +421,6 @@
                 }
             }
         };
-
         // ----- Arabic -----
         window.DHEtranslations.ar['other-about'] = {
             'document': { 'title': 'من نحن – منصة تعلم البرمجة' },
@@ -426,10 +448,22 @@
             'philosophy': {
                 'title': 'فلسفة التطوير',
                 'items': {
-                    'accessibility': '<strong>إمكانية الوصول أولاً:</strong> نصمم للجميع، لضمان أن منصتنا قابلة للاستخدام من قبل أشخاص ذوي قدرات وأجهزة متنوعة.',
-                    'learningByDoing': '<strong>التعلم بالممارسة:</strong> أفضل طريقة لتعلم البرمجة هي كتابة الكود. تركز منصتنا على الخبرة العملية.',
-                    'progressive': '<strong>التعقيد التدريجي:</strong> تبني الدروس على بعضها البعض، وتأخذ المتعلمين من المفاهيم الأساسية إلى التطبيقات المتقدمة بشكل طبيعي.',
-                    'realWorld': '<strong>الصلة بالواقع:</strong> كل درس ومشروع يعد المتعلمين لسيناريوهات التطوير الفعلية.'
+                    'accessibility': {
+                        'title': 'إمكانية الوصول أولاً:',
+                        'text': 'نصمم للجميع، لضمان أن منصتنا قابلة للاستخدام من قبل أشخاص ذوي قدرات وأجهزة متنوعة.'
+                    },
+                    'learningByDoing': {
+                        'title': 'التعلم بالممارسة:',
+                        'text': 'أفضل طريقة لتعلم البرمجة هي كتابة الكود. تركز منصتنا على الخبرة العملية.'
+                    },
+                    'progressive': {
+                        'title': 'التعقيد التدريجي:',
+                        'text': 'تبني الدروس على بعضها البعض، وتأخذ المتعلمين من المفاهيم الأساسية إلى التطبيقات المتقدمة بشكل طبيعي.'
+                    },
+                    'realWorld': {
+                        'title': 'الصلة بالواقع:',
+                        'text': 'كل درس ومشروع يعد المتعلمين لسيناريوهات التطوير الفعلية.'
+                    }
                 }
             },
             'tech': {
@@ -467,11 +501,9 @@
                 }
             }
         };
-
         // Set the page prefix
         window.DHEPagePrefix = 'other-about';
     </script>
-
     <!-- ===== GLOBAL SCRIPTS ===== -->
     <script src="scripts/translations.js"></script>
     <script src="scripts/notifications.js"></script>
@@ -480,50 +512,37 @@
     <script src="scripts/font.js"></script>
     <script src="scripts/export.js"></script>
     <script src="scripts/options.js"></script>
-<script>
-  // Register service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('SW registered:', reg))
-        .catch(err => console.error('SW registration failed:', err));
-    });
-  }
-
-  // Install prompt handling
-  let deferredPrompt;
-  const installButton = document.getElementById('installAppBtn');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67+ from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install button (if it exists)
-    if (installButton) installButton.style.display = 'inline-block';
-  });
-
-  if (installButton) {
-    installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      // Show the install prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to install prompt: ${outcome}`);
-      // We no longer need the prompt. Clear it.
-      deferredPrompt = null;
-      // Hide the button – it can't be used again
-      installButton.style.display = 'none';
-    });
-  }
-
-  // Optionally, hide the button if the app is already installed
-  window.addEventListener('appinstalled', () => {
-    console.log('App was installed.');
-    if (installButton) installButton.style.display = 'none';
-  });
-</script>
-
+    <script>
+      // Register service worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered:', reg))
+            .catch(err => console.error('SW registration failed:', err));
+        });
+      }
+      // Install prompt handling
+      let deferredPrompt;
+      const installButton = document.getElementById('installAppBtn');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installButton) installButton.style.display = 'inline-block';
+      });
+      if (installButton) {
+        installButton.addEventListener('click', async () => {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response to install prompt: ${outcome}`);
+          deferredPrompt = null;
+          installButton.style.display = 'none';
+        });
+      }
+      window.addEventListener('appinstalled', () => {
+        console.log('App was installed.');
+        if (installButton) installButton.style.display = 'none';
+      });
+    </script>
 </body>
 </html>

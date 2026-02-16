@@ -1,0 +1,123 @@
+/* other-contact.css – Contact page specific styles */
+
+.DHE-other-contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.DHE-other-contact-paper {
+    background: var(--DHE-index-card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.DHE-other-contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.DHE-other-contact-title {
+    font-size: 2rem;
+    color: var(--DHE-index-primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.DHE-other-contact-subtitle {
+    color: var(--DHE-index-text-light);
+    font-size: 1.1rem;
+}
+
+.DHE-other-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.DHE-other-contact-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.DHE-other-contact-form-label {
+    font-weight: 600;
+    color: var(--DHE-index-text-color);
+}
+
+.DHE-other-contact-form-input,
+.DHE-other-contact-form-textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--DHE-index-border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: var(--DHE-index-light-bg);
+    color: var(--DHE-index-text-color);
+    transition: border-color 0.2s ease;
+}
+
+.DHE-other-contact-form-input:focus,
+.DHE-other-contact-form-textarea:focus {
+    outline: none;
+    border-color: var(--DHE-index-primary-color);
+}
+
+.DHE-other-contact-form-textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.DHE-other-contact-submit-btn {
+    background: var(--DHE-index-primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    align-self: flex-start;
+}
+
+.DHE-other-contact-submit-btn:hover {
+    background: #3a5a9c;
+}
+
+.DHE-other-contact-submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* RTL adjustment */
+html[dir="rtl"] .DHE-other-contact-submit-btn {
+    align-self: flex-end;
+}
+
+.DHE-other-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.DHE-other-contact-item h3 {
+    color: var(--DHE-index-primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.DHE-other-contact-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.DHE-other-contact-item a {
+    color: var(--DHE-index-text-color);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--DHE-index-primary-color);
+}
+
+.DHE-other-contact-item a:hover {
+    color: var(--DHE-index-primary-color);
+}

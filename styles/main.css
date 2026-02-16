@@ -629,3 +629,32 @@ html[dir="rtl"] .DHE-card-courses-container {
     line-height: 1.7;
     color: var(--DHE-index-text-color);
 }
+/* Install App Button */
+.DHE-index-install-btn {
+    background: var(--DHE-index-primary-color);
+    border: 1px solid var(--DHE-index-primary-color);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.DHE-index-install-btn:hover {
+    background: #3a5a9c;
+    border-color: #3a5a9c;
+}
+
+.DHE-index-install-btn:active {
+    transform: translateY(1px);
+}
+
+/* Ensure it's visible in the dropdown */
+.DHE-index-dropdown .DHE-index-install-btn {
+    display: block;
+}

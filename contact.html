@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="document.title">Privacy Policy – Code Learning Platform</title>
-	<link rel="manifest" href="/manifest.json">
+    <title data-i18n="document.title">Contact Us – Code Learning Platform</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/other-privacy.css">
+    <link rel="stylesheet" href="styles/other-contact.css">
 </head>
 <body>
-    <!-- ===== HEADER (unchanged) ===== -->
+    <!-- ===== HEADER (shared) ===== -->
     <header class="DHE-index-header">
         <div class="DHE-index-header-container">
             <div class="DHE-index-logo-container">
-    <a href="index.html" aria-label="Return to Home">
-        <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
-    </a>
-</div>
+                <a href="index.html" aria-label="Return to Home">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+                </a>
+            </div>
             <div class="DHE-index-title-container">
                 <h1 data-i18n="index.header.title">Code Learning Platform</h1>
                 <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
@@ -28,7 +28,7 @@
                     <span class="DHE-index-hamburg-line"></span>
                 </button>
                 <div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+                    <button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
                     <!-- Language -->
                     <div class="DHE-index-dropdown-group">
                         <h3 data-i18n="index.dropdown.language">Language</h3>
@@ -93,122 +93,35 @@
         </div>
     </header>
 
-    <!-- ===== MAIN: PRIVACY POLICY ===== -->
-    <main class="DHE-other-privacy-container">
-        <article class="DHE-other-privacy-paper">
-            <header class="DHE-other-privacy-header">
-                <h1 class="DHE-other-privacy-title" data-i18n="page.title">Privacy Policy</h1>
-                <p class="DHE-other-privacy-last-updated">
-                    <span data-i18n="lastUpdated">Last Updated:</span>
-                    <span data-i18n="lastUpdatedDate">February 10, 2024</span>
-                </p>
-                <div class="DHE-other-privacy-summary">
-                    <p data-i18n="summary">We collect minimal data, store progress locally, never sell your information, and give you full control.</p>
-                </div>
+    <!-- ===== MAIN: CONTACT INFORMATION ===== -->
+    <main class="DHE-other-contact-container">
+        <article class="DHE-other-contact-paper">
+            <header class="DHE-other-contact-header">
+                <h1 class="DHE-other-contact-title" data-i18n="page.title">Contact Us</h1>
+                <p class="DHE-other-contact-subtitle" data-i18n="page.subtitle">Get in touch with us</p>
             </header>
 
-            <!-- Section 1 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">1</span>
-                    <span data-i18n="section1.title">Information We Collect</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section1.p1">We collect only the information necessary to provide and improve our educational services:</p>
-                    <ul>
-                        <li><strong data-i18n="section1.li1.strong">Learning data</strong> <span data-i18n="section1.li1.text">– lesson progress, saved code, preferences (stored locally in your browser).</span></li>
-                        <li><strong data-i18n="section1.li2.strong">Technical data</strong> <span data-i18n="section1.li2.text">– browser type, device information, pages visited (anonymous).</span></li>
-                    </ul>
+            <div class="DHE-other-contact-info">
+                <!-- Email -->
+                <div class="DHE-other-contact-item">
+                    <h3 data-i18n="info.email.title">Email</h3>
+                    <p><a href="mailto:contact@codelearning.example">contact@codelearning.example</a></p>
                 </div>
-            </section>
-
-            <!-- Section 2 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">2</span>
-                    <span data-i18n="section2.title">How We Use Your Information</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section2.p1">Your information helps us personalize your learning, track progress, and improve the platform. We never sell your data.</p>
+                <!-- Phone -->
+                <div class="DHE-other-contact-item">
+                    <h3 data-i18n="info.phone.title">Phone</h3>
+                    <p>+216 26 021 287</p>
                 </div>
-            </section>
-
-            <!-- Section 3 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">3</span>
-                    <span data-i18n="section3.title">Data Storage & Security</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section3.p1">Most data stays in your browser's localStorage. You can export, clear, or back it up anytime. All connections are HTTPS.</p>
+                <!-- Address -->
+                <div class="DHE-other-contact-item">
+                    <h3 data-i18n="info.address.title">Address</h3>
+                    <p data-i18n="info.address.value">Tunis, Tunisia</p>
                 </div>
-            </section>
-
-            <!-- Section 4 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">4</span>
-                    <span data-i18n="section4.title">Your Rights & Choices</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section4.p1">You can reset progress, export data, or clear localStorage via browser settings. No account needed.</p>
-                </div>
-            </section>
-
-            <!-- Section 5 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">5</span>
-                    <span data-i18n="section5.title">Third‑Party Services</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section5.p1">We use only essential libraries (like Highlight.js) served via CDN. No analytics or tracking scripts.</p>
-                </div>
-            </section>
-
-            <!-- Section 6 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">6</span>
-                    <span data-i18n="section6.title">Children's Privacy</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section6.p1">Our content is suitable for all ages. We do not knowingly collect personal information from children.</p>
-                </div>
-            </section>
-
-            <!-- Section 7 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">7</span>
-                    <span data-i18n="section7.title">Policy Changes</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p data-i18n="section7.p1">We may update this policy. The “last updated” date will always reflect the latest version.</p>
-                </div>
-            </section>
-
-            <!-- Section 8 -->
-            <section class="DHE-other-privacy-section">
-                <h2 class="DHE-other-privacy-section-title">
-                    <span class="DHE-other-privacy-section-number">8</span>
-                    <span data-i18n="section8.title">Contact Information</span>
-                </h2>
-                <div class="DHE-other-privacy-section-content">
-                    <p>
-                        <span data-i18n="section8.developer">Developer:</span>
-                        <span data-i18n="section8.developerName">Mejri Ziad</span>
-                        ·
-                        <span class="DHE-other-privacy-email">
-                            <span data-i18n="section8.emailLabel">privacy@codelearning.example</span>
-                        </span>
-                    </p>
-                </div>
-            </section>
+            </div>
         </article>
     </main>
 
-    <!-- ===== FOOTER (unchanged) ===== -->
+    <!-- ===== FOOTER (shared) ===== -->
     <footer class="DHE-index-footer">
         <div class="DHE-index-footer-container">
             <div class="DHE-index-footer-column">
@@ -249,54 +162,19 @@
     <!-- Notification Container -->
     <div id="notificationContainer" class="DHE-index-notification-container"></div>
 
-    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-privacy) ===== -->
+    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-contact) ===== -->
     <script>
         window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
 
         // ----- English -----
-        window.DHEtranslations.en['other-privacy'] = {
-            'document': { 'title': 'Privacy Policy – Code Learning Platform' },
-            'page': { 'title': 'Privacy Policy' },
-            'lastUpdated': 'Last Updated:',
-            'lastUpdatedDate': 'February 10, 2024',
-            'summary': 'We collect minimal data, store progress locally, never sell your information, and give you full control.',
-            'section1': {
-                'title': 'Information We Collect',
-                'p1': 'We collect only the information necessary to provide and improve our educational services:',
-                'li1': { 'strong': 'Learning data', 'text': '– lesson progress, saved code, preferences (stored locally in your browser).' },
-                'li2': { 'strong': 'Technical data', 'text': '– browser type, device information, pages visited (anonymous).' }
+        window.DHEtranslations.en['other-contact'] = {
+            'document': { 'title': 'Contact Us – Code Learning Platform' },
+            'page': { 'title': 'Contact Us', 'subtitle': 'Get in touch with us' },
+            'info': {
+                'email': { 'title': 'Email' },
+                'phone': { 'title': 'Phone' },
+                'address': { 'title': 'Address', 'value': 'Tunis, Tunisia' }
             },
-            'section2': {
-                'title': 'How We Use Your Information',
-                'p1': 'Your information helps us personalize your learning, track progress, and improve the platform. We never sell your data.'
-            },
-            'section3': {
-                'title': 'Data Storage & Security',
-                'p1': 'Most data stays in your browser\'s localStorage. You can export, clear, or back it up anytime. All connections are HTTPS.'
-            },
-            'section4': {
-                'title': 'Your Rights & Choices',
-                'p1': 'You can reset progress, export data, or clear localStorage via browser settings. No account needed.'
-            },
-            'section5': {
-                'title': 'Third‑Party Services',
-                'p1': 'We use only essential libraries (like Highlight.js) served via CDN. No analytics or tracking scripts.'
-            },
-            'section6': {
-                'title': 'Children\'s Privacy',
-                'p1': 'Our content is suitable for all ages. We do not knowingly collect personal information from children.'
-            },
-            'section7': {
-                'title': 'Policy Changes',
-                'p1': 'We may update this policy. The “last updated” date will always reflect the latest version.'
-            },
-            'section8': {
-                'title': 'Contact Information',
-                'developer': 'Developer:',
-                'developerName': 'Mejri Ziad',
-                'emailLabel': 'privacy@codelearning.example'
-            },
-            // Notifications (copied from card-html)
             'notifications': {
                 'welcome': 'Welcome to Code Learning Platform!',
                 'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
@@ -307,7 +185,6 @@
                 'comingSoonGeneric': 'Coming soon! This feature is under development.',
                 'done': 'Done! {0} set to {1}.'
             },
-            // Shared header/footer/dropdown (copied from card-html)
             'index': {
                 'header': {
                     'title': 'Code Learning Platform',
@@ -357,58 +234,24 @@
                     },
                     'copyright': '© 2026 Code Learning Platform. All rights reserved.'
                 },
-    'installButton': 'Install App'
+                'installButton': 'Install App'
             }
         };
 
         // ----- French -----
-        window.DHEtranslations.fr['other-privacy'] = {
-            'document': { 'title': 'Politique de confidentialité – Code Learning Platform' },
-            'page': { 'title': 'Politique de confidentialité' },
-            'lastUpdated': 'Dernière mise à jour :',
-            'lastUpdatedDate': '10 février 2024',
-            'summary': 'Nous collectons un minimum de données, stockons la progression localement, ne vendons jamais vos informations et vous donnons un contrôle total.',
-            'section1': {
-                'title': 'Informations que nous collectons',
-                'p1': 'Nous collectons uniquement les informations nécessaires pour fournir et améliorer nos services éducatifs :',
-                'li1': { 'strong': 'Données d\'apprentissage', 'text': '– progression des leçons, code sauvegardé, préférences (stockées localement dans votre navigateur).' },
-                'li2': { 'strong': 'Données techniques', 'text': '– type de navigateur, informations sur l\'appareil, pages visitées (anonymes).' }
-            },
-            'section2': {
-                'title': 'Comment nous utilisons vos informations',
-                'p1': 'Vos informations nous aident à personnaliser votre apprentissage, suivre votre progression et améliorer la plateforme. Nous ne vendons jamais vos données.'
-            },
-            'section3': {
-                'title': 'Stockage et sécurité des données',
-                'p1': 'La plupart des données restent dans le localStorage de votre navigateur. Vous pouvez les exporter, les effacer ou les sauvegarder à tout moment. Toutes les connexions sont en HTTPS.'
-            },
-            'section4': {
-                'title': 'Vos droits et choix',
-                'p1': 'Vous pouvez réinitialiser la progression, exporter les données ou effacer le localStorage via les paramètres de votre navigateur. Aucun compte nécessaire.'
-            },
-            'section5': {
-                'title': 'Services tiers',
-                'p1': 'Nous utilisons uniquement des bibliothèques essentielles (comme Highlight.js) servies via CDN. Pas de scripts d\'analyse ou de suivi.'
-            },
-            'section6': {
-                'title': 'Confidentialité des enfants',
-                'p1': 'Notre contenu convient à tous les âges. Nous ne collectons pas sciemment d\'informations personnelles auprès des enfants.'
-            },
-            'section7': {
-                'title': 'Modifications de la politique',
-                'p1': 'Nous pouvons mettre à jour cette politique. La date de « dernière mise à jour » reflète toujours la version la plus récente.'
-            },
-            'section8': {
-                'title': 'Coordonnées',
-                'developer': 'Développeur :',
-                'developerName': 'Mejri Ziad',
-                'emailLabel': 'privacy@codelearning.example'
+        window.DHEtranslations.fr['other-contact'] = {
+            'document': { 'title': 'Contactez-nous – Plateforme d’apprentissage du code' },
+            'page': { 'title': 'Contactez-nous', 'subtitle': 'Entrez en contact avec nous' },
+            'info': {
+                'email': { 'title': 'E-mail' },
+                'phone': { 'title': 'Téléphone' },
+                'address': { 'title': 'Adresse', 'value': 'Tunis, Tunisie' }
             },
             'notifications': {
-                'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
+                'welcome': 'Bienvenue sur la Plateforme d’Apprentissage du Code!',
                 'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
                 'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
-                'exportPDF': 'Ouverture de l\'export PDF...',
+                'exportPDF': 'Ouverture de l’export PDF...',
                 'exportTXT': 'Export texte terminé.',
                 'exportSheet': 'Export CSV terminé.',
                 'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
@@ -416,7 +259,7 @@
             },
             'index': {
                 'header': {
-                    'title': 'Plateforme d\'Apprentissage du Code',
+                    'title': 'Plateforme d’Apprentissage du Code',
                     'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation'
                 },
                 'dropdown': {
@@ -459,56 +302,22 @@
                         'aboutUs': 'À propos',
                         'contactSupport': 'Contacter le support',
                         'privacyPolicy': 'Politique de confidentialité',
-                        'termsOfService': 'Conditions d\'utilisation'
+                        'termsOfService': 'Conditions d’utilisation'
                     },
                     'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
                 },
-'installButton': 'Installer l’application'
+                'installButton': 'Installer l’application'
             }
         };
 
         // ----- Arabic -----
-        window.DHEtranslations.ar['other-privacy'] = {
-            'document': { 'title': 'سياسة الخصوصية – منصة تعلم البرمجة' },
-            'page': { 'title': 'سياسة الخصوصية' },
-            'lastUpdated': 'آخر تحديث:',
-            'lastUpdatedDate': '١٠ فبراير ٢٠٢٤',
-            'summary': 'نجمع الحد الأدنى من البيانات، ونخزن التقدم محليًا، ولا نبيع معلوماتك أبدًا، ونمنحك التحكم الكامل.',
-            'section1': {
-                'title': 'المعلومات التي نجمعها',
-                'p1': 'نجمع فقط المعلومات الضرورية لتقديم وتحسين خدماتنا التعليمية:',
-                'li1': { 'strong': 'بيانات التعلم', 'text': '– تقدم الدروس، الكود المحفوظ، التفضيلات (تُخزن محليًا في متصفحك).' },
-                'li2': { 'strong': 'بيانات تقنية', 'text': '– نوع المتصفح، معلومات الجهاز، الصفحات التي تمت زيارتها (مجهولة).' }
-            },
-            'section2': {
-                'title': 'كيف نستخدم معلوماتك',
-                'p1': 'تساعدنا معلوماتك في تخصيص تعلمك، وتتبع التقدم، وتحسين المنصة. نحن لا نبيع بياناتك أبدًا.'
-            },
-            'section3': {
-                'title': 'تخزين البيانات وأمانها',
-                'p1': 'معظم البيانات تبقى في localStorage بالمتصفح الخاص بك. يمكنك تصديرها أو مسحها أو نسخها احتياطيًا في أي وقت. جميع الاتصالات مشفرة بـ HTTPS.'
-            },
-            'section4': {
-                'title': 'حقوقك وخياراتك',
-                'p1': 'يمكنك إعادة تعيين التقدم، أو تصدير البيانات، أو مسح localStorage عبر إعدادات المتصفح. لا حاجة لحساب.'
-            },
-            'section5': {
-                'title': 'خدمات الطرف الثالث',
-                'p1': 'نستخدم فقط المكتبات الأساسية (مثل Highlight.js) عبر CDN. لا توجد نصوص تحليل أو تتبع.'
-            },
-            'section6': {
-                'title': 'خصوصية الأطفال',
-                'p1': 'محتوانا مناسب لجميع الأعمار. لا نجمع عن قصد معلومات شخصية من الأطفال.'
-            },
-            'section7': {
-                'title': 'تغييرات السياسة',
-                'p1': 'قد نقوم بتحديث هذه السياسة. تاريخ "آخر تحديث" يعكس دائمًا أحدث إصدار.'
-            },
-            'section8': {
-                'title': 'معلومات الاتصال',
-                'developer': 'المطور:',
-                'developerName': 'Mejri Ziad',
-                'emailLabel': 'privacy@codelearning.example'
+        window.DHEtranslations.ar['other-contact'] = {
+            'document': { 'title': 'اتصل بنا – منصة تعلم البرمجة' },
+            'page': { 'title': 'اتصل بنا', 'subtitle': 'تواصل معنا' },
+            'info': {
+                'email': { 'title': 'البريد الإلكتروني' },
+                'phone': { 'title': 'الهاتف' },
+                'address': { 'title': 'العنوان', 'value': 'تونس، تونس' }
             },
             'notifications': {
                 'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
@@ -569,12 +378,12 @@
                     },
                     'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
                 },
-'installButton': 'تثبيت التطبيق'
+                'installButton': 'تثبيت التطبيق'
             }
         };
 
         // Set the page prefix
-        window.DHEPagePrefix = 'other-privacy';
+        window.DHEPagePrefix = 'other-contact';
     </script>
 
     <!-- ===== GLOBAL SCRIPTS ===== -->
@@ -585,50 +394,43 @@
     <script src="scripts/font.js"></script>
     <script src="scripts/export.js"></script>
     <script src="scripts/options.js"></script>
-<script>
-  // Register service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('SW registered:', reg))
-        .catch(err => console.error('SW registration failed:', err));
-    });
-  }
 
-  // Install prompt handling
-  let deferredPrompt;
-  const installButton = document.getElementById('installAppBtn');
+    <!-- ===== Service Worker & Install Prompt ===== -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67+ from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install button (if it exists)
-    if (installButton) installButton.style.display = 'inline-block';
-  });
+        // Install prompt handling
+        let deferredPrompt;
+        const installButton = document.getElementById('installAppBtn');
 
-  if (installButton) {
-    installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      // Show the install prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to install prompt: ${outcome}`);
-      // We no longer need the prompt. Clear it.
-      deferredPrompt = null;
-      // Hide the button – it can't be used again
-      installButton.style.display = 'none';
-    });
-  }
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installButton) installButton.style.display = 'inline-block';
+        });
 
-  // Optionally, hide the button if the app is already installed
-  window.addEventListener('appinstalled', () => {
-    console.log('App was installed.');
-    if (installButton) installButton.style.display = 'none';
-  });
-</script>
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            });
+        }
 
+        window.addEventListener('appinstalled', () => {
+            console.log('App was installed.');
+            if (installButton) installButton.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

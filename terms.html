@@ -13,8 +13,10 @@
     <header class="DHE-index-header">
         <div class="DHE-index-header-container">
             <div class="DHE-index-logo-container">
-                <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
-            </div>
+    <a href="index.html" aria-label="Return to Home">
+        <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+    </a>
+</div>
             <div class="DHE-index-title-container">
                 <h1 data-i18n="index.header.title">Code Learning Platform</h1>
                 <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
@@ -26,7 +28,7 @@
                     <span class="DHE-index-hamburg-line"></span>
                 </button>
                 <div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" style="display: none;">Install App</button>
+				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
                     <!-- Language -->
                     <div class="DHE-index-dropdown-group">
                         <h3 data-i18n="index.dropdown.language">Language</h3>
@@ -271,8 +273,8 @@
             <div class="DHE-index-footer-column">
                 <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
                 <ul class="DHE-index-footer-links">
-                    <li><a href="about.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
-                    <li><a href="contact.html" data-flag="coming-soon" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+                    <li><a href="about.html" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+                    <li><a href="contact.html" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
                     <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
                     <li><a href="terms.html" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
                 </ul>
@@ -420,7 +422,8 @@
                     'termsOfService': 'Terms of Service'
                 },
                 'copyright': '© 2026 Code Learning Platform. All rights reserved.'
-            }
+            },
+    'installButton': 'Install App'
         }
     };
 
@@ -552,7 +555,8 @@
                     'termsOfService': 'Conditions d\'utilisation'
                 },
                 'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
-            }
+            },
+'installButton': 'Installer l’application'
         }
     };
 
@@ -684,7 +688,8 @@
                     'termsOfService': 'شروط الخدمة'
                 },
                 'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
-            }
+            },
+'installButton': 'تثبيت التطبيق'
         }
     };
 

@@ -13,8 +13,10 @@
 			<div class="DHE-index-header-container">
 				<!-- Logo Container -->
 				<div class="DHE-index-logo-container">
-					<img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
-				</div>
+    <a href="index.html" aria-label="Return to Home">
+        <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+    </a>
+</div>
 				
 				<!-- Title + Subtitle -->
 				<div class="DHE-index-title-container">
@@ -32,7 +34,7 @@
 					
 					<!-- Dropdown Menu -->
 					<div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" style="display: none;">Install App</button>
+				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
 						<!-- Language -->
 						<div class="DHE-index-dropdown-group">
 							<h3 data-i18n="DHE.translation.index.dropdown.language">Language</h3>
@@ -153,10 +155,10 @@
 				<div class="DHE-index-footer-column">
 					<h4 data-i18n="DHE.translation.index.footer.aboutSupportTitle">About & Support</h4>
 					<ul class="DHE-index-footer-links">
-						<li><a href="about.html" data-flag="coming-soon" data-i18n="DHE.translation.index.footer.aboutSupport.aboutUs">About Us</a></li>
-						<li><a href="contact.html" data-flag="coming-soon" data-i18n="DHE.translation.index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+						<li><a href="about.html" data-i18n="DHE.translation.index.footer.aboutSupport.aboutUs">About Us</a></li>
+						<li><a href="contact.html" data-i18n="DHE.translation.index.footer.aboutSupport.contactSupport">Contact Support</a></li>
 						<li><a href="privacy.html" data-i18n="DHE.translation.index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
-						<li><a href="terms.html" data-flag="coming-soon" data-i18n="DHE.translation.index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+						<li><a href="terms.html" data-i18n="DHE.translation.index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
 					</ul>
 				</div>
 			</div>
@@ -231,6 +233,7 @@
 							},
 							'copyright': '© 2026 Code Learning Platform. All rights reserved.'
 						},
+    'installButton': 'Install App',
 						'notifications': {
 							'welcome': 'Welcome to Code Learning Platform!',
 							'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
@@ -302,6 +305,7 @@
 							},
 							'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
 						},
+'installButton': 'Installer l’application',
 						'notifications': {
 							'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
 							'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
@@ -373,6 +377,7 @@
 							},
 							'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
 						},
+'installButton': 'تثبيت التطبيق',
 						'notifications': {
 							'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
 							'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
