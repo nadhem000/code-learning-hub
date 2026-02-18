@@ -658,3 +658,115 @@ html[dir="rtl"] .DHE-card-courses-container {
 .DHE-index-dropdown .DHE-index-install-btn {
     display: block;
 }
+/* ===== AUTHENTICATION MODAL ===== */
+.DHE-auth-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.DHE-auth-modal-content {
+    background-color: var(--DHE-index-card-bg, #fefefe);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--DHE-index-border-color, #888);
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.DHE-auth-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.DHE-auth-close:hover,
+.DHE-auth-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.DHE-auth-modal-content form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--DHE-index-border-color, #ccc);
+    border-radius: 4px;
+}
+
+.DHE-auth-modal-content form button {
+    width: 100%;
+    padding: 10px;
+    background: var(--DHE-index-primary-color, #4b6cb7);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.DHE-auth-modal-content form button:hover {
+    background: var(--DHE-index-secondary-color, #182848);
+}
+
+#authGoogleBtn {
+    width: 100%;
+    padding: 10px;
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+#authGoogleBtn:hover {
+    background: #3367d6;
+}
+
+/* Dark mode adjustments */
+.DHE-index-mode-dark .DHE-auth-modal-content {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+.DHE-index-mode-dark .DHE-auth-close {
+    color: #bbb;
+}
+.DHE-index-mode-dark .DHE-auth-close:hover {
+    color: white;
+}
+.DHE-index-mode-dark .DHE-auth-modal-content form input {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+/* High contrast mode */
+.DHE-index-mode-highcontrast .DHE-auth-modal-content {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+}
+.DHE-index-mode-highcontrast .DHE-auth-modal-content form button,
+.DHE-index-mode-highcontrast #authGoogleBtn {
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+.DHE-index-mode-highcontrast .DHE-auth-modal-content form button:hover,
+.DHE-index-mode-highcontrast #authGoogleBtn:hover {
+    background: #333;
+}

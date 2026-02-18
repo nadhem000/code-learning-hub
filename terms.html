@@ -1,791 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="document.title">Terms of Service – Code Learning Platform</title>
-	<link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/other-terms.css">
-</head>
-<body>
-    <!-- ===== HEADER (shared) ===== -->
-    <header class="DHE-index-header">
-        <div class="DHE-index-header-container">
-            <div class="DHE-index-logo-container">
-    <a href="index.html" aria-label="Return to Home">
-        <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
-    </a>
-</div>
-            <div class="DHE-index-title-container">
-                <h1 data-i18n="index.header.title">Code Learning Platform</h1>
-                <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
-            </div>
-            <div class="DHE-index-hamburg-container">
-                <button class="DHE-index-hamburg-btn" id="hamburgBtn">
-                    <span class="DHE-index-hamburg-line"></span>
-                    <span class="DHE-index-hamburg-line"></span>
-                    <span class="DHE-index-hamburg-line"></span>
-                </button>
-                <div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
-                    <!-- Language -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.language">Language</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn active" data-setting="language" data-value="en" data-i18n="index.dropdown.en">EN</button>
-                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="fr" data-i18n="index.dropdown.fr">FR</button>
-                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="ar" data-i18n="index.dropdown.ar">AR</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="language" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                    <!-- Mode -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.mode">Mode</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn active" data-setting="mode" data-value="light" data-i18n="index.dropdown.light">Light</button>
-                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="dark" data-i18n="index.dropdown.dark">Dark</button>
-                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="highcontrast" data-i18n="index.dropdown.highcontrast">High Contrast</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="mode" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                    <!-- Fullscreen -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.fullscreen">Fullscreen</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn" data-setting="fullscreen" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
-                            <button class="DHE-index-toggle-btn active" data-setting="fullscreen" data-value="no" data-i18n="index.dropdown.no">No</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="fullscreen" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                    <!-- Font Size -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.fontsize">Font Size</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="increase" data-i18n="index.dropdown.increase">Increase</button>
-                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="decrease" data-i18n="index.dropdown.decrease">Decrease</button>
-                            <button class="DHE-index-toggle-btn active" data-setting="fontsize" data-value="reset" data-i18n="index.dropdown.reset">Reset</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="fontsize" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                    <!-- Export Data -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.export">Export Data</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="pdf" data-i18n="index.dropdown.pdf">PDF</button>
-                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="sheet" data-i18n="index.dropdown.sheet">Sheet</button>
-                            <button class="DHE-index-toggle-btn active" data-setting="export" data-value="txt" data-i18n="index.dropdown.txt">TXT</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="export" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                    <!-- Notifications -->
-                    <div class="DHE-index-dropdown-group">
-                        <h3 data-i18n="index.dropdown.notifications">Notifications</h3>
-                        <div class="DHE-index-btn-group">
-                            <button class="DHE-index-toggle-btn active" data-setting="notifications" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
-                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="no" data-i18n="index.dropdown.no">No</button>
-                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="important" data-i18n="index.dropdown.important">Only Important</button>
-                        </div>
-                        <button class="DHE-index-do-btn" data-setting="notifications" data-i18n="index.dropdown.do">Do</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- ===== MAIN: TERMS OF SERVICE ===== -->
-    <main class="DHE-other-terms-container">
-        <article class="DHE-other-terms-paper">
-            <header class="DHE-other-terms-header">
-                <h1 class="DHE-other-terms-title" data-i18n="page.title">Terms of Service</h1>
-                <p class="DHE-other-terms-last-updated">
-                    <span data-i18n="lastUpdated">Last Updated:</span>
-                    <span data-i18n="lastUpdatedDate">March 10, 2024</span>
-                </p>
-                <div class="DHE-other-terms-summary">
-                    <p data-i18n="summary">By using our platform, you agree to these terms. Please read them carefully.</p>
-                </div>
-            </header>
-
-            <!-- Section 1: Acceptance -->
-            <section class="DHE-other-terms-section" id="acceptance">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">1</span>
-                    <span data-i18n="section1.title">Acceptance of Terms</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section1.p1">These Terms of Service constitute a legally binding agreement between you and Dev Hub Education (based in Tunisia) regarding your use of the Code Learning Platform.</p>
-                    <p data-i18n="section1.p2">By accessing or using the Platform, you confirm that you accept these terms and agree to comply with them. If you do not agree, you must not use our Platform.</p>
-                </div>
-            </section>
-
-            <!-- Section 2: Eligibility -->
-            <section class="DHE-other-terms-section" id="eligibility">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">2</span>
-                    <span data-i18n="section2.title">Eligibility</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section2.p1">To use our Platform, you must:</p>
-                    <ul>
-                        <li data-i18n="section2.li1">Be at least 12 years of age</li>
-                        <li data-i18n="section2.li2">Have the legal capacity to enter into a binding agreement</li>
-                        <li data-i18n="section2.li3">Use the Platform only for lawful educational purposes</li>
-                        <li data-i18n="section2.li4">Not violate any applicable laws or regulations</li>
-                    </ul>
-                    <p data-i18n="section2.p2">If you are under 18, you confirm that you have obtained parental or guardian consent to use this Platform.</p>
-                </div>
-            </section>
-
-            <!-- Section 3: User Accounts -->
-            <section class="DHE-other-terms-section" id="accounts">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">3</span>
-                    <span data-i18n="section3.title">User Accounts & Access</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section3.p1">The Platform is currently free and does not require account creation. This may change in future versions.</p>
-                    <p data-i18n="section3.p2">When account features are implemented:</p>
-                    <ul>
-                        <li data-i18n="section3.li1">You are responsible for maintaining the confidentiality of your account credentials</li>
-                        <li data-i18n="section3.li2">You must provide accurate and complete information</li>
-                        <li data-i18n="section3.li3">You are responsible for all activities under your account</li>
-                        <li data-i18n="section3.li4">We reserve the right to suspend or terminate accounts violating these terms</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Section 4: Intellectual Property -->
-            <section class="DHE-other-terms-section" id="intellectual">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">4</span>
-                    <span data-i18n="section4.title">Intellectual Property Rights</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <h3 data-i18n="section4.sub1">4.1 Platform Content</h3>
-                    <p data-i18n="section4.p1">All educational content, tutorials, code examples, and platform design are owned by Dev Hub Education and Mejri Ziad (Platform Developer).</p>
-                    <h3 data-i18n="section4.sub2">4.2 User Creations</h3>
-                    <p data-i18n="section4.p2">Code and projects you create using our tutorials belong to you. You may use them for personal or commercial purposes.</p>
-                </div>
-            </section>
-
-            <!-- Section 5: User Content -->
-            <section class="DHE-other-terms-section" id="user-content">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">5</span>
-                    <span data-i18n="section5.title">User-Generated Content</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section5.p1">When you submit code examples, questions, or feedback:</p>
-                    <ul>
-                        <li data-i18n="section5.li1">You grant us a non-exclusive, worldwide license to use your content for platform improvement</li>
-                        <li data-i18n="section5.li2">You remain the owner of your original creations</li>
-                        <li data-i18n="section5.li3">You must not submit copyrighted material without permission</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Section 6: Third-Party Services -->
-            <section class="DHE-other-terms-section" id="third-party">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">6</span>
-                    <span data-i18n="section6.title">Third-Party Services</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section6.p1">Our Platform may integrate with third-party services (e.g., GitHub, Netlify). Your use of those services is subject to their respective terms.</p>
-                </div>
-            </section>
-
-            <!-- Section 7: Disclaimer -->
-            <section class="DHE-other-terms-section" id="disclaimer">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">7</span>
-                    <span data-i18n="section7.title">Disclaimer of Warranties</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section7.p1">The Platform is provided "as is" without warranties of any kind. We do not guarantee uninterrupted or error-free service.</p>
-                </div>
-            </section>
-
-            <!-- Section 8: Limitation of Liability -->
-            <section class="DHE-other-terms-section" id="liability">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">8</span>
-                    <span data-i18n="section8.title">Limitation of Liability</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section8.p1">To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform.</p>
-                </div>
-            </section>
-
-            <!-- Section 9: Changes to Terms -->
-            <section class="DHE-other-terms-section" id="changes">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">9</span>
-                    <span data-i18n="section9.title">Changes to Terms</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section9.p1">We may update these Terms of Service. Continued use after changes constitutes acceptance.</p>
-                </div>
-            </section>
-
-            <!-- Section 10: Contact -->
-            <section class="DHE-other-terms-section" id="contact">
-                <h2 class="DHE-other-terms-section-title">
-                    <span class="DHE-other-terms-section-number">10</span>
-                    <span data-i18n="section10.title">Contact Information</span>
-                </h2>
-                <div class="DHE-other-terms-section-content">
-                    <p data-i18n="section10.p1">For questions, please contact us via the platform feedback or email:</p>
-                    <p><span data-i18n="section10.developer">Developer:</span> Mejri Ziad</p>
-                </div>
-            </section>
-
-            <!-- Agreement Box -->
-            <div class="DHE-other-terms-agreement-box">
-                <p data-i18n="agreement.text"><strong>By using this platform, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</strong></p>
-                <button id="acceptTermsBtn" class="DHE-other-terms-agree-btn" data-i18n="agreement.button">I Accept</button>
-            </div>
-        </article>
-    </main>
-
-    <!-- ===== FOOTER (shared) ===== -->
-    <footer class="DHE-index-footer">
-        <div class="DHE-index-footer-container">
-            <div class="DHE-index-footer-column">
-                <div class="DHE-index-footer-logo">
-                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-footer-logo-img">
-                    <p data-i18n="index.footer.briefDescription">
-                        Your go-to platform for mastering web development and programming languages.
-                    </p>
-                </div>
-            </div>
-            <div class="DHE-index-footer-column">
-                <h4 data-i18n="index.footer.communityTitle">Community</h4>
-                <ul class="DHE-index-footer-links">
-                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.facebook">Facebook</a></li>
-                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.twitter">Twitter</a></li>
-                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.github">GitHub</a></li>
-                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.youtube">YouTube</a></li>
-                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.upscrolled">UpScrolled</a></li>
-                </ul>
-            </div>
-            <div class="DHE-index-footer-column">
-                <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
-                <ul class="DHE-index-footer-links">
-                    <li><a href="about.html" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
-                    <li><a href="contact.html" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
-                    <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="DHE-index-footer-bottom">
-            <p data-i18n="index.footer.copyright" data-i18n-params='[2026]'>
-                © 2026 Code Learning Platform. All rights reserved.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Notification Container -->
-    <div id="notificationContainer" class="DHE-index-notification-container"></div>
-
-    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-terms) ===== -->
-<script>
-    window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
-
-    // ----- English -----
-    window.DHEtranslations.en['other-terms'] = {
-        'document': { 'title': 'Terms of Service – Code Learning Platform' },
-        'page': { 'title': 'Terms of Service' },
-        'lastUpdated': 'Last Updated:',
-        'lastUpdatedDate': 'March 10, 2024',
-        'summary': 'By using our platform, you agree to these terms. Please read them carefully.',
-        'section1': {
-            'title': 'Acceptance of Terms',
-            'p1': 'These Terms of Service constitute a legally binding agreement between you and Dev Hub Education (based in Tunisia) regarding your use of the Code Learning Platform.',
-            'p2': 'By accessing or using the Platform, you confirm that you accept these terms and agree to comply with them. If you do not agree, you must not use our Platform.'
-        },
-        'section2': {
-            'title': 'Eligibility',
-            'p1': 'To use our Platform, you must:',
-            'li1': 'Be at least 12 years of age',
-            'li2': 'Have the legal capacity to enter into a binding agreement',
-            'li3': 'Use the Platform only for lawful educational purposes',
-            'li4': 'Not violate any applicable laws or regulations',
-            'p2': 'If you are under 18, you confirm that you have obtained parental or guardian consent to use this Platform.'
-        },
-        'section3': {
-            'title': 'User Accounts & Access',
-            'p1': 'The Platform is currently free and does not require account creation. This may change in future versions.',
-            'p2': 'When account features are implemented:',
-            'li1': 'You are responsible for maintaining the confidentiality of your account credentials',
-            'li2': 'You must provide accurate and complete information',
-            'li3': 'You are responsible for all activities under your account',
-            'li4': 'We reserve the right to suspend or terminate accounts violating these terms'
-        },
-        'section4': {
-            'title': 'Intellectual Property Rights',
-            'sub1': '4.1 Platform Content',
-            'p1': 'All educational content, tutorials, code examples, and platform design are owned by Dev Hub Education and Mejri Ziad (Platform Developer).',
-            'sub2': '4.2 User Creations',
-            'p2': 'Code and projects you create using our tutorials belong to you. You may use them for personal or commercial purposes.'
-        },
-        'section5': {
-            'title': 'User-Generated Content',
-            'p1': 'When you submit code examples, questions, or feedback:',
-            'li1': 'You grant us a non-exclusive, worldwide license to use your content for platform improvement',
-            'li2': 'You remain the owner of your original creations',
-            'li3': 'You must not submit copyrighted material without permission'
-        },
-        'section6': {
-            'title': 'Third-Party Services',
-            'p1': 'Our Platform may integrate with third-party services (e.g., GitHub, Netlify). Your use of those services is subject to their respective terms.'
-        },
-        'section7': {
-            'title': 'Disclaimer of Warranties',
-            'p1': 'The Platform is provided "as is" without warranties of any kind. We do not guarantee uninterrupted or error-free service.'
-        },
-        'section8': {
-            'title': 'Limitation of Liability',
-            'p1': 'To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform.'
-        },
-        'section9': {
-            'title': 'Changes to Terms',
-            'p1': 'We may update these Terms of Service. Continued use after changes constitutes acceptance.'
-        },
-        'section10': {
-            'title': 'Contact Information',
-            'p1': 'For questions, please contact us via the platform feedback or email:',
-            'developer': 'Developer:'
-        },
-        'agreement': {
-            'text': 'By using this platform, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.',
-            'button': 'I Accept'
-        },
-        'notifications': {
-            'welcome': 'Welcome to Code Learning Platform!',
-            'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
-            'doAction': 'Activating "{0}" with value "{1}" - Coming soon! Feature is under development.',
-            'exportPDF': 'Opening PDF export...',
-            'exportTXT': 'Text export completed.',
-            'exportSheet': 'CSV export completed.',
-            'comingSoonGeneric': 'Coming soon! This feature is under development.',
-            'done': 'Done! {0} set to {1}.',
-            'termsAccepted': 'Thank you for accepting our Terms of Service.'
-        },
-        'index': {
-            'header': {
-                'title': 'Code Learning Platform',
-                'subtitle': 'Master Web Development & Programming Languages'
-            },
-            'dropdown': {
-                'language': 'Language',
-                'mode': 'Mode',
-                'fullscreen': 'Fullscreen',
-                'fontsize': 'Font Size',
-                'export': 'Export Data',
-                'notifications': 'Notifications',
-                'en': 'EN',
-                'fr': 'FR',
-                'ar': 'AR',
-                'light': 'Light',
-                'dark': 'Dark',
-                'highcontrast': 'High Contrast',
-                'yes': 'Yes',
-                'no': 'No',
-                'increase': 'Increase',
-                'decrease': 'Decrease',
-                'reset': 'Reset',
-                'pdf': 'PDF',
-                'sheet': 'Sheet',
-                'txt': 'TXT',
-                'important': 'Only Important',
-                'do': 'Do',
-                'close': 'Close'
-            },
-            'footer': {
-                'briefDescription': 'Your go-to platform for mastering web development and programming languages.',
-                'communityTitle': 'Community',
-                'community': {
-                    'facebook': 'Facebook',
-                    'twitter': 'Twitter',
-                    'github': 'GitHub',
-                    'youtube': 'YouTube',
-                    'upscrolled': 'UpScrolled'
-                },
-                'aboutSupportTitle': 'About & Support',
-                'aboutSupport': {
-                    'aboutUs': 'About Us',
-                    'contactSupport': 'Contact Support',
-                    'privacyPolicy': 'Privacy Policy',
-                    'termsOfService': 'Terms of Service'
-                },
-                'copyright': '© 2026 Code Learning Platform. All rights reserved.'
-            },
-    'installButton': 'Install App'
-        }
-    };
-
-    // ----- French -----
-    window.DHEtranslations.fr['other-terms'] = {
-        'document': { 'title': 'Conditions d\'utilisation – Code Learning Platform' },
-        'page': { 'title': 'Conditions d\'utilisation' },
-        'lastUpdated': 'Dernière mise à jour :',
-        'lastUpdatedDate': '10 mars 2024',
-        'summary': 'En utilisant notre plateforme, vous acceptez ces conditions. Veuillez les lire attentivement.',
-        'section1': {
-            'title': 'Acceptation des conditions',
-            'p1': 'Les présentes conditions d\'utilisation constituent un accord juridiquement contraignant entre vous et Dev Hub Education (basé en Tunisie) concernant votre utilisation de la plateforme.',
-            'p2': 'En accédant ou en utilisant la plateforme, vous confirmez que vous acceptez ces conditions et que vous vous engagez à les respecter. Si vous n\'êtes pas d\'accord, vous ne devez pas utiliser notre plateforme.'
-        },
-        'section2': {
-            'title': 'Admissibilité',
-            'p1': 'Pour utiliser notre plateforme, vous devez :',
-            'li1': 'Avoir au moins 12 ans',
-            'li2': 'Avoir la capacité juridique de conclure un accord contraignant',
-            'li3': 'Utiliser la plateforme uniquement à des fins éducatives licites',
-            'li4': 'Ne pas violer les lois ou règlements applicables',
-            'p2': 'Si vous avez moins de 18 ans, vous confirmez avoir obtenu le consentement parental ou d\'un tuteur pour utiliser cette plateforme.'
-        },
-        'section3': {
-            'title': 'Comptes utilisateur et accès',
-            'p1': 'La plateforme est actuellement gratuite et ne nécessite pas de création de compte. Cela pourrait changer dans les versions futures.',
-            'p2': 'Lorsque les fonctionnalités de compte seront implémentées :',
-            'li1': 'Vous êtes responsable de la confidentialité de vos identifiants de compte',
-            'li2': 'Vous devez fournir des informations exactes et complètes',
-            'li3': 'Vous êtes responsable de toutes les activités effectuées sous votre compte',
-            'li4': 'Nous nous réservons le droit de suspendre ou de résilier les comptes violant ces conditions'
-        },
-        'section4': {
-            'title': 'Droits de propriété intellectuelle',
-            'sub1': '4.1 Contenu de la plateforme',
-            'p1': 'Tout le contenu éducatif, les tutoriels, les exemples de code et la conception de la plateforme sont la propriété de Dev Hub Education et de Mejri Ziad.',
-            'sub2': '4.2 Créations des utilisateurs',
-            'p2': 'Le code et les projets que vous créez avec nos tutoriels vous appartiennent. Vous pouvez les utiliser à des fins personnelles ou commerciales.'
-        },
-        'section5': {
-            'title': 'Contenu généré par l\'utilisateur',
-            'p1': 'Lorsque vous soumettez des exemples de code, des questions ou des commentaires :',
-            'li1': 'Vous nous accordez une licence mondiale non exclusive pour utiliser votre contenu afin d\'améliorer la plateforme',
-            'li2': 'Vous restez propriétaire de vos créations originales',
-            'li3': 'Vous ne devez pas soumettre de matériel protégé par le droit d\'auteur sans autorisation'
-        },
-        'section6': {
-            'title': 'Services tiers',
-            'p1': 'Notre plateforme peut intégrer des services tiers (ex: GitHub, Netlify). Votre utilisation de ces services est soumise à leurs conditions respectives.'
-        },
-        'section7': {
-            'title': 'Exclusion de garanties',
-            'p1': 'La plateforme est fournie "telle quelle", sans aucune garantie. Nous ne garantissons pas un service ininterrompu ou sans erreur.'
-        },
-        'section8': {
-            'title': 'Limitation de responsabilité',
-            'p1': 'Dans toute la mesure permise par la loi, nous ne sommes pas responsables des dommages indirects, accessoires ou consécutifs découlant de votre utilisation de la plateforme.'
-        },
-        'section9': {
-            'title': 'Modifications des conditions',
-            'p1': 'Nous pouvons modifier les présentes conditions. L\'utilisation continue après les modifications constitue une acceptation.'
-        },
-        'section10': {
-            'title': 'Coordonnées',
-            'p1': 'Pour toute question, veuillez nous contacter via les retours de la plateforme ou par courriel :',
-            'developer': 'Développeur :'
-        },
-        'agreement': {
-            'text': 'En utilisant cette plateforme, vous reconnaissez avoir lu, compris et accepté d\'être lié par ces conditions d\'utilisation.',
-            'button': 'J\'accepte'
-        },
-        'notifications': {
-            'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
-            'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
-            'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
-            'exportPDF': 'Ouverture de l\'export PDF...',
-            'exportTXT': 'Export texte terminé.',
-            'exportSheet': 'Export CSV terminé.',
-            'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
-            'done': 'Terminé ! {0} défini sur {1}.',
-            'termsAccepted': 'Merci d\'avoir accepté nos conditions d\'utilisation.'
-        },
-        'index': {
-            'header': {
-                'title': 'Plateforme d\'Apprentissage du Code',
-                'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation'
-            },
-            'dropdown': {
-                'language': 'Langue',
-                'mode': 'Mode',
-                'fullscreen': 'Plein écran',
-                'fontsize': 'Taille de police',
-                'export': 'Exporter les données',
-                'notifications': 'Notifications',
-                'en': 'EN',
-                'fr': 'FR',
-                'ar': 'AR',
-                'light': 'Clair',
-                'dark': 'Sombre',
-                'highcontrast': 'Contraste élevé',
-                'yes': 'Oui',
-                'no': 'Non',
-                'increase': 'Augmenter',
-                'decrease': 'Diminuer',
-                'reset': 'Réinitialiser',
-                'pdf': 'PDF',
-                'sheet': 'Feuille',
-                'txt': 'TXT',
-                'important': 'Important uniquement',
-                'do': 'Faire',
-                'close': 'Fermer'
-            },
-            'footer': {
-                'briefDescription': 'Votre plateforme de référence pour maîtriser le développement web et les langages de programmation.',
-                'communityTitle': 'Communauté',
-                'community': {
-                    'facebook': 'Facebook',
-                    'twitter': 'Twitter',
-                    'github': 'GitHub',
-                    'youtube': 'YouTube',
-                    'upscrolled': 'UpScrolled'
-                },
-                'aboutSupportTitle': 'À propos et support',
-                'aboutSupport': {
-                    'aboutUs': 'À propos',
-                    'contactSupport': 'Contacter le support',
-                    'privacyPolicy': 'Politique de confidentialité',
-                    'termsOfService': 'Conditions d\'utilisation'
-                },
-                'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
-            },
-'installButton': 'Installer l’application'
-        }
-    };
-
-    // ----- Arabic -----
-    window.DHEtranslations.ar['other-terms'] = {
-        'document': { 'title': 'شروط الخدمة – منصة تعلم البرمجة' },
-        'page': { 'title': 'شروط الخدمة' },
-        'lastUpdated': 'آخر تحديث:',
-        'lastUpdatedDate': '١٠ مارس ٢٠٢٤',
-        'summary': 'باستخدام منصتنا، فإنك توافق على هذه الشروط. يرجى قراءتها بعناية.',
-        'section1': {
-            'title': 'قبول الشروط',
-            'p1': 'تشكل شروط الخدمة هذه اتفاقية ملزمة قانونًا بينك وبين Dev Hub Education (ومقرها تونس) فيما يتعلق باستخدامك لمنصة تعلم البرمجة.',
-            'p2': 'من خلال الوصول إلى المنصة أو استخدامها، فإنك تؤكد قبولك لهذه الشروط والتزامك بها. إذا لم توافق، فلا يجوز لك استخدام منصتنا.'
-        },
-        'section2': {
-            'title': 'الأهلية',
-            'p1': 'لاستخدام منصتنا، يجب عليك:',
-            'li1': 'أن يكون عمرك 12 عامًا على الأقل',
-            'li2': 'أن تكون لديك الأهلية القانونية لإبرام اتفاقية ملزمة',
-            'li3': 'استخدام المنصة للأغراض التعليمية المشروعة فقط',
-            'li4': 'عدم انتهاك أي قوانين أو لوائح معمول بها',
-            'p2': 'إذا كان عمرك أقل من 18 عامًا، فإنك تؤكد أنك حصلت على موافقة الوالدين أو الوصي لاستخدام هذه المنصة.'
-        },
-        'section3': {
-            'title': 'حسابات المستخدمين والوصول',
-            'p1': 'المنصة حاليًا مجانية ولا تتطلب إنشاء حساب. قد يتغير هذا في الإصدارات المستقبلية.',
-            'p2': 'عند تنفيذ ميزات الحساب:',
-            'li1': 'أنت مسؤول عن الحفاظ على سرية بيانات اعتماد حسابك',
-            'li2': 'يجب عليك تقديم معلومات دقيقة وكاملة',
-            'li3': 'أنت مسؤول عن جميع الأنشطة التي تتم تحت حسابك',
-            'li4': 'نحن نحتفظ بالحق في تعليق أو إنهاء الحسابات التي تنتهك هذه الشروط'
-        },
-        'section4': {
-            'title': 'حقوق الملكية الفكرية',
-            'sub1': '٤.١ محتوى المنصة',
-            'p1': 'جميع المحتويات التعليمية والبرامج التعليمية وأمثلة التعليمات البرمجية وتصميم المنصة مملوكة لـ Dev Hub Education ومهريزي زياد.',
-            'sub2': '٤.٢ إبداعات المستخدم',
-            'p2': 'الكود والمشاريع التي تنشئها باستخدام برامجنا التعليمية ملك لك. يمكنك استخدامها لأغراض شخصية أو تجارية.'
-        },
-        'section5': {
-            'title': 'المحتوى الذي ينشئه المستخدم',
-            'p1': 'عند تقديم أمثلة التعليمات البرمجية أو الأسئلة أو الملاحظات:',
-            'li1': 'تمنحنا ترخيصًا عالميًا غير حصري لاستخدام المحتوى الخاص بك لتحسين المنصة',
-            'li2': 'تبقى مالك إبداعاتك الأصلية',
-            'li3': 'يجب عليك عدم تقديم مواد محمية بحقوق الطبع والنشر دون إذن'
-        },
-        'section6': {
-            'title': 'خدمات الطرف الثالث',
-            'p1': 'قد تتكامل منصتنا مع خدمات الطرف الثالث (مثل GitHub و Netlify). يخضع استخدامك لتلك الخدمات لشروط كل منها.'
-        },
-        'section7': {
-            'title': 'إخلاء المسؤولية عن الضمانات',
-            'p1': 'يتم توفير المنصة "كما هي" دون أي ضمانات من أي نوع. نحن لا نضمن خدمة بدون انقطاع أو خالية من الأخطاء.'
-        },
-        'section8': {
-            'title': 'تحديد المسؤولية',
-            'p1': 'إلى أقصى حد يسمح به القانون، نحن غير مسؤولين عن أي أضرار غير مباشرة أو عرضية أو تبعية ناشئة عن استخدامك للمنصة.'
-        },
-        'section9': {
-            'title': 'تغييرات الشروط',
-            'p1': 'قد نقوم بتحديث شروط الخدمة هذه. الاستمرار في الاستخدام بعد التغييرات يشكل قبولاً.'
-        },
-        'section10': {
-            'title': 'معلومات الاتصال',
-            'p1': 'للاستفسارات، يرجى الاتصال بنا عبر ملاحظات المنصة أو البريد الإلكتروني:',
-            'developer': 'المطور:'
-        },
-        'agreement': {
-            'text': 'باستخدام هذه المنصة، فإنك تقر بأنك قد قرأت وفهمت ووافقت على الالتزام بشروط الخدمة هذه.',
-            'button': 'أوافق'
-        },
-        'notifications': {
-            'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
-            'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
-            'doAction': 'تفعيل "{0}" بالقيمة "{1}" - الميزة قيد التطوير. قريبًا',
-            'exportPDF': 'جاري فتح تصدير PDF...',
-            'exportTXT': 'تم تصدير النص بنجاح.',
-            'exportSheet': 'تم تصدير CSV بنجاح.',
-            'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
-            'done': 'تم! تعيين {0} إلى {1}.',
-            'termsAccepted': 'شكرًا لقبولك شروط الخدمة.'
-        },
-        'index': {
-            'header': {
-                'title': 'منصة تعلم البرمجة',
-                'subtitle': 'إتقان تطوير الويب ولغات البرمجة'
-            },
-            'dropdown': {
-                'language': 'اللغة',
-                'mode': 'الوضع',
-                'fullscreen': 'ملء الشاشة',
-                'fontsize': 'حجم الخط',
-                'export': 'تصدير البيانات',
-                'notifications': 'الإشعارات',
-                'en': 'الإنجليزية',
-                'fr': 'الفرنسية',
-                'ar': 'العربية',
-                'light': 'فاتح',
-                'dark': 'داكن',
-                'highcontrast': 'تباين عال',
-                'yes': 'نعم',
-                'no': 'لا',
-                'increase': 'زيادة',
-                'decrease': 'تقليل',
-                'reset': 'إعادة تعيين',
-                'pdf': 'PDF',
-                'sheet': 'ورقة',
-                'txt': 'نص',
-                'important': 'المهم فقط',
-                'do': 'تنفيذ',
-                'close': 'إغلاق'
-            },
-            'footer': {
-                'briefDescription': 'منصتك المثالية لإتقان تطوير الويب ولغات البرمجة.',
-                'communityTitle': 'المجتمع',
-                'community': {
-                    'facebook': 'فيسبوك',
-                    'twitter': 'تويتر',
-                    'github': 'جيت‌هب',
-                    'youtube': 'يوتيوب',
-                    'upscrolled': 'أب‌سكرولد'
-                },
-                'aboutSupportTitle': 'حول والدعم',
-                'aboutSupport': {
-                    'aboutUs': 'معلومات عنا',
-                    'contactSupport': 'اتصل بالدعم',
-                    'privacyPolicy': 'سياسة الخصوصية',
-                    'termsOfService': 'شروط الخدمة'
-                },
-                'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
-            },
-'installButton': 'تثبيت التطبيق'
-        }
-    };
-
-    // Set the page prefix
-    window.DHEPagePrefix = 'other-terms';
-</script>
-
-    <!-- ===== SUPABASE SCRIPTS (added) ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase.js"></script>
-    <!-- ===== GLOBAL SCRIPTS ===== -->
-    <script src="scripts/translations.js"></script>
-    <script src="scripts/notifications.js"></script>
-    <script src="scripts/modes.js"></script>
-    <script src="scripts/screen.js"></script>
-    <script src="scripts/font.js"></script>
-    <script src="scripts/export.js"></script>
-    <script src="scripts/options.js"></script>
-
-    <!-- ===== Accept button handler ===== -->
-    <script>
-        (function() {
-            const acceptBtn = document.getElementById('acceptTermsBtn');
-            if (!acceptBtn) return;
-
-            // Check if already accepted
-            if (localStorage.getItem('termsAccepted') === 'true') {
-                acceptBtn.disabled = true;
-                acceptBtn.textContent = window.DHEIndexTranslator?.getTranslation('agreement.button') || 'Accepted';
-            }
-
-            acceptBtn.addEventListener('click', function() {
-                if (localStorage.getItem('termsAccepted') === 'true') return;
-
-                // Store acceptance
-                localStorage.setItem('termsAccepted', 'true');
-
-                // Show notification
-                if (window.DHEIndexNotifications && DHEIndexNotifications.instance) {
-                    DHEIndexNotifications.instance.show(
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title data-i18n="document.title">Terms of Service – Code Learning Platform</title>
+		<link rel="manifest" href="/manifest.json">
+		<link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="styles/other-terms.css">
+	</head>
+	<body>
+		<!-- ===== HEADER (shared) ===== -->
+		<header class="DHE-index-header">
+			<div class="DHE-index-header-container">
+				<div class="DHE-index-logo-container">
+					<a href="index.html" aria-label="Return to Home">
+						<img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+					</a>
+				</div>
+				<div class="DHE-index-title-container">
+					<h1 data-i18n="index.header.title">Code Learning Platform</h1>
+					<p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
+				</div>
+				<div class="DHE-index-hamburg-container">
+					<button class="DHE-index-hamburg-btn" id="hamburgBtn">
+						<span class="DHE-index-hamburg-line"></span>
+						<span class="DHE-index-hamburg-line"></span>
+						<span class="DHE-index-hamburg-line"></span>
+					</button>
+					<div class="DHE-index-dropdown" id="dropdownMenu">
+						<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+						<div class="DHE-index-dropdown-group" id="authGroup">
+							<h3 data-i18n="index.auth.account">Account</h3>
+							<div class="DHE-index-btn-group">
+								<button id="authSignInBtn" class="DHE-index-toggle-btn" data-i18n="index.auth.signIn">Sign In</button>
+								<span id="authUserEmail" style="display: none;">user@example.com</span>
+								<button id="authSignOutBtn" class="DHE-index-toggle-btn" style="display: none;" data-i18n="index.auth.signOut">Sign Out</button>
+							</div>
+						</div>
+						<!-- Language -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.language">Language</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn active" data-setting="language" data-value="en" data-i18n="index.dropdown.en">EN</button>
+								<button class="DHE-index-toggle-btn" data-setting="language" data-value="fr" data-i18n="index.dropdown.fr">FR</button>
+								<button class="DHE-index-toggle-btn" data-setting="language" data-value="ar" data-i18n="index.dropdown.ar">AR</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="language" data-i18n="index.dropdown.do">Do</button>
+						</div>
+						<!-- Mode -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.mode">Mode</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn active" data-setting="mode" data-value="light" data-i18n="index.dropdown.light">Light</button>
+								<button class="DHE-index-toggle-btn" data-setting="mode" data-value="dark" data-i18n="index.dropdown.dark">Dark</button>
+								<button class="DHE-index-toggle-btn" data-setting="mode" data-value="highcontrast" data-i18n="index.dropdown.highcontrast">High Contrast</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="mode" data-i18n="index.dropdown.do">Do</button>
+						</div>
+						<!-- Fullscreen -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.fullscreen">Fullscreen</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn" data-setting="fullscreen" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+								<button class="DHE-index-toggle-btn active" data-setting="fullscreen" data-value="no" data-i18n="index.dropdown.no">No</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="fullscreen" data-i18n="index.dropdown.do">Do</button>
+						</div>
+						<!-- Font Size -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.fontsize">Font Size</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="increase" data-i18n="index.dropdown.increase">Increase</button>
+								<button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="decrease" data-i18n="index.dropdown.decrease">Decrease</button>
+								<button class="DHE-index-toggle-btn active" data-setting="fontsize" data-value="reset" data-i18n="index.dropdown.reset">Reset</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="fontsize" data-i18n="index.dropdown.do">Do</button>
+						</div>
+						<!-- Export Data -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.export">Export Data</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn" data-setting="export" data-value="pdf" data-i18n="index.dropdown.pdf">PDF</button>
+								<button class="DHE-index-toggle-btn" data-setting="export" data-value="sheet" data-i18n="index.dropdown.sheet">Sheet</button>
+								<button class="DHE-index-toggle-btn active" data-setting="export" data-value="txt" data-i18n="index.dropdown.txt">TXT</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="export" data-i18n="index.dropdown.do">Do</button>
+						</div>
+						<!-- Notifications -->
+						<div class="DHE-index-dropdown-group">
+							<h3 data-i18n="index.dropdown.notifications">Notifications</h3>
+							<div class="DHE-index-btn-group">
+								<button class="DHE-index-toggle-btn active" data-setting="notifications" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+								<button class="DHE-index-toggle-btn" data-setting="notifications" data-value="no" data-i18n="index.dropdown.no">No</button>
+								<button class="DHE-index-toggle-btn" data-setting="notifications" data-value="important" data-i18n="index.dropdown.important">Only Important</button>
+							</div>
+							<button class="DHE-index-do-btn" data-setting="notifications" data-i18n="index.dropdown.do">Do</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<!-- ===== MAIN: TERMS OF SERVICE ===== -->
+		<main class="DHE-other-terms-container">
+			<article class="DHE-other-terms-paper">
+				<header class="DHE-other-terms-header">
+					<h1 class="DHE-other-terms-title" data-i18n="page.title">Terms of Service</h1>
+					<p class="DHE-other-terms-last-updated">
+						<span data-i18n="lastUpdated">Last Updated:</span>
+						<span data-i18n="lastUpdatedDate">March 10, 2024</span>
+					</p>
+					<div class="DHE-other-terms-summary">
+						<p data-i18n="summary">By using our platform, you agree to these terms. Please read them carefully.</p>
+					</div>
+				</header>
+				
+				<!-- Section 1: Acceptance -->
+				<section class="DHE-other-terms-section" id="acceptance">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">1</span>
+						<span data-i18n="section1.title">Acceptance of Terms</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section1.p1">These Terms of Service constitute a legally binding agreement between you and Dev Hub Education (based in Tunisia) regarding your use of the Code Learning Platform.</p>
+						<p data-i18n="section1.p2">By accessing or using the Platform, you confirm that you accept these terms and agree to comply with them. If you do not agree, you must not use our Platform.</p>
+					</div>
+				</section>
+				
+				<!-- Section 2: Eligibility -->
+				<section class="DHE-other-terms-section" id="eligibility">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">2</span>
+						<span data-i18n="section2.title">Eligibility</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section2.p1">To use our Platform, you must:</p>
+						<ul>
+							<li data-i18n="section2.li1">Be at least 12 years of age</li>
+							<li data-i18n="section2.li2">Have the legal capacity to enter into a binding agreement</li>
+							<li data-i18n="section2.li3">Use the Platform only for lawful educational purposes</li>
+							<li data-i18n="section2.li4">Not violate any applicable laws or regulations</li>
+						</ul>
+						<p data-i18n="section2.p2">If you are under 18, you confirm that you have obtained parental or guardian consent to use this Platform.</p>
+					</div>
+				</section>
+				
+				<!-- Section 3: User Accounts -->
+				<section class="DHE-other-terms-section" id="accounts">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">3</span>
+						<span data-i18n="section3.title">User Accounts & Access</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section3.p1">The Platform is currently free and does not require account creation. This may change in future versions.</p>
+						<p data-i18n="section3.p2">When account features are implemented:</p>
+						<ul>
+							<li data-i18n="section3.li1">You are responsible for maintaining the confidentiality of your account credentials</li>
+							<li data-i18n="section3.li2">You must provide accurate and complete information</li>
+							<li data-i18n="section3.li3">You are responsible for all activities under your account</li>
+							<li data-i18n="section3.li4">We reserve the right to suspend or terminate accounts violating these terms</li>
+						</ul>
+					</div>
+				</section>
+				
+				<!-- Section 4: Intellectual Property -->
+				<section class="DHE-other-terms-section" id="intellectual">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">4</span>
+						<span data-i18n="section4.title">Intellectual Property Rights</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<h3 data-i18n="section4.sub1">4.1 Platform Content</h3>
+						<p data-i18n="section4.p1">All educational content, tutorials, code examples, and platform design are owned by Dev Hub Education and Mejri Ziad (Platform Developer).</p>
+						<h3 data-i18n="section4.sub2">4.2 User Creations</h3>
+						<p data-i18n="section4.p2">Code and projects you create using our tutorials belong to you. You may use them for personal or commercial purposes.</p>
+					</div>
+				</section>
+				
+				<!-- Section 5: User Content -->
+				<section class="DHE-other-terms-section" id="user-content">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">5</span>
+						<span data-i18n="section5.title">User-Generated Content</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section5.p1">When you submit code examples, questions, or feedback:</p>
+						<ul>
+							<li data-i18n="section5.li1">You grant us a non-exclusive, worldwide license to use your content for platform improvement</li>
+							<li data-i18n="section5.li2">You remain the owner of your original creations</li>
+							<li data-i18n="section5.li3">You must not submit copyrighted material without permission</li>
+						</ul>
+					</div>
+				</section>
+				
+				<!-- Section 6: Third-Party Services -->
+				<section class="DHE-other-terms-section" id="third-party">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">6</span>
+						<span data-i18n="section6.title">Third-Party Services</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section6.p1">Our Platform may integrate with third-party services (e.g., GitHub, Netlify). Your use of those services is subject to their respective terms.</p>
+					</div>
+				</section>
+				
+				<!-- Section 7: Disclaimer -->
+				<section class="DHE-other-terms-section" id="disclaimer">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">7</span>
+						<span data-i18n="section7.title">Disclaimer of Warranties</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section7.p1">The Platform is provided "as is" without warranties of any kind. We do not guarantee uninterrupted or error-free service.</p>
+					</div>
+				</section>
+				
+				<!-- Section 8: Limitation of Liability -->
+				<section class="DHE-other-terms-section" id="liability">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">8</span>
+						<span data-i18n="section8.title">Limitation of Liability</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section8.p1">To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform.</p>
+					</div>
+				</section>
+				
+				<!-- Section 9: Changes to Terms -->
+				<section class="DHE-other-terms-section" id="changes">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">9</span>
+						<span data-i18n="section9.title">Changes to Terms</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section9.p1">We may update these Terms of Service. Continued use after changes constitutes acceptance.</p>
+					</div>
+				</section>
+				
+				<!-- Section 10: Contact -->
+				<section class="DHE-other-terms-section" id="contact">
+					<h2 class="DHE-other-terms-section-title">
+						<span class="DHE-other-terms-section-number">10</span>
+						<span data-i18n="section10.title">Contact Information</span>
+					</h2>
+					<div class="DHE-other-terms-section-content">
+						<p data-i18n="section10.p1">For questions, please contact us via the platform feedback or email:</p>
+						<p><span data-i18n="section10.developer">Developer:</span> Mejri Ziad</p>
+					</div>
+				</section>
+				
+				<!-- Agreement Box -->
+				<div class="DHE-other-terms-agreement-box">
+					<p data-i18n="agreement.text"><strong>By using this platform, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</strong></p>
+					<button id="acceptTermsBtn" class="DHE-other-terms-agree-btn" data-i18n="agreement.button">I Accept</button>
+				</div>
+			</article>
+		</main>
+		
+		<!-- ===== FOOTER (shared) ===== -->
+		<footer class="DHE-index-footer">
+			<div class="DHE-index-footer-container">
+				<div class="DHE-index-footer-column">
+					<div class="DHE-index-footer-logo">
+						<img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-footer-logo-img">
+						<p data-i18n="index.footer.briefDescription">
+							Your go-to platform for mastering web development and programming languages.
+						</p>
+					</div>
+				</div>
+				<div class="DHE-index-footer-column">
+					<h4 data-i18n="index.footer.communityTitle">Community</h4>
+					<ul class="DHE-index-footer-links">
+						<li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.facebook">Facebook</a></li>
+						<li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.twitter">Twitter</a></li>
+						<li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.github">GitHub</a></li>
+						<li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.youtube">YouTube</a></li>
+						<li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.upscrolled">UpScrolled</a></li>
+					</ul>
+				</div>
+				<div class="DHE-index-footer-column">
+					<h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
+					<ul class="DHE-index-footer-links">
+						<li><a href="about.html" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+						<li><a href="contact.html" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+						<li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
+						<li><a href="terms.html" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="DHE-index-footer-bottom">
+				<p data-i18n="index.footer.copyright" data-i18n-params='[2026]'>
+					© 2026 Code Learning Platform. All rights reserved.
+				</p>
+			</div>
+		</footer>
+		
+		<!-- Notification Container -->
+		<div id="notificationContainer" class="DHE-index-notification-container"></div>
+		
+		<!-- ===== PAGE‑SPECIFIC TRANSLATIONS (other-terms) ===== -->
+		<script>
+			window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
+			
+			// ----- English -----
+			window.DHEtranslations.en['other-terms'] = {
+				'document': { 'title': 'Terms of Service – Code Learning Platform' },
+				'page': { 'title': 'Terms of Service' },
+				'lastUpdated': 'Last Updated:',
+				'lastUpdatedDate': 'March 10, 2024',
+				'summary': 'By using our platform, you agree to these terms. Please read them carefully.',
+				'section1': {
+					'title': 'Acceptance of Terms',
+					'p1': 'These Terms of Service constitute a legally binding agreement between you and Dev Hub Education (based in Tunisia) regarding your use of the Code Learning Platform.',
+					'p2': 'By accessing or using the Platform, you confirm that you accept these terms and agree to comply with them. If you do not agree, you must not use our Platform.'
+				},
+				'section2': {
+					'title': 'Eligibility',
+					'p1': 'To use our Platform, you must:',
+					'li1': 'Be at least 12 years of age',
+					'li2': 'Have the legal capacity to enter into a binding agreement',
+					'li3': 'Use the Platform only for lawful educational purposes',
+					'li4': 'Not violate any applicable laws or regulations',
+					'p2': 'If you are under 18, you confirm that you have obtained parental or guardian consent to use this Platform.'
+				},
+				'section3': {
+					'title': 'User Accounts & Access',
+					'p1': 'The Platform is currently free and does not require account creation. This may change in future versions.',
+					'p2': 'When account features are implemented:',
+					'li1': 'You are responsible for maintaining the confidentiality of your account credentials',
+					'li2': 'You must provide accurate and complete information',
+					'li3': 'You are responsible for all activities under your account',
+					'li4': 'We reserve the right to suspend or terminate accounts violating these terms'
+				},
+				'section4': {
+					'title': 'Intellectual Property Rights',
+					'sub1': '4.1 Platform Content',
+					'p1': 'All educational content, tutorials, code examples, and platform design are owned by Dev Hub Education and Mejri Ziad (Platform Developer).',
+					'sub2': '4.2 User Creations',
+					'p2': 'Code and projects you create using our tutorials belong to you. You may use them for personal or commercial purposes.'
+				},
+				'section5': {
+					'title': 'User-Generated Content',
+					'p1': 'When you submit code examples, questions, or feedback:',
+					'li1': 'You grant us a non-exclusive, worldwide license to use your content for platform improvement',
+					'li2': 'You remain the owner of your original creations',
+					'li3': 'You must not submit copyrighted material without permission'
+				},
+				'section6': {
+					'title': 'Third-Party Services',
+					'p1': 'Our Platform may integrate with third-party services (e.g., GitHub, Netlify). Your use of those services is subject to their respective terms.'
+				},
+				'section7': {
+					'title': 'Disclaimer of Warranties',
+					'p1': 'The Platform is provided "as is" without warranties of any kind. We do not guarantee uninterrupted or error-free service.'
+				},
+				'section8': {
+					'title': 'Limitation of Liability',
+					'p1': 'To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform.'
+				},
+				'section9': {
+					'title': 'Changes to Terms',
+					'p1': 'We may update these Terms of Service. Continued use after changes constitutes acceptance.'
+				},
+				'section10': {
+					'title': 'Contact Information',
+					'p1': 'For questions, please contact us via the platform feedback or email:',
+					'developer': 'Developer:'
+				},
+				'agreement': {
+					'text': 'By using this platform, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.',
+					'button': 'I Accept'
+				},
+				'notifications': {
+					'welcome': 'Welcome to Code Learning Platform!',
+					'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
+					'doAction': 'Activating "{0}" with value "{1}" - Coming soon! Feature is under development.',
+					'exportPDF': 'Opening PDF export...',
+					'exportTXT': 'Text export completed.',
+					'exportSheet': 'CSV export completed.',
+					'comingSoonGeneric': 'Coming soon! This feature is under development.',
+					'done': 'Done! {0} set to {1}.',
+					'termsAccepted': 'Thank you for accepting our Terms of Service.'
+				},
+				'index': {
+					'header': {
+						'title': 'Code Learning Platform',
+						'subtitle': 'Master Web Development & Programming Languages'
+					},
+					'dropdown': {
+						'language': 'Language',
+						'mode': 'Mode',
+						'fullscreen': 'Fullscreen',
+						'fontsize': 'Font Size',
+						'export': 'Export Data',
+						'notifications': 'Notifications',
+						'en': 'EN',
+						'fr': 'FR',
+						'ar': 'AR',
+						'light': 'Light',
+						'dark': 'Dark',
+						'highcontrast': 'High Contrast',
+						'yes': 'Yes',
+						'no': 'No',
+						'increase': 'Increase',
+						'decrease': 'Decrease',
+						'reset': 'Reset',
+						'pdf': 'PDF',
+						'sheet': 'Sheet',
+						'txt': 'TXT',
+						'important': 'Only Important',
+						'do': 'Do',
+						'close': 'Close'
+					},
+					'footer': {
+						'briefDescription': 'Your go-to platform for mastering web development and programming languages.',
+						'communityTitle': 'Community',
+						'community': {
+							'facebook': 'Facebook',
+							'twitter': 'Twitter',
+							'github': 'GitHub',
+							'youtube': 'YouTube',
+							'upscrolled': 'UpScrolled'
+						},
+						'aboutSupportTitle': 'About & Support',
+						'aboutSupport': {
+							'aboutUs': 'About Us',
+							'contactSupport': 'Contact Support',
+							'privacyPolicy': 'Privacy Policy',
+							'termsOfService': 'Terms of Service'
+						},
+						'copyright': '© 2026 Code Learning Platform. All rights reserved.'
+					},
+					'installButton': 'Install App',
+                    'auth': {
+                        'account': 'Account',
+                        'signIn': 'Sign In',
+                        'signOut': 'Sign Out',
+                        'signInTitle': 'Sign In',
+                        'signUpTitle': 'Sign Up',
+                        'noAccount': "Don't have an account? Sign Up",
+                        'haveAccount': 'Already have an account? Sign In',
+                        'continueWithGoogle': 'Continue with Google'
+					}
+				}
+			};
+			
+			// ----- French -----
+			window.DHEtranslations.fr['other-terms'] = {
+				'document': { 'title': 'Conditions d\'utilisation – Code Learning Platform' },
+				'page': { 'title': 'Conditions d\'utilisation' },
+				'lastUpdated': 'Dernière mise à jour :',
+				'lastUpdatedDate': '10 mars 2024',
+				'summary': 'En utilisant notre plateforme, vous acceptez ces conditions. Veuillez les lire attentivement.',
+				'section1': {
+					'title': 'Acceptation des conditions',
+					'p1': 'Les présentes conditions d\'utilisation constituent un accord juridiquement contraignant entre vous et Dev Hub Education (basé en Tunisie) concernant votre utilisation de la plateforme.',
+					'p2': 'En accédant ou en utilisant la plateforme, vous confirmez que vous acceptez ces conditions et que vous vous engagez à les respecter. Si vous n\'êtes pas d\'accord, vous ne devez pas utiliser notre plateforme.'
+				},
+				'section2': {
+					'title': 'Admissibilité',
+					'p1': 'Pour utiliser notre plateforme, vous devez :',
+					'li1': 'Avoir au moins 12 ans',
+					'li2': 'Avoir la capacité juridique de conclure un accord contraignant',
+					'li3': 'Utiliser la plateforme uniquement à des fins éducatives licites',
+					'li4': 'Ne pas violer les lois ou règlements applicables',
+					'p2': 'Si vous avez moins de 18 ans, vous confirmez avoir obtenu le consentement parental ou d\'un tuteur pour utiliser cette plateforme.'
+				},
+				'section3': {
+					'title': 'Comptes utilisateur et accès',
+					'p1': 'La plateforme est actuellement gratuite et ne nécessite pas de création de compte. Cela pourrait changer dans les versions futures.',
+					'p2': 'Lorsque les fonctionnalités de compte seront implémentées :',
+					'li1': 'Vous êtes responsable de la confidentialité de vos identifiants de compte',
+					'li2': 'Vous devez fournir des informations exactes et complètes',
+					'li3': 'Vous êtes responsable de toutes les activités effectuées sous votre compte',
+					'li4': 'Nous nous réservons le droit de suspendre ou de résilier les comptes violant ces conditions'
+				},
+				'section4': {
+					'title': 'Droits de propriété intellectuelle',
+					'sub1': '4.1 Contenu de la plateforme',
+					'p1': 'Tout le contenu éducatif, les tutoriels, les exemples de code et la conception de la plateforme sont la propriété de Dev Hub Education et de Mejri Ziad.',
+					'sub2': '4.2 Créations des utilisateurs',
+					'p2': 'Le code et les projets que vous créez avec nos tutoriels vous appartiennent. Vous pouvez les utiliser à des fins personnelles ou commerciales.'
+				},
+				'section5': {
+					'title': 'Contenu généré par l\'utilisateur',
+					'p1': 'Lorsque vous soumettez des exemples de code, des questions ou des commentaires :',
+					'li1': 'Vous nous accordez une licence mondiale non exclusive pour utiliser votre contenu afin d\'améliorer la plateforme',
+					'li2': 'Vous restez propriétaire de vos créations originales',
+					'li3': 'Vous ne devez pas soumettre de matériel protégé par le droit d\'auteur sans autorisation'
+				},
+				'section6': {
+					'title': 'Services tiers',
+					'p1': 'Notre plateforme peut intégrer des services tiers (ex: GitHub, Netlify). Votre utilisation de ces services est soumise à leurs conditions respectives.'
+				},
+				'section7': {
+					'title': 'Exclusion de garanties',
+					'p1': 'La plateforme est fournie "telle quelle", sans aucune garantie. Nous ne garantissons pas un service ininterrompu ou sans erreur.'
+				},
+				'section8': {
+					'title': 'Limitation de responsabilité',
+					'p1': 'Dans toute la mesure permise par la loi, nous ne sommes pas responsables des dommages indirects, accessoires ou consécutifs découlant de votre utilisation de la plateforme.'
+				},
+				'section9': {
+					'title': 'Modifications des conditions',
+					'p1': 'Nous pouvons modifier les présentes conditions. L\'utilisation continue après les modifications constitue une acceptation.'
+				},
+				'section10': {
+					'title': 'Coordonnées',
+					'p1': 'Pour toute question, veuillez nous contacter via les retours de la plateforme ou par courriel :',
+					'developer': 'Développeur :'
+				},
+				'agreement': {
+					'text': 'En utilisant cette plateforme, vous reconnaissez avoir lu, compris et accepté d\'être lié par ces conditions d\'utilisation.',
+					'button': 'J\'accepte'
+				},
+				'notifications': {
+					'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
+					'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+					'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+					'exportPDF': 'Ouverture de l\'export PDF...',
+					'exportTXT': 'Export texte terminé.',
+					'exportSheet': 'Export CSV terminé.',
+					'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
+					'done': 'Terminé ! {0} défini sur {1}.',
+					'termsAccepted': 'Merci d\'avoir accepté nos conditions d\'utilisation.'
+				},
+				'index': {
+					'header': {
+						'title': 'Plateforme d\'Apprentissage du Code',
+						'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation'
+					},
+					'dropdown': {
+						'language': 'Langue',
+						'mode': 'Mode',
+						'fullscreen': 'Plein écran',
+						'fontsize': 'Taille de police',
+						'export': 'Exporter les données',
+						'notifications': 'Notifications',
+						'en': 'EN',
+						'fr': 'FR',
+						'ar': 'AR',
+						'light': 'Clair',
+						'dark': 'Sombre',
+						'highcontrast': 'Contraste élevé',
+						'yes': 'Oui',
+						'no': 'Non',
+						'increase': 'Augmenter',
+						'decrease': 'Diminuer',
+						'reset': 'Réinitialiser',
+						'pdf': 'PDF',
+						'sheet': 'Feuille',
+						'txt': 'TXT',
+						'important': 'Important uniquement',
+						'do': 'Faire',
+						'close': 'Fermer'
+					},
+					'footer': {
+						'briefDescription': 'Votre plateforme de référence pour maîtriser le développement web et les langages de programmation.',
+						'communityTitle': 'Communauté',
+						'community': {
+							'facebook': 'Facebook',
+							'twitter': 'Twitter',
+							'github': 'GitHub',
+							'youtube': 'YouTube',
+							'upscrolled': 'UpScrolled'
+						},
+						'aboutSupportTitle': 'À propos et support',
+						'aboutSupport': {
+							'aboutUs': 'À propos',
+							'contactSupport': 'Contacter le support',
+							'privacyPolicy': 'Politique de confidentialité',
+							'termsOfService': 'Conditions d\'utilisation'
+						},
+						'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
+					},
+					'installButton': 'Installer l’application',
+                    'auth': {
+                        'account': 'Compte',
+                        'signIn': 'Se connecter',
+                        'signOut': 'Se déconnecter',
+                        'signInTitle': 'Connexion',
+                        'signUpTitle': 'Inscription',
+                        'noAccount': 'Pas de compte ? Inscrivez-vous',
+                        'haveAccount': 'Déjà un compte ? Connectez-vous',
+                        'continueWithGoogle': 'Continuer avec Google'
+					}
+				}
+			};
+			
+			// ----- Arabic -----
+			window.DHEtranslations.ar['other-terms'] = {
+				'document': { 'title': 'شروط الخدمة – منصة تعلم البرمجة' },
+				'page': { 'title': 'شروط الخدمة' },
+				'lastUpdated': 'آخر تحديث:',
+				'lastUpdatedDate': '١٠ مارس ٢٠٢٤',
+				'summary': 'باستخدام منصتنا، فإنك توافق على هذه الشروط. يرجى قراءتها بعناية.',
+				'section1': {
+					'title': 'قبول الشروط',
+					'p1': 'تشكل شروط الخدمة هذه اتفاقية ملزمة قانونًا بينك وبين Dev Hub Education (ومقرها تونس) فيما يتعلق باستخدامك لمنصة تعلم البرمجة.',
+					'p2': 'من خلال الوصول إلى المنصة أو استخدامها، فإنك تؤكد قبولك لهذه الشروط والتزامك بها. إذا لم توافق، فلا يجوز لك استخدام منصتنا.'
+				},
+				'section2': {
+					'title': 'الأهلية',
+					'p1': 'لاستخدام منصتنا، يجب عليك:',
+					'li1': 'أن يكون عمرك 12 عامًا على الأقل',
+					'li2': 'أن تكون لديك الأهلية القانونية لإبرام اتفاقية ملزمة',
+					'li3': 'استخدام المنصة للأغراض التعليمية المشروعة فقط',
+					'li4': 'عدم انتهاك أي قوانين أو لوائح معمول بها',
+					'p2': 'إذا كان عمرك أقل من 18 عامًا، فإنك تؤكد أنك حصلت على موافقة الوالدين أو الوصي لاستخدام هذه المنصة.'
+				},
+				'section3': {
+					'title': 'حسابات المستخدمين والوصول',
+					'p1': 'المنصة حاليًا مجانية ولا تتطلب إنشاء حساب. قد يتغير هذا في الإصدارات المستقبلية.',
+					'p2': 'عند تنفيذ ميزات الحساب:',
+					'li1': 'أنت مسؤول عن الحفاظ على سرية بيانات اعتماد حسابك',
+					'li2': 'يجب عليك تقديم معلومات دقيقة وكاملة',
+					'li3': 'أنت مسؤول عن جميع الأنشطة التي تتم تحت حسابك',
+					'li4': 'نحن نحتفظ بالحق في تعليق أو إنهاء الحسابات التي تنتهك هذه الشروط'
+				},
+				'section4': {
+					'title': 'حقوق الملكية الفكرية',
+					'sub1': '٤.١ محتوى المنصة',
+					'p1': 'جميع المحتويات التعليمية والبرامج التعليمية وأمثلة التعليمات البرمجية وتصميم المنصة مملوكة لـ Dev Hub Education ومهريزي زياد.',
+					'sub2': '٤.٢ إبداعات المستخدم',
+					'p2': 'الكود والمشاريع التي تنشئها باستخدام برامجنا التعليمية ملك لك. يمكنك استخدامها لأغراض شخصية أو تجارية.'
+				},
+				'section5': {
+					'title': 'المحتوى الذي ينشئه المستخدم',
+					'p1': 'عند تقديم أمثلة التعليمات البرمجية أو الأسئلة أو الملاحظات:',
+					'li1': 'تمنحنا ترخيصًا عالميًا غير حصري لاستخدام المحتوى الخاص بك لتحسين المنصة',
+					'li2': 'تبقى مالك إبداعاتك الأصلية',
+					'li3': 'يجب عليك عدم تقديم مواد محمية بحقوق الطبع والنشر دون إذن'
+				},
+				'section6': {
+					'title': 'خدمات الطرف الثالث',
+					'p1': 'قد تتكامل منصتنا مع خدمات الطرف الثالث (مثل GitHub و Netlify). يخضع استخدامك لتلك الخدمات لشروط كل منها.'
+				},
+				'section7': {
+					'title': 'إخلاء المسؤولية عن الضمانات',
+					'p1': 'يتم توفير المنصة "كما هي" دون أي ضمانات من أي نوع. نحن لا نضمن خدمة بدون انقطاع أو خالية من الأخطاء.'
+				},
+				'section8': {
+					'title': 'تحديد المسؤولية',
+					'p1': 'إلى أقصى حد يسمح به القانون، نحن غير مسؤولين عن أي أضرار غير مباشرة أو عرضية أو تبعية ناشئة عن استخدامك للمنصة.'
+				},
+				'section9': {
+					'title': 'تغييرات الشروط',
+					'p1': 'قد نقوم بتحديث شروط الخدمة هذه. الاستمرار في الاستخدام بعد التغييرات يشكل قبولاً.'
+				},
+				'section10': {
+					'title': 'معلومات الاتصال',
+					'p1': 'للاستفسارات، يرجى الاتصال بنا عبر ملاحظات المنصة أو البريد الإلكتروني:',
+					'developer': 'المطور:'
+				},
+				'agreement': {
+					'text': 'باستخدام هذه المنصة، فإنك تقر بأنك قد قرأت وفهمت ووافقت على الالتزام بشروط الخدمة هذه.',
+					'button': 'أوافق'
+				},
+				'notifications': {
+					'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
+					'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
+					'doAction': 'تفعيل "{0}" بالقيمة "{1}" - الميزة قيد التطوير. قريبًا',
+					'exportPDF': 'جاري فتح تصدير PDF...',
+					'exportTXT': 'تم تصدير النص بنجاح.',
+					'exportSheet': 'تم تصدير CSV بنجاح.',
+					'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
+					'done': 'تم! تعيين {0} إلى {1}.',
+					'termsAccepted': 'شكرًا لقبولك شروط الخدمة.'
+				},
+				'index': {
+					'header': {
+						'title': 'منصة تعلم البرمجة',
+						'subtitle': 'إتقان تطوير الويب ولغات البرمجة'
+					},
+					'dropdown': {
+						'language': 'اللغة',
+						'mode': 'الوضع',
+						'fullscreen': 'ملء الشاشة',
+						'fontsize': 'حجم الخط',
+						'export': 'تصدير البيانات',
+						'notifications': 'الإشعارات',
+						'en': 'الإنجليزية',
+						'fr': 'الفرنسية',
+						'ar': 'العربية',
+						'light': 'فاتح',
+						'dark': 'داكن',
+						'highcontrast': 'تباين عال',
+						'yes': 'نعم',
+						'no': 'لا',
+						'increase': 'زيادة',
+						'decrease': 'تقليل',
+						'reset': 'إعادة تعيين',
+						'pdf': 'PDF',
+						'sheet': 'ورقة',
+						'txt': 'نص',
+						'important': 'المهم فقط',
+						'do': 'تنفيذ',
+						'close': 'إغلاق'
+					},
+					'footer': {
+						'briefDescription': 'منصتك المثالية لإتقان تطوير الويب ولغات البرمجة.',
+						'communityTitle': 'المجتمع',
+						'community': {
+							'facebook': 'فيسبوك',
+							'twitter': 'تويتر',
+							'github': 'جيت‌هب',
+							'youtube': 'يوتيوب',
+							'upscrolled': 'أب‌سكرولد'
+						},
+						'aboutSupportTitle': 'حول والدعم',
+						'aboutSupport': {
+							'aboutUs': 'معلومات عنا',
+							'contactSupport': 'اتصل بالدعم',
+							'privacyPolicy': 'سياسة الخصوصية',
+							'termsOfService': 'شروط الخدمة'
+						},
+						'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
+					},
+					'installButton': 'تثبيت التطبيق',
+                    'auth': {
+                        'account': 'الحساب',
+                        'signIn': 'تسجيل الدخول',
+                        'signOut': 'تسجيل الخروج',
+                        'signInTitle': 'تسجيل الدخول',
+                        'signUpTitle': 'إنشاء حساب',
+                        'noAccount': 'ليس لديك حساب؟ اشتراك',
+                        'haveAccount': 'لديك حساب بالفعل؟ تسجيل الدخول',
+                        'continueWithGoogle': 'المتابعة مع جوجل'
+					}
+				}
+			};
+			
+			// Set the page prefix
+			window.DHEPagePrefix = 'other-terms';
+		</script>
+		
+		<!-- ===== SUPABASE SCRIPTS (added) ===== -->
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+		<script src="scripts/supabase.js"></script>
+		<script src="scripts/auth.js"></script>
+		<!-- ===== GLOBAL SCRIPTS ===== -->
+		<script src="scripts/translations.js"></script>
+		<script src="scripts/notifications.js"></script>
+		<script src="scripts/modes.js"></script>
+		<script src="scripts/screen.js"></script>
+		<script src="scripts/font.js"></script>
+		<script src="scripts/export.js"></script>
+		<script src="scripts/options.js"></script>
+		
+		<!-- ===== Accept button handler ===== -->
+		<script>
+			(function() {
+				const acceptBtn = document.getElementById('acceptTermsBtn');
+				if (!acceptBtn) return;
+				
+				// Check if already accepted
+				if (localStorage.getItem('termsAccepted') === 'true') {
+					acceptBtn.disabled = true;
+					acceptBtn.textContent = window.DHEIndexTranslator?.getTranslation('agreement.button') || 'Accepted';
+				}
+				
+				acceptBtn.addEventListener('click', function() {
+					if (localStorage.getItem('termsAccepted') === 'true') return;
+					
+					// Store acceptance
+					localStorage.setItem('termsAccepted', 'true');
+					
+					// Show notification
+					if (window.DHEIndexNotifications && DHEIndexNotifications.instance) {
+						DHEIndexNotifications.instance.show(
                         'terms-accepted',
                         'notifications.termsAccepted',
                         'Thank you for accepting our Terms of Service.',
                         'success'
-                    );
-                }
-
-                // Update button
-                acceptBtn.disabled = true;
-                acceptBtn.textContent = window.DHEIndexTranslator?.getTranslation('agreement.button') || 'Accepted';
-            });
-        })();
-    </script>
-<script>
-  // Register service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('SW registered:', reg))
-        .catch(err => console.error('SW registration failed:', err));
-    });
-  }
-
-  // Install prompt handling
-  let deferredPrompt;
-  const installButton = document.getElementById('installAppBtn');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67+ from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install button (if it exists)
-    if (installButton) installButton.style.display = 'inline-block';
-  });
-
-  if (installButton) {
-    installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      // Show the install prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to install prompt: ${outcome}`);
-      // We no longer need the prompt. Clear it.
-      deferredPrompt = null;
-      // Hide the button – it can't be used again
-      installButton.style.display = 'none';
-    });
-  }
-
-  // Optionally, hide the button if the app is already installed
-  window.addEventListener('appinstalled', () => {
-    console.log('App was installed.');
-    if (installButton) installButton.style.display = 'none';
-  });
-</script>
-</body>
+						);
+					}
+					
+					// Update button
+					acceptBtn.disabled = true;
+					acceptBtn.textContent = window.DHEIndexTranslator?.getTranslation('agreement.button') || 'Accepted';
+				});
+			})();
+		</script>
+		<script>
+			// Register service worker
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js')
+					.then(reg => console.log('SW registered:', reg))
+					.catch(err => console.error('SW registration failed:', err));
+				});
+			}
+			
+			// Install prompt handling
+			let deferredPrompt;
+			const installButton = document.getElementById('installAppBtn');
+			
+			window.addEventListener('beforeinstallprompt', (e) => {
+				// Prevent Chrome 67+ from automatically showing the prompt
+				e.preventDefault();
+				// Stash the event so it can be triggered later
+				deferredPrompt = e;
+				// Show the install button (if it exists)
+				if (installButton) installButton.style.display = 'inline-block';
+			});
+			
+			if (installButton) {
+				installButton.addEventListener('click', async () => {
+					if (!deferredPrompt) return;
+					// Show the install prompt
+					deferredPrompt.prompt();
+					// Wait for the user to respond to the prompt
+					const { outcome } = await deferredPrompt.userChoice;
+					console.log(`User response to install prompt: ${outcome}`);
+					// We no longer need the prompt. Clear it.
+					deferredPrompt = null;
+					// Hide the button – it can't be used again
+					installButton.style.display = 'none';
+				});
+			}
+			
+			// Optionally, hide the button if the app is already installed
+			window.addEventListener('appinstalled', () => {
+				console.log('App was installed.');
+				if (installButton) installButton.style.display = 'none';
+			});
+		</script>
+	</body>
 </html>

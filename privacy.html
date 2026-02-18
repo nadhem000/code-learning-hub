@@ -29,6 +29,14 @@
                 </button>
                 <div class="DHE-index-dropdown" id="dropdownMenu">
 				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+<div class="DHE-index-dropdown-group" id="authGroup">
+    <h3 data-i18n="index.auth.account">Account</h3>
+    <div class="DHE-index-btn-group">
+        <button id="authSignInBtn" class="DHE-index-toggle-btn" data-i18n="index.auth.signIn">Sign In</button>
+        <span id="authUserEmail" style="display: none;">user@example.com</span>
+        <button id="authSignOutBtn" class="DHE-index-toggle-btn" style="display: none;" data-i18n="index.auth.signOut">Sign Out</button>
+    </div>
+</div>
                     <!-- Language -->
                     <div class="DHE-index-dropdown-group">
                         <h3 data-i18n="index.dropdown.language">Language</h3>
@@ -357,7 +365,17 @@
                     },
                     'copyright': '© 2026 Code Learning Platform. All rights reserved.'
                 },
-    'installButton': 'Install App'
+    'installButton': 'Install App',
+                    'auth': {
+                        'account': 'Account',
+                        'signIn': 'Sign In',
+                        'signOut': 'Sign Out',
+                        'signInTitle': 'Sign In',
+                        'signUpTitle': 'Sign Up',
+                        'noAccount': "Don't have an account? Sign Up",
+                        'haveAccount': 'Already have an account? Sign In',
+                        'continueWithGoogle': 'Continue with Google'
+                    }
             }
         };
 
@@ -463,7 +481,17 @@
                     },
                     'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
                 },
-'installButton': 'Installer l’application'
+'installButton': 'Installer l’application',
+                    'auth': {
+                        'account': 'Compte',
+                        'signIn': 'Se connecter',
+                        'signOut': 'Se déconnecter',
+                        'signInTitle': 'Connexion',
+                        'signUpTitle': 'Inscription',
+                        'noAccount': 'Pas de compte ? Inscrivez-vous',
+                        'haveAccount': 'Déjà un compte ? Connectez-vous',
+                        'continueWithGoogle': 'Continuer avec Google'
+                    }
             }
         };
 
@@ -569,7 +597,17 @@
                     },
                     'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
                 },
-'installButton': 'تثبيت التطبيق'
+'installButton': 'تثبيت التطبيق',
+                    'auth': {
+                        'account': 'الحساب',
+                        'signIn': 'تسجيل الدخول',
+                        'signOut': 'تسجيل الخروج',
+                        'signInTitle': 'تسجيل الدخول',
+                        'signUpTitle': 'إنشاء حساب',
+                        'noAccount': 'ليس لديك حساب؟ اشتراك',
+                        'haveAccount': 'لديك حساب بالفعل؟ تسجيل الدخول',
+                        'continueWithGoogle': 'المتابعة مع جوجل'
+                    }
             }
         };
 
@@ -578,8 +616,9 @@
     </script>
 
     <!-- ===== SUPABASE SCRIPTS (added) ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="scripts/supabase.js"></script>
+<script src="scripts/auth.js"></script>
     <!-- ===== GLOBAL SCRIPTS ===== -->
     <script src="scripts/translations.js"></script>
     <script src="scripts/notifications.js"></script>

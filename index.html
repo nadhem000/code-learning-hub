@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title data-i18n="DHE.translation.index.document.title">Programming and Web Development Courses</title>
-	<link rel="manifest" href="/manifest.json">
+		<link rel="manifest" href="/manifest.json">
 		<link rel="stylesheet" href="styles/main.css">
 	</head>
 	<body>
@@ -13,10 +13,10 @@
 			<div class="DHE-index-header-container">
 				<!-- Logo Container -->
 				<div class="DHE-index-logo-container">
-    <a href="index.html" aria-label="Return to Home">
-        <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
-    </a>
-</div>
+					<a href="index.html" aria-label="Return to Home">
+						<img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+					</a>
+				</div>
 				
 				<!-- Title + Subtitle -->
 				<div class="DHE-index-title-container">
@@ -34,7 +34,15 @@
 					
 					<!-- Dropdown Menu -->
 					<div class="DHE-index-dropdown" id="dropdownMenu">
-				<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+						<button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+						<div class="DHE-index-dropdown-group" id="authGroup">
+							<h3 data-i18n="index.auth.account">Account</h3>
+							<div class="DHE-index-btn-group">
+								<button id="authSignInBtn" class="DHE-index-toggle-btn" data-i18n="index.auth.signIn">Sign In</button>
+								<span id="authUserEmail" style="display: none;">user@example.com</span>
+								<button id="authSignOutBtn" class="DHE-index-toggle-btn" style="display: none;" data-i18n="index.auth.signOut">Sign Out</button>
+							</div>
+						</div>
 						<!-- Language -->
 						<div class="DHE-index-dropdown-group">
 							<h3 data-i18n="DHE.translation.index.dropdown.language">Language</h3>
@@ -233,7 +241,7 @@
 							},
 							'copyright': '© 2026 Code Learning Platform. All rights reserved.'
 						},
-    'installButton': 'Install App',
+						'installButton': 'Install App',
 						'notifications': {
 							'welcome': 'Welcome to Code Learning Platform!',
 							'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
@@ -241,9 +249,19 @@
 							'exportPDF': 'Opening PDF export...',
 							'exportTXT': 'Text export completed.',
 							'exportSheet': 'CSV export completed.',
-    'comingSoonGeneric': 'Coming soon! This feature is under development.',
-'done': 'Done! {0} set to {1}.'
-						}
+							'comingSoonGeneric': 'Coming soon! This feature is under development.',
+							'done': 'Done! {0} set to {1}.'
+						},
+                    'auth': {
+                        'account': 'Account',
+                        'signIn': 'Sign In',
+                        'signOut': 'Sign Out',
+                        'signInTitle': 'Sign In',
+                        'signUpTitle': 'Sign Up',
+                        'noAccount': "Don't have an account? Sign Up",
+                        'haveAccount': 'Already have an account? Sign In',
+                        'continueWithGoogle': 'Continue with Google'
+                    }
 					}
 				},
 				'fr': {
@@ -305,7 +323,7 @@
 							},
 							'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
 						},
-'installButton': 'Installer l’application',
+						'installButton': 'Installer l’application',
 						'notifications': {
 							'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
 							'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
@@ -313,8 +331,18 @@
 							'exportPDF': 'Ouverture de l\'export PDF...',
 							'exportTXT': 'Export texte terminé.',
 							'exportSheet': 'Export CSV terminé.',
-    'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
-'done': 'Terminé ! {0} défini sur {1}.'
+							'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
+							'done': 'Terminé ! {0} défini sur {1}.'
+						},
+						'auth': {
+							'account': 'Compte',
+							'signIn': 'Se connecter',
+							'signOut': 'Se déconnecter',
+							'signInTitle': 'Connexion',
+							'signUpTitle': 'Inscription',
+							'noAccount': 'Pas de compte ? Inscrivez-vous',
+							'haveAccount': 'Déjà un compte ? Connectez-vous',
+							'continueWithGoogle': 'Continuer avec Google'
 						}
 					}
 				},
@@ -377,7 +405,7 @@
 							},
 							'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
 						},
-'installButton': 'تثبيت التطبيق',
+						'installButton': 'تثبيت التطبيق',
 						'notifications': {
 							'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
 							'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
@@ -385,68 +413,79 @@
 							'exportPDF': 'جاري فتح تصدير PDF...',
 							'exportTXT': 'تم تصدير النص بنجاح.',
 							'exportSheet': 'تم تصدير CSV بنجاح.',
-    'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
-'done': 'تم! تعيين {0} إلى {1}.'
+							'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
+							'done': 'تم! تعيين {0} إلى {1}.'
+						},
+						'auth': {
+							'account': 'الحساب',
+							'signIn': 'تسجيل الدخول',
+							'signOut': 'تسجيل الخروج',
+							'signInTitle': 'تسجيل الدخول',
+							'signUpTitle': 'إنشاء حساب',
+							'noAccount': 'ليس لديك حساب؟ اشتراك',
+							'haveAccount': 'لديك حساب بالفعل؟ تسجيل الدخول',
+							'continueWithGoogle': 'المتابعة مع جوجل'
 						}
 					}
 				}
 			};
 			window.DHEPagePrefix = 'index';
 		</script>
-    <!-- ===== SUPABASE SCRIPTS (added) ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase.js"></script>
-<script src="scripts/course-structure.js"></script>
-	<script src="scripts/translations.js"></script>
+		<!-- ===== SUPABASE SCRIPTS (added) ===== -->
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+		<script src="scripts/supabase.js"></script>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/course-structure.js"></script>
+		<script src="scripts/translations.js"></script>
 		<script src="scripts/notifications.js"></script>
 		<script src="scripts/modes.js"></script>
 		<script src="scripts/screen.js"></script>
 		<script src="scripts/font.js"></script>
 		<script src="scripts/export.js"></script>
 		<script src="scripts/options.js"></script>
-<script>
-  // Register service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('SW registered:', reg))
-        .catch(err => console.error('SW registration failed:', err));
-    });
-  }
-  // Install prompt handling
-  let deferredPrompt;
-  const installButton = document.getElementById('installAppBtn');
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67+ from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install button (if it exists)
-    if (installButton) installButton.style.display = 'inline-block';
-  });
-  if (installButton) {
-    installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      // Show the install prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to install prompt: ${outcome}`);
-      // We no longer need the prompt. Clear it.
-      deferredPrompt = null;
-      // Hide the button – it can't be used again
-      installButton.style.display = 'none';
-    });
-  }
-  // Optionally, hide the button if the app is already installed
-  window.addEventListener('appinstalled', () => {
-    console.log('App was installed.');
-    if (installButton) installButton.style.display = 'none';
-    // Update install status in settings
-    if (window.DHEIndexNotifications?.instance?.updateInstallStatus) {
-      window.DHEIndexNotifications.instance.updateInstallStatus(true);
-    }
-  });
-</script>
+		<script>
+			// Register service worker
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js')
+					.then(reg => console.log('SW registered:', reg))
+					.catch(err => console.error('SW registration failed:', err));
+				});
+			}
+			// Install prompt handling
+			let deferredPrompt;
+			const installButton = document.getElementById('installAppBtn');
+			window.addEventListener('beforeinstallprompt', (e) => {
+				// Prevent Chrome 67+ from automatically showing the prompt
+				e.preventDefault();
+				// Stash the event so it can be triggered later
+				deferredPrompt = e;
+				// Show the install button (if it exists)
+				if (installButton) installButton.style.display = 'inline-block';
+			});
+			if (installButton) {
+				installButton.addEventListener('click', async () => {
+					if (!deferredPrompt) return;
+					// Show the install prompt
+					deferredPrompt.prompt();
+					// Wait for the user to respond to the prompt
+					const { outcome } = await deferredPrompt.userChoice;
+					console.log(`User response to install prompt: ${outcome}`);
+					// We no longer need the prompt. Clear it.
+					deferredPrompt = null;
+					// Hide the button – it can't be used again
+					installButton.style.display = 'none';
+				});
+			}
+			// Optionally, hide the button if the app is already installed
+			window.addEventListener('appinstalled', () => {
+				console.log('App was installed.');
+				if (installButton) installButton.style.display = 'none';
+				// Update install status in settings
+				if (window.DHEIndexNotifications?.instance?.updateInstallStatus) {
+					window.DHEIndexNotifications.instance.updateInstallStatus(true);
+				}
+			});
+		</script>
 	</body>
 </html>
