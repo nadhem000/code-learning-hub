@@ -10,16 +10,17 @@ class DHEIndexNotifications {
             export: 'txt',
             notifications: 'yes'
         };
+        // Start with defaults; will be updated after async load
         this.currentSettings = { ...this.defaultSettings };
-        // In‑memory fallback for when localStorage fails
+        // In‑memory fallback for when localStorage fails (used by dataSync)
         this.memorySettings = null;
         this.init();
+        // Trigger async load of saved settings
+        this.loadSettingsAsync().catch(err => console.warn('Notifications: async load failed', err));
     }
 
     init() {
-        // Load saved settings into memory (no DOM changes)
-        this.loadSettings();
-        // Show initial notification if enabled
+        // Show initial notification if enabled (defaults to 'yes' until loaded)
         if (this.currentSettings.notifications === 'yes') {
             setTimeout(() => {
                 this.show('welcome', 'notifications.welcome', 'Welcome to Code Learning Platform!', 'info');
@@ -33,6 +34,17 @@ class DHEIndexNotifications {
         window.addEventListener('appinstalled', () => {
             this.updateInstallStatus(true);
         });
+    }
+
+    async loadSettingsAsync() {
+        try {
+            const settings = await window.DHEDataSync.getSettings();
+            // Merge with defaults (settings may be partial)
+            this.currentSettings = { ...this.defaultSettings, ...settings };
+        } catch (e) {
+            console.warn('DHEIndexNotifications: Failed to load settings via dataSync, using defaults', e);
+            this.currentSettings = { ...this.defaultSettings };
+        }
     }
 
     // Simple placeholder replacement: replaces {0}, {1}, … with given values
@@ -52,47 +64,26 @@ class DHEIndexNotifications {
             if (key && window.DHEIndexTranslator) {
                 const translation = window.DHEIndexTranslator.getTranslation(key);
                 if (translation !== undefined) {
-                    // Parse stored parameters (default to empty array)
                     let params = [];
                     if (paramsAttr) {
                         try { params = JSON.parse(paramsAttr); } catch(e) {}
                     }
-                    // Format the translation with the parameters
                     messageDiv.textContent = this._formatString(translation, params);
                 }
             }
         });
     }
 
-    loadSettings() {
-        try {
-            const saved = localStorage.getItem('DHEIndexSettings');
-            if (saved) {
-                this.currentSettings = { ...this.defaultSettings, ...JSON.parse(saved) };
-                this.memorySettings = null; // no fallback needed
-            } else {
-                this.currentSettings = { ...this.defaultSettings };
-            }
-        } catch (e) {
-            console.warn('DHEIndexNotifications: Failed to load settings, using defaults and in‑memory fallback', e);
-            this.currentSettings = { ...this.defaultSettings };
-            this.memorySettings = { ...this.currentSettings }; // for potential saves
-            this.show('localStorageError', 'notifications.localStorageError', 'Could not access saved settings. Changes will not persist.', 'warning');
-        }
-    }
-
-    saveSettings() {
-        // Always add metadata timestamp
+    // loadSettings() is replaced by async version above – kept for backward compatibility? Not needed.
+    // Save settings via dataSync
+    async saveSettings() {
         const settingsToSave = { ...this.currentSettings };
         settingsToSave._meta = settingsToSave._meta || {};
         settingsToSave._meta.lastSaved = new Date().toISOString();
-
         try {
-            localStorage.setItem('DHEIndexSettings', JSON.stringify(settingsToSave));
-            this.memorySettings = null; // clear fallback
+            await window.DHEDataSync.saveSettings(settingsToSave);
         } catch (e) {
-            console.warn('DHEIndexNotifications: Failed to save settings, keeping in memory only', e);
-            this.memorySettings = { ...settingsToSave }; // store in memory
+            console.warn('DHEIndexNotifications: Failed to save settings via dataSync', e);
             this.show('localStorageError', 'notifications.localStorageError', 'Could not save settings. Changes will not persist after this session.', 'warning');
         }
     }
@@ -100,7 +91,7 @@ class DHEIndexNotifications {
     // --- Update only the in‑memory setting and persist it ---
     updateSetting(setting, value) {
         this.currentSettings[setting] = value;
-        this.saveSettings();
+        this.saveSettings(); // async, fire and forget
     }
 
     // --- UI ONLY: set the active class on a button ---
@@ -121,14 +112,14 @@ class DHEIndexNotifications {
         }
     }
 
-    // --- Show a notification (type can be info, warning, error, important, success) ---
+    // --- Show a notification ---
     show(id, translationKey, fallbackMessage, type = 'info', params = []) {
+        // Use currentSettings (may still be defaults if async not finished)
         if (this.currentSettings.notifications === 'no') return;
         if (this.currentSettings.notifications === 'important' && type !== 'important') return;
         const existing = document.getElementById(`notification-${id}`);
         if (existing) existing.remove();
 
-        // --- Determine the message with placeholders replaced ---
         let message = fallbackMessage;
         if (window.DHEIndexTranslator && translationKey) {
             const translated = window.DHEIndexTranslator.getTranslation(translationKey);
@@ -136,15 +127,12 @@ class DHEIndexNotifications {
                 message = this._formatString(translated, params);
             }
         } else {
-            // Fallback may also contain placeholders; format it too.
             message = this._formatString(fallbackMessage, params);
         }
 
-        // --- Create notification ---
         const notification = document.createElement('div');
         notification.id = `notification-${id}`;
         notification.className = 'DHE-index-notification';
-        // Set border color based on type (unchanged) ...
         notification.innerHTML = `
         <div class="DHE-index-notification-message" 
         data-i18n="${translationKey}"
@@ -203,7 +191,7 @@ class DHEIndexNotifications {
     updateInstallStatus(installed) {
         this.currentSettings._meta = this.currentSettings._meta || {};
         this.currentSettings._meta.installed = installed;
-        this.saveSettings();
+        this.saveSettings(); // async
     }
 
     remove(id) {

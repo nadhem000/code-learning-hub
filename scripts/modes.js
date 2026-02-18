@@ -1,9 +1,8 @@
 // modes.js - Mode Management System (Light/Dark/High Contrast)
-// Now applies both page‑specific and global (index) mode classes
 class DHEModes {
     constructor() {
-        this.prefix = window.DHEPagePrefix || 'index';          // for page‑specific classes
-        this.globalPrefix = 'index';                             // for global (header/footer) classes
+        this.prefix = window.DHEPagePrefix || 'index';
+        this.globalPrefix = 'index';
         this.modeClasses = {
             dark: `DHE-${this.prefix}-mode-dark`,
             highcontrast: `DHE-${this.prefix}-mode-highcontrast`
@@ -12,32 +11,27 @@ class DHEModes {
             dark: `DHE-${this.globalPrefix}-mode-dark`,
             highcontrast: `DHE-${this.globalPrefix}-mode-highcontrast`
         };
-        this.currentMode = 'light';
-        this.init();
-    }
-
-    init() {
-        this.loadMode();
+        this.currentMode = 'light'; // default
+        // Apply default immediately (light)
         this.applyMode(this.currentMode);
+        // Then load saved mode asynchronously
+        this.loadModeAsync().catch(err => console.warn('Modes: async load failed', err));
     }
 
-    loadMode() {
+    async loadModeAsync() {
         try {
-            const saved = localStorage.getItem('DHEIndexSettings');
-            if (saved) {
-                const settings = JSON.parse(saved);
-                if (settings.mode) {
-                    this.currentMode = settings.mode;
-                }
+            const settings = await window.DHEDataSync.getSettings();
+            if (settings.mode) {
+                this.setMode(settings.mode); // will re-apply if different
             }
         } catch (e) {
-            console.warn('DHEModes: Failed to load mode from localStorage, using light', e);
+            console.warn('DHEModes: Failed to load mode via dataSync, using light', e);
             this._notify('localStorageError', 'Could not load theme mode. Using light.');
         }
     }
 
     applyMode(mode) {
-        // Remove all possible mode classes (both page and global)
+        // Remove all possible mode classes
         const allClasses = [
             ...Object.values(this.modeClasses),
             ...Object.values(this.globalModeClasses)
@@ -45,41 +39,34 @@ class DHEModes {
         allClasses.forEach(cls => {
             document.body.classList.remove(cls);
         });
-
         if (mode === 'dark' || mode === 'highcontrast') {
-            // Add both page‑specific and global classes
             document.body.classList.add(this.modeClasses[mode]);
             document.body.classList.add(this.globalModeClasses[mode]);
         }
-        // Light mode: no extra classes (both removed)
     }
 
     setMode(mode) {
         if (mode === this.currentMode) return;
         this.currentMode = mode;
         this.applyMode(mode);
-        // Persist using the existing settings system
+        // Persist via notifications (which uses dataSync)
         if (window.DHEIndexNotifications) {
             window.DHEIndexNotifications.instance.updateSetting('mode', mode);
         } else {
-            this._saveModeDirectly(mode);
+            this._saveModeDirectly(mode); // fallback (should not happen)
         }
-        // Notify the rest of the application
         document.dispatchEvent(new CustomEvent('modeChanged', { detail: { mode } }));
     }
 
     _saveModeDirectly(mode) {
-        try {
-            const saved = localStorage.getItem('DHEIndexSettings');
-            let settings = saved ? JSON.parse(saved) : {};
+        // Fallback if notifications not available – uses dataSync directly
+        window.DHEDataSync.getSettings().then(settings => {
             settings.mode = mode;
-            settings._meta = settings._meta || {};
-            settings._meta.lastSaved = new Date().toISOString();
-            localStorage.setItem('DHEIndexSettings', JSON.stringify(settings));
-        } catch (e) {
+            return window.DHEDataSync.saveSettings(settings);
+        }).catch(e => {
             console.warn('DHEModes: Failed to save mode directly', e);
             this._notify('localStorageError', 'Could not save theme mode.');
-        }
+        });
     }
 
     getMode() {
@@ -98,5 +85,4 @@ class DHEModes {
     }
 }
 
-// Instantiate globally
 window.DHEModes = new DHEModes();

@@ -1,76 +1,63 @@
 // export.js - Export Management System (PDF, CSV/Sheet, TXT)
-// Now exports localStorage data (DHEIndexSettings) instead of screen content.
 class DHEExport {
     constructor() {
         this.prefix = window.DHEPagePrefix || 'index';
     }
 
-    // Public API – called from options.js
-    exportData(format) {
+    // Public API – called from options.js (now async)
+    async exportData(format) {
         switch (format) {
-            case 'pdf':  this.exportToPDF();  break;
-            case 'sheet': this.exportToSheet(); break;
-            case 'txt':  this.exportToTXT();  break;
+            case 'pdf':  await this.exportToPDF();  break;
+            case 'sheet': await this.exportToSheet(); break;
+            case 'txt':  await this.exportToTXT();  break;
             default: console.warn(`DHEExport: Unknown format "${format}"`);
         }
     }
 
-    // ---------- PDF (print settings as a clean document) ----------
-    exportToPDF() {
-        const text = this._extractText();
+    async exportToPDF() {
+        const text = await this._extractText();
         this._printDocument(text);
         this._showNotification('exportPDF', 'Opening PDF export...', 'info');
     }
 
-    // ---------- TXT (JSON) ----------
-    exportToTXT() {
-        const text = this._extractText();
+    async exportToTXT() {
+        const text = await this._extractText();
         this._download(text, `${this.prefix}-settings.json`, 'application/json');
         this._showNotification('exportTXT', 'Text export completed.', 'success');
     }
 
-    // ---------- Sheet (CSV) ----------
-    exportToSheet() {
-        const data = this._extractSheetData();
+    async exportToSheet() {
+        const data = await this._extractSheetData();
         const csv = this._arrayToCSV(data);
         this._download(csv, `${this.prefix}-settings.csv`, 'text/csv');
         this._showNotification('exportSheet', 'CSV export completed.', 'success');
     }
 
-    // -------------------------------------------------------------
-    // Content extraction – now reads from localStorage by default
-    // Override via window.DHEPageExportTextExtractor / SheetExtractor
-    // -------------------------------------------------------------
-    _extractText() {
-        // Allow custom override (kept for backward compatibility)
+    async _extractText() {
         if (typeof window.DHEPageExportTextExtractor === 'function') {
             try {
-                return window.DHEPageExportTextExtractor();
+                return await window.DHEPageExportTextExtractor();
             } catch (e) {
                 console.warn('DHEExport: Custom text extractor failed, using default', e);
                 this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
             }
         }
-        // Default: return pretty‑printed settings JSON
-        const settings = this._getSettings();
+        const settings = await this._getSettings();
         return JSON.stringify(settings, null, 2);
     }
 
-    _extractSheetData() {
-        // Allow custom override
+    async _extractSheetData() {
         if (typeof window.DHEPageExportSheetExtractor === 'function') {
             try {
-                return window.DHEPageExportSheetExtractor();
+                return await window.DHEPageExportSheetExtractor();
             } catch (e) {
                 console.warn('DHEExport: Custom sheet extractor failed, using default', e);
                 this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
             }
         }
-        // Default: convert settings object to key‑value CSV
-        const settings = this._getSettings();
+        const settings = await this._getSettings();
         const data = [['Setting', 'Value']];
         Object.entries(settings).forEach(([key, value]) => {
-            // If value is an object/array, stringify it
             const val = (typeof value === 'object' && value !== null)
                 ? JSON.stringify(value)
                 : String(value);
@@ -79,31 +66,19 @@ class DHEExport {
         return data;
     }
 
-    // -------------------------------------------------------------
-    // Helper: retrieve and parse DHEIndexSettings from localStorage
-    // -------------------------------------------------------------
-    _getSettings() {
+    async _getSettings() {
         try {
-            const saved = localStorage.getItem('DHEIndexSettings');
-            if (saved) {
-                return JSON.parse(saved);
-            }
+            return await window.DHEDataSync.getSettings();
         } catch (e) {
-            console.warn('DHEExport: Failed to read settings from localStorage', e);
+            console.warn('DHEExport: Failed to read settings via dataSync', e);
             this._showNotification('localStorageError', 'Could not access saved settings. Using defaults.', 'warning');
+            return {};
         }
-        return {};
     }
 
-    // -------------------------------------------------------------
-    // Print a document with the given text (PDF via print dialog)
-    // -------------------------------------------------------------
     _printDocument(content) {
-        // Save original body
         const originalBody = document.body.innerHTML;
         const originalTitle = document.title;
-
-        // Build a simple printable document
         const printContainer = document.createElement('div');
         printContainer.innerHTML = `
             <style>
@@ -112,8 +87,6 @@ class DHEExport {
             </style>
             <pre>${this._escapeHTML(content)}</pre>
         `;
-
-        // Replace body, print, restore
         document.body.innerHTML = printContainer.innerHTML;
         document.title = `${this.prefix} Settings Export`;
         window.print();
@@ -121,9 +94,6 @@ class DHEExport {
         document.title = originalTitle;
     }
 
-    // -------------------------------------------------------------
-    // Utility: escape HTML for safe printing
-    // -------------------------------------------------------------
     _escapeHTML(str) {
         return str.replace(/[&<>"]/g, function(m) {
             if (m === '&') return '&amp;';
@@ -134,7 +104,6 @@ class DHEExport {
         });
     }
 
-    // ---------- unchanged helpers ----------
     _arrayToCSV(data) {
         return data.map(row =>
             row.map(cell => {
@@ -170,5 +139,4 @@ class DHEExport {
     }
 }
 
-// Instantiate globally
 window.DHEExport = new DHEExport();

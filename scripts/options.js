@@ -8,27 +8,22 @@ class DHEIndexOptions {
         // --- Hamburger menu ---
         const hamburgBtn = document.getElementById('hamburgBtn');
         const dropdownMenu = document.getElementById('dropdownMenu');
-
         if (hamburgBtn && dropdownMenu) {
             hamburgBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('show');
             });
-
             document.addEventListener('click', (e) => {
                 if (!hamburgBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
                     dropdownMenu.classList.remove('show');
                 }
             });
-
             dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
         }
-
         this.initToggleButtons();
         this.initDoButtons();
         this.initComingSoonLinks();
         this.loadSettings();
-
         document.addEventListener('modeChanged', (e) => {
             this.setActiveButtonForSetting('mode', e.detail.mode);
         });
@@ -43,24 +38,18 @@ class DHEIndexOptions {
             console.error('❌ Coming-soon: notifications system failed to load');
             return;
         }
-
         if (!window.DHEIndexNotifications || !DHEIndexNotifications.instance) {
             setTimeout(() => this.initComingSoonLinks(), 100);
             return;
         }
-
         this._comingSoonRetry = 0;
-
         if (this._boundComingSoonHandler) {
             document.removeEventListener('click', this._boundComingSoonHandler);
         }
-
         this._boundComingSoonHandler = (e) => {
             const link = e.target.closest('[data-flag="coming-soon"]');
             if (!link) return;
-
             e.preventDefault();
-
             try {
                 DHEIndexNotifications.instance.show(
                     'coming-soon-generic',
@@ -72,7 +61,6 @@ class DHEIndexOptions {
                 console.error('Failed to show coming-soon notification:', err);
             }
         };
-
         document.addEventListener('click', this._boundComingSoonHandler);
     }
 
@@ -85,9 +73,7 @@ class DHEIndexOptions {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-
                 if (button.classList.contains('active')) return;
-
                 DHEIndexNotifications.instance.setActiveButton(button);
             });
         });
@@ -102,11 +88,9 @@ class DHEIndexOptions {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-
                 const setting = button.dataset.setting;
                 const activeValue = this.getActiveValue(setting);
                 const value = activeValue || this.getDefaultSetting(setting);
-
                 this.applySetting(setting, value);
             });
         });
@@ -132,7 +116,6 @@ class DHEIndexOptions {
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
             case 'mode':
                 if (window.DHEModes) {
                     window.DHEModes.setMode(value);
@@ -142,7 +125,6 @@ class DHEIndexOptions {
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
             case 'fullscreen':
                 if (window.DHEScreen) {
                     window.DHEScreen.setFullscreen(value);
@@ -152,14 +134,12 @@ class DHEIndexOptions {
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
             case 'notifications':
                 DHEIndexNotifications.instance.updateSetting('notifications', value);
                 this.setActiveButtonForSetting(setting, value);
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
             case 'fontsize':
                 if (window.DHEFont) {
                     window.DHEFont.setFontSize(value);
@@ -169,19 +149,18 @@ class DHEIndexOptions {
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
             case 'export':
                 if (window.DHEExport) {
-                    window.DHEExport.exportData(value);
+                    // exportData is now async, but we don't need to await
+                    window.DHEExport.exportData(value).catch(err =>
+                        console.warn('Export failed', err)
+                    );
                 }
                 DHEIndexNotifications.instance.updateSetting('export', value);
                 this.setActiveButtonForSetting(setting, value);
                 this.showDoneNotification(setting, value);
                 this.closeDropdown();
                 break;
-
-            // ALL OTHER SETTINGS remain "coming soon"
-            case 'advanced':
             default:
                 DHEIndexNotifications.instance.showComingSoon(setting, value);
                 break;
@@ -193,7 +172,6 @@ class DHEIndexOptions {
     // ------------------------------------------------------------
     showDoneNotification(setting, value) {
         if (!window.DHEIndexNotifications || !DHEIndexNotifications.instance) return;
-
         const names = this.getLocalizedNames(setting, value);
         DHEIndexNotifications.instance.show(
             `done-${setting}-${Date.now()}`,
@@ -215,14 +193,13 @@ class DHEIndexOptions {
     }
 
     // ------------------------------------------------------------
-    // Get localized names for setting and value (same as coming‑soon)
+    // Get localized names for setting and value
     // ------------------------------------------------------------
     getLocalizedNames(setting, value) {
         const settingKey = `dropdown.${setting}`;
         const valueKey = `dropdown.${value}`;
         let settingName = setting;
         let valueName = value;
-
         if (window.DHEIndexTranslator) {
             const settingTrans = window.DHEIndexTranslator.getTranslation(settingKey);
             const valueTrans = window.DHEIndexTranslator.getTranslation(valueKey);
@@ -258,34 +235,35 @@ class DHEIndexOptions {
     }
 
     // ------------------------------------------------------------
-    // Load settings from localStorage
+    // Load settings from dataSync via notifications (async)
     // ------------------------------------------------------------
     loadSettings() {
-        const saved = localStorage.getItem('DHEIndexSettings');
-        if (saved) {
-            const settings = JSON.parse(saved);
+        // Settings are already loaded asynchronously by notifications.
+        // We just need to set active buttons based on current settings.
+        // Use a small delay to allow async load to complete, or listen for changes.
+        // For simplicity, we'll set them after a short timeout.
+        setTimeout(() => {
+            const settings = DHEIndexNotifications.instance.currentSettings;
             if (settings.language) {
-                this.applySetting('language', settings.language);
+                this.setActiveButtonForSetting('language', settings.language);
             }
             if (settings.mode) {
                 this.setActiveButtonForSetting('mode', settings.mode);
             }
             if (settings.fullscreen) {
-                this.applySetting('fullscreen', settings.fullscreen);
+                this.setActiveButtonForSetting('fullscreen', settings.fullscreen);
             }
             if (settings.notifications) {
-                this.applySetting('notifications', settings.notifications);
+                this.setActiveButtonForSetting('notifications', settings.notifications);
             }
             if (settings.export) {
                 this.setActiveButtonForSetting('export', settings.export);
             }
-        }
+        }, 100); // enough for async load
     }
 }
 
-// Initialize options when DOM is loaded
 let DHEIndexOptionsInstance;
-
 document.addEventListener('DOMContentLoaded', () => {
     DHEIndexOptionsInstance = new DHEIndexOptions();
     window.DHEIndexOptions = DHEIndexOptionsInstance;

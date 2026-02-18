@@ -1,36 +1,24 @@
-// screen.js - Fullscreen Management (reusable, persistent, with error handling)
+// screen.js - Fullscreen Management
 class DHEScreen {
     constructor() {
         this.prefix = window.DHEPagePrefix || 'index';
         this.currentFullscreen = 'no';   // default
-        this.init();
-    }
-
-    // -------------------------------------------------------------
-    // Initialisation: load saved setting, apply, and listen
-    // -------------------------------------------------------------
-    init() {
-        this.loadSetting();
-        // Apply the saved setting – but only if it differs from current browser state
-        this.applyFullscreen(this.currentFullscreen);
         this.addEventListeners();
+        this.loadSettingAsync().catch(err => console.warn('Screen: async load failed', err));
     }
 
-    // Read saved fullscreen setting from DHEIndexSettings (localStorage)
-    loadSetting() {
-        const saved = localStorage.getItem('DHEIndexSettings');
-        if (saved) {
-            const settings = JSON.parse(saved);
+    async loadSettingAsync() {
+        try {
+            const settings = await window.DHEDataSync.getSettings();
             if (settings.fullscreen) {
                 this.currentFullscreen = settings.fullscreen;
+                this.applyFullscreen(this.currentFullscreen);
             }
+        } catch (e) {
+            console.warn('DHEScreen: Failed to load settings via dataSync, using default', e);
         }
     }
 
-    // -------------------------------------------------------------
-    // Public method – called from options.js (Do button)
-    // Accepts only 'yes' or 'no'
-    // -------------------------------------------------------------
     setFullscreen(value) {
         if (value !== 'yes' && value !== 'no') {
             console.warn(`DHEScreen: invalid value "${value}" – use 'yes' or 'no'`);
@@ -41,18 +29,10 @@ class DHEScreen {
         // The fullscreenchange event will handle persistence and UI update
     }
 
-    // -------------------------------------------------------------
-    // Safe fullscreen API calls – only request/exit if necessary
-    // -------------------------------------------------------------
     applyFullscreen(value) {
         const isCurrentlyFullscreen = this.isFullscreen();
-
-        // --- Enter fullscreen ---
         if (value === 'yes') {
-            if (isCurrentlyFullscreen) {
-                // Already in fullscreen – nothing to do
-                return;
-            }
+            if (isCurrentlyFullscreen) return;
             const enterFS = this._getEnterFS();
             if (enterFS) {
                 enterFS.call(document.documentElement).catch(err => {
@@ -61,14 +41,8 @@ class DHEScreen {
             } else {
                 console.warn('Fullscreen API not supported');
             }
-        }
-
-        // --- Exit fullscreen ---
-        else if (value === 'no') {
-            if (!isCurrentlyFullscreen) {
-                // Already not in fullscreen – nothing to do
-                return;
-            }
+        } else if (value === 'no') {
+            if (!isCurrentlyFullscreen) return;
             const exitFS = this._getExitFS();
             if (exitFS) {
                 exitFS.call(document).catch(err => {
@@ -78,35 +52,25 @@ class DHEScreen {
         }
     }
 
-    // -------------------------------------------------------------
-    // Fullscreen change handler – persists the new state and notifies
-    // -------------------------------------------------------------
     handleFullscreenChange = () => {
         const newValue = this.isFullscreen() ? 'yes' : 'no';
         if (newValue === this.currentFullscreen) return;
-
         this.currentFullscreen = newValue;
-
-        // Persist via the existing notifications system (single source of truth)
+        // Persist via notifications (which uses dataSync)
         if (window.DHEIndexNotifications) {
             window.DHEIndexNotifications.instance.updateSetting('fullscreen', newValue);
         } else {
-            // Fallback – should never happen because notifications.js is loaded first
-            const saved = localStorage.getItem('DHEIndexSettings');
-            let settings = saved ? JSON.parse(saved) : {};
-            settings.fullscreen = newValue;
-            localStorage.setItem('DHEIndexSettings', JSON.stringify(settings));
+            // Fallback – save directly via dataSync
+            window.DHEDataSync.getSettings().then(settings => {
+                settings.fullscreen = newValue;
+                return window.DHEDataSync.saveSettings(settings);
+            }).catch(e => console.warn('Failed to save fullscreen', e));
         }
-
-        // Notify other components (especially the toggle button in options.js)
         document.dispatchEvent(new CustomEvent('fullscreenChanged', {
             detail: { fullscreen: newValue }
         }));
     };
 
-    // -------------------------------------------------------------
-    // Utility: detect current fullscreen state (cross‑browser)
-    // -------------------------------------------------------------
     isFullscreen() {
         return !!(
             document.fullscreenElement ||
@@ -116,14 +80,11 @@ class DHEScreen {
         );
     }
 
-    // -------------------------------------------------------------
-    // Vendor‑prefixed fullscreen methods (cached)
-    // -------------------------------------------------------------
     _getEnterFS() {
         const docEl = document.documentElement;
         return docEl.requestFullscreen ||
                docEl.webkitRequestFullscreen ||
-               docEl.webkitEnterFullscreen ||    // iOS Safari
+               docEl.webkitEnterFullscreen ||
                docEl.mozRequestFullScreen ||
                docEl.msRequestFullscreen;
     }
@@ -135,9 +96,6 @@ class DHEScreen {
                document.msExitFullscreen;
     }
 
-    // -------------------------------------------------------------
-    // Attach all possible fullscreenchange events
-    // -------------------------------------------------------------
     addEventListeners() {
         const events = [
             'fullscreenchange',
@@ -151,5 +109,4 @@ class DHEScreen {
     }
 }
 
-// Instantiate globally – available as window.DHEScreen
 window.DHEScreen = new DHEScreen();

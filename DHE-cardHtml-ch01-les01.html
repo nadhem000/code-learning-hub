@@ -797,134 +797,6 @@
         window.DHEPagePrefix = 'lesson-ch01-les01';
     </script>
     
-    <!-- ===== PROGRESS MANAGEMENT SCRIPT ===== -->
-    <script>
-(function() {
-  const COURSE = window.DHECourse || 'html';
-  const CHAPTER_ID = window.DHECurrentChapter;
-  const LESSON_ID = window.DHECurrentLesson;
-  const courseData = window.DHECourseData?.[COURSE];
-  if (!courseData) {
-    console.error('Course data not found');
-    return;
-  }
-  // Find the current chapter object
-  const currentChapter = courseData.chapters.find(ch => ch.id === CHAPTER_ID);
-  if (!currentChapter) {
-    console.error('Chapter not found:', CHAPTER_ID);
-    return;
-  }
-  const chapterLessonIds = currentChapter.lessons.map(l => l.id);
-  const allLessonIds = courseData.chapters.flatMap(ch => ch.lessons.map(l => l.id));
-  const CHAPTER_LESSONS = chapterLessonIds.length;
-  const TOTAL_COURSE_LESSONS = allLessonIds.length;
-
-  // In‑memory fallback for when localStorage is unavailable
-  let memoryProgress = {};
-
-  function getProgress() {
-    try {
-      const stored = localStorage.getItem('DHELessonProgress');
-      if (stored) {
-        return JSON.parse(stored);
-      }
-    } catch (e) {
-      console.warn('Progress: Failed to read from localStorage, using in‑memory fallback', e);
-      if (window.DHEIndexNotifications) {
-        window.DHEIndexNotifications.instance.show(
-          'localStorageError',
-          'notifications.localStorageError',
-          'Could not load your progress. Changes will not persist after this session.',
-          'warning'
-        );
-      }
-      return memoryProgress;
-    }
-    return {};
-  }
-
-  function saveProgress(progress) {
-    try {
-      localStorage.setItem('DHELessonProgress', JSON.stringify(progress));
-      memoryProgress = {}; // clear fallback after successful save
-    } catch (e) {
-      console.warn('Progress: Failed to save to localStorage, keeping in memory only', e);
-      memoryProgress = { ...progress };
-      if (window.DHEIndexNotifications) {
-        window.DHEIndexNotifications.instance.show(
-          'localStorageError',
-          'notifications.localStorageError',
-          'Could not save your progress. Changes will not persist after this session.',
-          'warning'
-        );
-      }
-    }
-  }
-
-  function updateProgressUI() {
-    const progress = getProgress();
-    // Chapter progress
-    let chapterCompletedCount = 0;
-    chapterLessonIds.forEach(id => {
-      if (progress[id]) chapterCompletedCount++;
-    });
-    // Course progress
-    let courseCompletedCount = 0;
-    allLessonIds.forEach(id => {
-      if (progress[id]) courseCompletedCount++;
-    });
-    // Update DOM elements
-    document.getElementById('chapterProgressText').textContent =
-      `${chapterCompletedCount}/${CHAPTER_LESSONS}`;
-    document.getElementById('chapterProgressFill').style.width =
-      (chapterCompletedCount / CHAPTER_LESSONS) * 100 + '%';
-    document.getElementById('courseProgressText').textContent =
-      `${courseCompletedCount}/${TOTAL_COURSE_LESSONS}`;
-    document.getElementById('courseProgressFill').style.width =
-      (courseCompletedCount / TOTAL_COURSE_LESSONS) * 100 + '%';
-
-    // Toggle "Mark Completed" button text
-    const btn = document.getElementById('markCompletedBtn');
-    const isCompleted = progress[LESSON_ID] || false;
-    if (isCompleted) {
-      btn.classList.add('completed');
-    } else {
-      btn.classList.remove('completed');
-    }
-    if (window.DHEIndexTranslator) {
-      const key = isCompleted ? 'progress.markIncomplete' : 'progress.markCompleted';
-      const translation = window.DHEIndexTranslator.getTranslation(key);
-      if (translation) btn.textContent = translation;
-    }
-  }
-
-  function toggleCompletion() {
-    const progress = getProgress();
-    progress[LESSON_ID] = !progress[LESSON_ID];
-    saveProgress(progress);
-    updateProgressUI();
-    if (window.DHEIndexNotifications) {
-      const status = progress[LESSON_ID] ? 'completed' : 'marked incomplete';
-      window.DHEIndexNotifications.instance.show(
-        'lesson-toggle', null, `Lesson ${status}.`, 'success'
-      );
-    }
-  }
-
-  function init() {
-    const btn = document.getElementById('markCompletedBtn');
-    if (btn) btn.addEventListener('click', toggleCompletion);
-    updateProgressUI();
-    document.addEventListener('languageChanged', updateProgressUI);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-    </script>
     <!-- ===== SCRIPT FOR PDF SAVE BUTTON ===== -->
     <script>
         (function() {
@@ -981,18 +853,19 @@
             }
         };
     </script>
-    <!-- ===== SUPABASE SCRIPTS (added) ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="scripts/supabase.js"></script>
+<script src="scripts/dataSync.js"></script>
 <script src="scripts/auth.js"></script>
-    <!-- ===== GLOBAL SCRIPTS ===== -->
-    <script src="scripts/translations.js"></script>
-    <script src="scripts/notifications.js"></script>
-    <script src="scripts/modes.js"></script>
-    <script src="scripts/screen.js"></script>
-    <script src="scripts/font.js"></script>
-    <script src="scripts/export.js"></script>
-    <script src="scripts/options.js"></script>
+<script src="scripts/translations.js"></script>
+<script src="scripts/notifications.js"></script>
+<script src="scripts/modes.js"></script>
+<script src="scripts/screen.js"></script>
+<script src="scripts/font.js"></script>
+<script src="scripts/export.js"></script>
+<script src="scripts/options.js"></script>
+<!-- On lesson pages only -->
+<script src="scripts/lessonProgress.js"></script>
     <!-- ===== Service Worker & Install Prompt ===== -->
     <script>
         // Register service worker
