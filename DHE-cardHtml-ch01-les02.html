@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="document.title">Your first HTML page – Code Learning Platform</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- Lesson page custom styles (including progress bars & enhanced lesson typography) -->
+    <style>
+        .DHE-lesson-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .DHE-lesson-paper {
+            background: var(--DHE-index-card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border-top: 5px solid #e34c26; /* HTML5 orange */
+        }
+        .DHE-lesson-title {
+            font-size: 2rem;
+            color: #e34c26;
+            margin-bottom: 1rem;
+        }
+        .DHE-lesson-subtitle {
+            font-size: 1.2rem;
+            color: var(--DHE-index-text-light);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--DHE-index-border-color);
+            padding-bottom: 1rem;
+        }
+        .DHE-lesson-content {
+            line-height: 1.8;
+            color: var(--DHE-index-text-color);
+        }
+        .DHE-lesson-content h3 {
+            margin: 1.8rem 0 0.8rem 0;
+            font-size: 1.4rem;
+            color: #e34c26;
+            border-left: 5px solid #e34c26;
+            padding-left: 0.8rem;
+        }
+        .DHE-lesson-content h3:first-of-type {
+            margin-top: 0.5rem;
+        }
+        .DHE-lesson-content p {
+            margin: 1.2rem 0;
+        }
+        .DHE-lesson-content pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--DHE-index-border-color);
+            font-family: 'Courier New', monospace;
+            direction: ltr; /* force left-to-right for code blocks */
+            text-align: left;
+            unicode-bidi: embed;
+        }
+        .DHE-lesson-content code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            direction: ltr; /* ensure inline code is LTR even in RTL context */
+            unicode-bidi: embed;
+            display: inline-block; /* helps with background & padding */
+        }
+        .DHE-lesson-content pre code {
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            display: inline; /* reset for pre */
+        }
+        .DHE-lesson-content ul {
+            margin: 1rem 0 1rem 1.5rem;
+            list-style-type: disc;
+        }
+        .DHE-lesson-content li {
+            margin: 0.4rem 0;
+        }
+        /* Progress bars section */
+        .DHE-progress-section {
+            background: var(--DHE-index-card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--DHE-index-border-color);
+        }
+        .DHE-progress-item {
+            margin-bottom: 1.2rem;
+        }
+        .DHE-progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .DHE-progress-bar-bg {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .DHE-progress-bar-fill {
+            height: 100%;
+            background: #e34c26; /* HTML5 orange */
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .DHE-mark-btn,
+        .DHE-save-pdf-btn {
+            background: var(--DHE-index-primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .DHE-mark-btn.completed {
+            background: #4CAF50;
+        }
+        .DHE-mark-btn:hover,
+        .DHE-save-pdf-btn:hover {
+            background: var(--DHE-index-secondary-color);
+        }
+        .DHE-mark-btn.completed:hover {
+            background: #45a049;
+        }
+        .DHE-mark-btn:active,
+        .DHE-save-pdf-btn:active {
+            transform: translateY(1px);
+        }
+        /* Navigation */
+        .DHE-lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--DHE-index-border-color);
+        }
+        .DHE-lesson-nav-btn {
+            background: var(--DHE-index-primary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .DHE-lesson-nav-btn:hover {
+            background: var(--DHE-index-secondary-color);
+        }
+        .DHE-lesson-nav-btn.disabled {
+            background: #ccc;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        /* Dark mode adjustments */
+        .DHE-index-mode-dark .DHE-lesson-paper,
+        .DHE-index-mode-dark .DHE-progress-section {
+            background: #2d2d2d;
+        }
+        .DHE-index-mode-dark .DHE-lesson-content pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-color: #444;
+        }
+        .DHE-index-mode-dark .DHE-lesson-content code {
+            background: #3a3a3a;
+            color: #d4d4d4;
+        }
+        .DHE-index-mode-dark .DHE-progress-bar-bg {
+            background: #444;
+        }
+        .DHE-index-mode-dark .DHE-lesson-content h3 {
+            color: #ffa07a;
+            border-left-color: #ffa07a;
+        }
+        /* High contrast adjustments */
+        .DHE-index-mode-highcontrast .DHE-lesson-paper,
+        .DHE-index-mode-highcontrast .DHE-progress-section {
+            border: 2px solid #000;
+            border-top: 5px solid #000;
+        }
+        .DHE-index-mode-highcontrast .DHE-lesson-title {
+            color: #000;
+        }
+        .DHE-index-mode-highcontrast .DHE-lesson-nav-btn,
+        .DHE-index-mode-highcontrast .DHE-mark-btn,
+        .DHE-index-mode-highcontrast .DHE-save-pdf-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+        .DHE-index-mode-highcontrast .DHE-lesson-nav-btn:hover,
+        .DHE-index-mode-highcontrast .DHE-mark-btn:hover,
+        .DHE-index-mode-highcontrast .DHE-save-pdf-btn:hover {
+            background: #333;
+        }
+        .DHE-index-mode-highcontrast .DHE-progress-bar-fill {
+            background: #000;
+        }
+        .DHE-index-mode-highcontrast .DHE-lesson-content h3 {
+            color: #000;
+            border-left-color: #000;
+        }
+        /* RTL adjustments: use logical properties */
+        html[dir="rtl"] .DHE-progress-header {
+            flex-direction: row-reverse;
+        }
+        html[dir="rtl"] .DHE-mark-btn,
+        html[dir="rtl"] .DHE-save-pdf-btn {
+            margin-left: 0;
+            margin-right: auto;
+        }
+        html[dir="rtl"] .DHE-lesson-content h3 {
+            border-left: none;
+            border-right: 5px solid #e34c26;
+            padding-left: 0;
+            padding-right: 0.8rem;
+        }
+        /* Ensure code samples are always LTR, even inside RTL paragraphs */
+        html[dir="rtl"] .DHE-lesson-content code,
+        html[dir="rtl"] .DHE-lesson-content pre {
+            direction: ltr;
+            unicode-bidi: embed;
+            text-align: left;
+        }
+        /* For inline code that might be part of a mixed RTL/LTR sentence,
+           we keep LTR but allow proper isolation */
+        html[dir="rtl"] .DHE-lesson-content p code {
+            unicode-bidi: isolate;
+        }
+
+        /* ===== PRINT STYLES FOR PDF SAVING ===== */
+        @media print {
+            /* Hide everything except the lesson content */
+            body * {
+                visibility: hidden;
+            }
+            .DHE-lesson-paper,
+            .DHE-lesson-paper * {
+                visibility: visible;
+            }
+            .DHE-lesson-paper {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white;
+                color: black;
+                border: none;
+                box-shadow: none;
+                padding: 1.5cm;
+                font-size: 12pt;
+            }
+            /* Hide elements inside the paper that shouldn't appear */
+            .DHE-progress-section,
+            .DHE-lesson-navigation,
+            .DHE-mark-btn,
+            .DHE-save-pdf-btn {
+                display: none !important;
+            }
+            /* Style headings and text for print */
+            .DHE-lesson-title {
+                color: black;
+                font-size: 24pt;
+                margin-top: 0;
+            }
+            .DHE-lesson-subtitle {
+                color: #333;
+                border-bottom: 1px solid #ccc;
+                font-size: 14pt;
+            }
+            .DHE-lesson-content h3 {
+                color: black;
+                border-left: 3px solid #666;
+                font-size: 16pt;
+            }
+            .DHE-lesson-content pre {
+                background: #f9f9f9;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                font-size: 10pt;
+            }
+            .DHE-lesson-content code {
+                background: #f0f0f0;
+                color: black;
+            }
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER (shared) ===== -->
+    <header class="DHE-index-header">
+        <div class="DHE-index-header-container">
+            <div class="DHE-index-logo-container">
+                <a href="index.html" aria-label="Return to Home">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-logo">
+                </a>
+            </div>
+            <div class="DHE-index-title-container">
+                <h1 data-i18n="index.header.title">Code Learning Platform</h1>
+                <p data-i18n="index.header.subtitle">Master Web Development & Programming Languages</p>
+            </div>
+            <div class="DHE-index-hamburg-container">
+                <button class="DHE-index-hamburg-btn" id="hamburgBtn">
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                    <span class="DHE-index-hamburg-line"></span>
+                </button>
+                <div class="DHE-index-dropdown" id="dropdownMenu">
+                    <button id="installAppBtn" class="DHE-index-install-btn" data-i18n="index.installButton" style="display: none;">Install App</button>
+                    <!-- Language -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.language">Language</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="language" data-value="en" data-i18n="index.dropdown.en">EN</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="fr" data-i18n="index.dropdown.fr">FR</button>
+                            <button class="DHE-index-toggle-btn" data-setting="language" data-value="ar" data-i18n="index.dropdown.ar">AR</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="language" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Mode -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.mode">Mode</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="mode" data-value="light" data-i18n="index.dropdown.light">Light</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="dark" data-i18n="index.dropdown.dark">Dark</button>
+                            <button class="DHE-index-toggle-btn" data-setting="mode" data-value="highcontrast" data-i18n="index.dropdown.highcontrast">High Contrast</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="mode" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Fullscreen -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fullscreen">Fullscreen</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fullscreen" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fullscreen" data-value="no" data-i18n="index.dropdown.no">No</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fullscreen" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Font Size -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.fontsize">Font Size</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="increase" data-i18n="index.dropdown.increase">Increase</button>
+                            <button class="DHE-index-toggle-btn" data-setting="fontsize" data-value="decrease" data-i18n="index.dropdown.decrease">Decrease</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="fontsize" data-value="reset" data-i18n="index.dropdown.reset">Reset</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="fontsize" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Export Data -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.export">Export Data</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="pdf" data-i18n="index.dropdown.pdf">PDF</button>
+                            <button class="DHE-index-toggle-btn" data-setting="export" data-value="sheet" data-i18n="index.dropdown.sheet">Sheet</button>
+                            <button class="DHE-index-toggle-btn active" data-setting="export" data-value="txt" data-i18n="index.dropdown.txt">TXT</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="export" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                    <!-- Notifications -->
+                    <div class="DHE-index-dropdown-group">
+                        <h3 data-i18n="index.dropdown.notifications">Notifications</h3>
+                        <div class="DHE-index-btn-group">
+                            <button class="DHE-index-toggle-btn active" data-setting="notifications" data-value="yes" data-i18n="index.dropdown.yes">Yes</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="no" data-i18n="index.dropdown.no">No</button>
+                            <button class="DHE-index-toggle-btn" data-setting="notifications" data-value="important" data-i18n="index.dropdown.important">Only Important</button>
+                        </div>
+                        <button class="DHE-index-do-btn" data-setting="notifications" data-i18n="index.dropdown.do">Do</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ===== MAIN: LESSON CONTENT WITH PROGRESS ===== -->
+    <main class="DHE-lesson-container">
+        <article class="DHE-lesson-paper">
+            <h1 class="DHE-lesson-title" data-i18n="page.title">Your first HTML page</h1>
+            <div class="DHE-lesson-subtitle" data-i18n="page.subtitle">Chapter 1: Getting Started with HTML</div>
+
+            <!-- PROGRESS SECTION -->
+            <div class="DHE-progress-section">
+                <!-- Chapter progress (lessons in this chapter) -->
+                <div class="DHE-progress-item">
+                    <div class="DHE-progress-header">
+                        <span data-i18n="progress.chapter">Chapter progress</span>
+                        <span id="chapterProgressText">0/4</span>
+                    </div>
+                    <div class="DHE-progress-bar-bg">
+                        <div id="chapterProgressFill" class="DHE-progress-bar-fill" style="width:0%"></div>
+                    </div>
+                </div>
+                <!-- Overall course progress (all chapters) -->
+                <div class="DHE-progress-item">
+                    <div class="DHE-progress-header">
+                        <span data-i18n="progress.course">Course progress</span>
+                        <span id="courseProgressText">0/25</span>
+                    </div>
+                    <div class="DHE-progress-bar-bg">
+                        <div id="courseProgressFill" class="DHE-progress-bar-fill" style="width:0%"></div>
+                    </div>
+                </div>
+                <!-- Action buttons: Mark Completed and Save PDF -->
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button id="markCompletedBtn" class="DHE-mark-btn" data-i18n="progress.markCompleted">Mark Completed</button>
+                    <button id="saveLessonPdfBtn" class="DHE-save-pdf-btn" data-i18n="progress.savePdf">📄 Save Lesson as PDF</button>
+                </div>
+            </div>
+
+            <div class="DHE-lesson-content">
+                <!-- INTRO -->
+                <p data-i18n="content.intro">Creating your first HTML page is the first exciting step into web development. In this lesson, you'll build a real web page from scratch and see it come to life in your browser.</p>
+
+                <!-- STEP-BY-STEP GUIDE – each step is split into plain text parts to avoid HTML in translations -->
+                <h3 data-i18n="content.stepByStepHeading">Step‑by‑Step Guide</h3>
+
+                <!-- Step 1 -->
+                <p>
+                    <strong data-i18n="content.step1_prefix"></strong>
+                    <span data-i18n="content.step1_text"></span>
+                </p>
+
+                <!-- Step 2 (multiple code insertions) -->
+                <p>
+                    <strong data-i18n="content.step2_prefix"></strong>
+                    <span data-i18n="content.step2_text_before_doctype"></span>
+                    <code data-i18n="content.step2_doctype"></code>
+                    <span data-i18n="content.step2_text_after_doctype"></span>
+                    <code data-i18n="content.step2_html"></code>
+                    <span data-i18n="content.step2_text_after_html"></span>
+                    <code data-i18n="content.step2_head"></code>
+                    <span data-i18n="content.step2_text_after_head"></span>
+                    <code data-i18n="content.step2_body"></code>
+                    <span data-i18n="content.step2_text_after_body"></span>
+                </p>
+
+                <!-- Step 3 -->
+                <p>
+                    <strong data-i18n="content.step3_prefix"></strong>
+                    <span data-i18n="content.step3_text_before_body"></span>
+                    <code data-i18n="content.step3_body"></code>
+                    <span data-i18n="content.step3_text_after_body"></span>
+                    <code data-i18n="content.step3_h1"></code>
+                    <span data-i18n="content.step3_text_after_h1"></span>
+                    <code data-i18n="content.step3_p"></code>
+                    <span data-i18n="content.step3_text_after_p"></span>
+                </p>
+
+                <!-- Step 4 -->
+                <p>
+                    <strong data-i18n="content.step4_prefix"></strong>
+                    <span data-i18n="content.step4_text_before_code1"></span>
+                    <code data-i18n="content.step4_code1"></code>
+                    <span data-i18n="content.step4_text_between"></span>
+                    <code data-i18n="content.step4_code2"></code>
+                    <span data-i18n="content.step4_text_after_code2"></span>
+                    <span data-i18n="content.step4_text_extra"></span>
+                    <code data-i18n="content.step4_code_html"></code>
+                    <span data-i18n="content.step4_text_final"></span>
+                </p>
+
+                <!-- Step 5 -->
+                <p>
+                    <strong data-i18n="content.step5_prefix"></strong>
+                    <span data-i18n="content.step5_text"></span>
+                </p>
+
+                <!-- EXAMPLE CODE (unchanged, pre block is fine) -->
+                <h3 data-i18n="content.exampleHeading">A Complete Minimal Example</h3>
+                <p data-i18n="content.basicExample">Copy the following code into your text editor:</p>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My First Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <!-- EXPLANATION (each line now separate keys, but we keep as simple paragraphs with code) -->
+                <h3 data-i18n="content.explanationHeading">What Each Part Does</h3>
+                <p><code data-i18n="content.explanationCode1"></code> <span data-i18n="content.explanationText1"></span></p>
+                <p><code data-i18n="content.explanationCode2"></code> <span data-i18n="content.explanationText2"></span></p>
+                <p><code data-i18n="content.explanationCode3"></code> <span data-i18n="content.explanationText3"></span></p>
+                <p><code data-i18n="content.explanationCode4"></code> <span data-i18n="content.explanationText4"></span></p>
+                <p><code data-i18n="content.explanationCode5"></code> <span data-i18n="content.explanationText5"></span></p>
+
+                <!-- VIEWING YOUR PAGE -->
+                <h3 data-i18n="content.viewingHeading">Viewing and Inspecting Your Page</h3>
+                <p data-i18n="content.viewing"></p>
+
+                <!-- TIPS (split into parts to avoid code inside translation) -->
+                <h3 data-i18n="content.tipsHeading">Tips for Beginners</h3>
+                <ul>
+                    <li><span data-i18n="content.tip1_prefix"></span><code data-i18n="content.tip1_code"></code><span data-i18n="content.tip1_suffix"></span></li>
+                    <li data-i18n="content.tip2"></li>
+                    <li data-i18n="content.tip3"></li>
+                    <li data-i18n="content.tip4"></li>
+                </ul>
+
+                <!-- CONCLUSION -->
+                <p data-i18n="content.conclusion"></p>
+            </div>
+
+            <!-- Navigation to previous and next lessons -->
+            <div class="DHE-lesson-navigation">
+                <a href="DHE-cardHtml-ch01-les01.html" class="DHE-lesson-nav-btn" data-i18n="navigation.previous">Previous: What is HTML?</a>
+                <a href="DHE-cardHtml-ch01-les03.html" class="DHE-lesson-nav-btn" data-i18n="navigation.next">Next: HTML document structure</a>
+            </div>
+        </article>
+    </main>
+    <!-- ===== FOOTER (shared) ===== -->
+    <footer class="DHE-index-footer">
+        <div class="DHE-index-footer-container">
+            <div class="DHE-index-footer-column">
+                <div class="DHE-index-footer-logo">
+                    <img src="assets/icons/icon-192x192.png" alt="Logo" class="DHE-index-footer-logo-img">
+                    <p data-i18n="index.footer.briefDescription">
+                        Your go-to platform for mastering web development and programming languages.
+                    </p>
+                </div>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.communityTitle">Community</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.facebook">Facebook</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.twitter">Twitter</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.github">GitHub</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.youtube">YouTube</a></li>
+                    <li><a href="#" data-flag="coming-soon" data-i18n="index.footer.community.upscrolled">UpScrolled</a></li>
+                </ul>
+            </div>
+            <div class="DHE-index-footer-column">
+                <h4 data-i18n="index.footer.aboutSupportTitle">About & Support</h4>
+                <ul class="DHE-index-footer-links">
+                    <li><a href="about.html" data-i18n="index.footer.aboutSupport.aboutUs">About Us</a></li>
+                    <li><a href="contact.html" data-i18n="index.footer.aboutSupport.contactSupport">Contact Support</a></li>
+                    <li><a href="privacy.html" data-i18n="index.footer.aboutSupport.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="index.footer.aboutSupport.termsOfService">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="DHE-index-footer-bottom">
+            <p data-i18n="index.footer.copyright" data-i18n-params='[2026]'>
+                © 2026 Code Learning Platform. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="DHE-index-notification-container"></div>
+    <!-- ===== PAGE‑SPECIFIC TRANSLATIONS (prefix: lesson-ch01-les02) ===== -->
+<script>
+  window.DHECurrentLesson = 'html-ch01-les02';   // unique lesson ID
+  window.DHECurrentChapter = 'ch01';             // chapter ID
+  window.DHECourse = 'html';                      // course identifier
+</script>
+<script src="scripts/course-structure.js"></script>
+    <script>
+        window.DHEtranslations = window.DHEtranslations || { en: {}, fr: {}, ar: {} };
+        // ----- English -----
+        window.DHEtranslations.en['lesson-ch01-les02'] = {
+            'document': { 'title': 'Your first HTML page – Code Learning Platform' },
+            'page': { 'title': 'Your first HTML page', 'subtitle': 'Chapter 1: Getting Started with HTML' },
+            'content': {
+                'intro': 'Creating your first HTML page is the first exciting step into web development. In this lesson, you\'ll build a real web page from scratch and see it come to life in your browser.',
+                'stepByStepHeading': 'Step‑by‑Step Guide',
+                // step1
+                'step1_prefix': '1. Open a text editor:',
+                'step1_text': 'You can use any plain text editor – Notepad (Windows), TextEdit (macOS in plain text mode), or a code editor like VS Code, Sublime Text, or Atom.',
+                // step2
+                'step2_prefix': '2. Write the basic HTML structure:',
+                'step2_text_before_doctype': 'Every HTML document starts with a ',
+                'step2_doctype': '<!DOCTYPE html>',
+                'step2_text_after_doctype': ' declaration, followed by an ',
+                'step2_html': '<html>',
+                'step2_text_after_html': ' root element that contains ',
+                'step2_head': '<head>',
+                'step2_text_after_head': ' and ',
+                'step2_body': '<body>',
+                'step2_text_after_body': ' sections.',
+                // step3
+                'step3_prefix': '3. Add content to the body:',
+                'step3_text_before_body': 'Inside the ',
+                'step3_body': '<body>',
+                'step3_text_after_body': ', place at least a heading (',
+                'step3_h1': '<h1>',
+                'step3_text_after_h1': ') and a paragraph (',
+                'step3_p': '<p>',
+                'step3_text_after_p': ').',
+                // step4
+                'step4_prefix': '4. Save the file:',
+                'step4_text_before_code1': 'Choose a name like ',
+                'step4_code1': 'myfirstpage.html',
+                'step4_text_between': ' and make sure the extension is ',
+                'step4_code2': '.html',
+                'step4_text_after_code2': ' (not ',
+                'step4_text_extra': '.txt). In your editor, select “Save as type: All Files” or explicitly add ',
+                'step4_code_html': '.html',
+                'step4_text_final': '.',
+                // step5
+                'step5_prefix': '5. Open in a browser:',
+                'step5_text': 'Locate the saved file, right‑click it, and choose “Open with” your favourite web browser (Chrome, Firefox, Edge, etc.). You’ll see your rendered page!',
+                // example
+                'exampleHeading': 'A Complete Minimal Example',
+                'basicExample': 'Copy the following code into your text editor:',
+                // explanation
+                'explanationHeading': 'What Each Part Does',
+                'explanationCode1': '<!DOCTYPE html>',
+                'explanationText1': 'tells the browser this is an HTML5 document.',
+                'explanationCode2': '<html>',
+                'explanationText2': 'is the root element that wraps all content.',
+                'explanationCode3': '<head>',
+                'explanationText3': 'contains meta information, like the page <title> (shown in the browser tab).',
+                'explanationCode4': '<body>',
+                'explanationText4': 'holds everything visible on the page – headings, paragraphs, images, etc.',
+                'explanationCode5': '<h1> and <p>',
+                'explanationText5': 'are a top‑level heading and a paragraph.',
+                // viewing
+                'viewingHeading': 'Viewing and Inspecting Your Page',
+                'viewing': 'Once the page is open in your browser, you can right‑click anywhere and select “View Page Source” to see the raw HTML. You can also open Developer Tools (F12) to inspect elements, see the DOM, and experiment with live changes – a great way to learn!',
+                // tips
+                'tipsHeading': 'Tips for Beginners',
+                'tip1_prefix': 'Always save your file with the ',
+                'tip1_code': '.html',
+                'tip1_suffix': ' extension.',
+                'tip2': 'Use indentation (spaces or tabs) to make your code readable.',
+                'tip3': 'If your page doesn’t look right, check for typos – missing angle brackets or misspelled tags are common mistakes.',
+                'tip4': 'Keep your text editor and browser side by side to see changes immediately after you save and refresh.',
+                // conclusion
+                'conclusion': 'Congratulations! You’ve just created your first HTML page. In the next lesson, we’ll explore the full structure of an HTML document in more detail, including the head section and metadata.'
+            },
+            'progress': {
+                'chapter': 'Chapter progress',
+                'course': 'Course progress',
+                'markCompleted': 'Mark Completed',
+                'markIncomplete': 'Mark Incomplete',
+                'savePdf': '📄 Save Lesson as PDF'
+            },
+            'navigation': {
+                'previous': 'Previous: What is HTML?',
+                'next': 'Next: HTML document structure'
+            },
+            'notifications': {
+                'welcome': 'Welcome to Code Learning Platform!',
+                'comingSoon': 'Setting "{0}" to "{1}" - Coming soon! Feature is under development.',
+                'doAction': 'Activating "{0}" with value "{1}" - Coming soon! Feature is under development.',
+                'exportPDF': 'Opening PDF export...',
+                'exportTXT': 'Text export completed.',
+                'exportSheet': 'CSV export completed.',
+                'comingSoonGeneric': 'Coming soon! This feature is under development.',
+                'done': 'Done! {0} set to {1}.'
+            },
+            'index': {
+                'header': {
+                    'title': 'Code Learning Platform',
+                    'subtitle': 'Master Web Development & Programming Languages'
+                },
+                'dropdown': {
+                    'language': 'Language', 'mode': 'Mode', 'fullscreen': 'Fullscreen', 'fontsize': 'Font Size',
+                    'export': 'Export Data', 'notifications': 'Notifications', 'en': 'EN', 'fr': 'FR', 'ar': 'AR',
+                    'light': 'Light', 'dark': 'Dark', 'highcontrast': 'High Contrast', 'yes': 'Yes', 'no': 'No',
+                    'increase': 'Increase', 'decrease': 'Decrease', 'reset': 'Reset', 'pdf': 'PDF', 'sheet': 'Sheet',
+                    'txt': 'TXT', 'important': 'Only Important', 'do': 'Do', 'close': 'Close'
+                },
+                'footer': {
+                    'briefDescription': 'Your go-to platform for mastering web development and programming languages.',
+                    'communityTitle': 'Community',
+                    'community': {
+                        'facebook': 'Facebook', 'twitter': 'Twitter', 'github': 'GitHub', 'youtube': 'YouTube', 'upscrolled': 'UpScrolled'
+                    },
+                    'aboutSupportTitle': 'About & Support',
+                    'aboutSupport': {
+                        'aboutUs': 'About Us', 'contactSupport': 'Contact Support', 'privacyPolicy': 'Privacy Policy', 'termsOfService': 'Terms of Service'
+                    },
+                    'copyright': '© 2026 Code Learning Platform. All rights reserved.'
+                },
+                'installButton': 'Install App'
+            }
+        };
+        // ----- French -----
+        window.DHEtranslations.fr['lesson-ch01-les02'] = {
+            'document': { 'title': 'Votre première page HTML – Plateforme d\'apprentissage du code' },
+            'page': { 'title': 'Votre première page HTML', 'subtitle': 'Chapitre 1 : Premiers pas avec HTML' },
+            'content': {
+                'intro': 'Créer votre première page HTML est la première étape passionnante du développement web. Dans cette leçon, vous allez construire une vraie page web à partir de zéro et la voir prendre vie dans votre navigateur.',
+                'stepByStepHeading': 'Guide étape par étape',
+                // step1
+                'step1_prefix': '1. Ouvrez un éditeur de texte :',
+                'step1_text': 'Vous pouvez utiliser n\'importe quel éditeur de texte simple – Notepad (Windows), TextEdit (macOS en mode texte brut) ou un éditeur de code comme VS Code, Sublime Text ou Atom.',
+                // step2
+                'step2_prefix': '2. Écrivez la structure HTML de base :',
+                'step2_text_before_doctype': 'Chaque document HTML commence par une déclaration ',
+                'step2_doctype': '<!DOCTYPE html>',
+                'step2_text_after_doctype': ', suivie d\'un élément racine ',
+                'step2_html': '<html>',
+                'step2_text_after_html': ' qui contient les sections ',
+                'step2_head': '<head>',
+                'step2_text_after_head': ' et ',
+                'step2_body': '<body>',
+                'step2_text_after_body': '.',
+                // step3
+                'step3_prefix': '3. Ajoutez du contenu au body :',
+                'step3_text_before_body': 'À l\'intérieur de ',
+                'step3_body': '<body>',
+                'step3_text_after_body': ', placez au moins un titre (',
+                'step3_h1': '<h1>',
+                'step3_text_after_h1': ') et un paragraphe (',
+                'step3_p': '<p>',
+                'step3_text_after_p': ').',
+                // step4
+                'step4_prefix': '4. Enregistrez le fichier :',
+                'step4_text_before_code1': 'Choisissez un nom comme ',
+                'step4_code1': 'mapremierepage.html',
+                'step4_text_between': ' et assurez-vous que l\'extension est ',
+                'step4_code2': '.html',
+                'step4_text_after_code2': ' (pas ',
+                'step4_text_extra': '.txt). Dans votre éditeur, sélectionnez « Type de fichier : Tous les fichiers » ou ajoutez explicitement ',
+                'step4_code_html': '.html',
+                'step4_text_final': '.',
+                // step5
+                'step5_prefix': '5. Ouvrez dans un navigateur :',
+                'step5_text': 'Localisez le fichier enregistré, faites un clic droit et choisissez « Ouvrir avec » votre navigateur web préféré (Chrome, Firefox, Edge, etc.). Vous verrez votre page rendue !',
+                // example
+                'exampleHeading': 'Un exemple minimal complet',
+                'basicExample': 'Copiez le code suivant dans votre éditeur de texte :',
+                // explanation
+                'explanationHeading': 'Ce que fait chaque partie',
+                'explanationCode1': '<!DOCTYPE html>',
+                'explanationText1': 'indique au navigateur qu\'il s\'agit d\'un document HTML5.',
+                'explanationCode2': '<html>',
+                'explanationText2': 'est l\'élément racine qui encapsule tout le contenu.',
+                'explanationCode3': '<head>',
+                'explanationText3': 'contient des méta-informations, comme le <title> de la page (affiché dans l\'onglet du navigateur).',
+                'explanationCode4': '<body>',
+                'explanationText4': 'contient tout ce qui est visible sur la page – titres, paragraphes, images, etc.',
+                'explanationCode5': '<h1> et <p>',
+                'explanationText5': 'sont un titre de niveau supérieur et un paragraphe.',
+                // viewing
+                'viewingHeading': 'Visualiser et inspecter votre page',
+                'viewing': 'Une fois la page ouverte dans votre navigateur, vous pouvez faire un clic droit n\'importe où et sélectionner « Afficher la source de la page » pour voir le code HTML brut. Vous pouvez également ouvrir les outils de développement (F12) pour inspecter les éléments, voir le DOM et expérimenter des modifications en direct – une excellente façon d\'apprendre !',
+                // tips
+                'tipsHeading': 'Conseils pour débutants',
+                'tip1_prefix': 'Enregistrez toujours votre fichier avec l\'extension ',
+                'tip1_code': '.html',
+                'tip1_suffix': '.',
+                'tip2': 'Utilisez l\'indentation (espaces ou tabulations) pour rendre votre code lisible.',
+                'tip3': 'Si votre page ne s\'affiche pas correctement, vérifiez les fautes de frappe – les chevrons manquants ou les balises mal orthographiées sont des erreurs courantes.',
+                'tip4': 'Gardez votre éditeur de texte et votre navigateur côte à côte pour voir les changements immédiatement après avoir enregistré et actualisé.',
+                // conclusion
+                'conclusion': 'Félicitations ! Vous venez de créer votre première page HTML. Dans la prochaine leçon, nous explorerons plus en détail la structure complète d\'un document HTML, y compris la section head et les métadonnées.'
+            },
+            'progress': {
+                'chapter': 'Progression du chapitre',
+                'course': 'Progression du cours',
+                'markCompleted': 'Marquer comme terminé',
+                'markIncomplete': 'Marquer comme incomplet',
+                'savePdf': '📄 Enregistrer la leçon en PDF'
+            },
+            'navigation': {
+                'previous': 'Précédent : Qu\'est-ce que HTML?',
+                'next': 'Suivant : Structure d\'un document HTML'
+            },
+            'notifications': {
+                'welcome': 'Bienvenue sur la Plateforme d\'Apprentissage du Code!',
+                'comingSoon': 'Réglage "{0}" sur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'doAction': 'Activation de "{0}" avec la valeur "{1}" - Bientôt disponible! Fonctionnalité en cours de développement.',
+                'exportPDF': 'Ouverture de l\'export PDF...',
+                'exportTXT': 'Export texte terminé.',
+                'exportSheet': 'Export CSV terminé.',
+                'comingSoonGeneric': 'Bientôt disponible! Fonctionnalité en cours de développement.',
+                'done': 'Terminé ! {0} défini sur {1}.'
+            },
+            'index': {
+                'header': {
+                    'title': 'Plateforme d\'Apprentissage du Code',
+                    'subtitle': 'Maîtrisez le Développement Web & les Langages de Programmation'
+                },
+                'dropdown': {
+                    'language': 'Langue', 'mode': 'Mode', 'fullscreen': 'Plein écran', 'fontsize': 'Taille de police',
+                    'export': 'Exporter les données', 'notifications': 'Notifications', 'en': 'EN', 'fr': 'FR', 'ar': 'AR',
+                    'light': 'Clair', 'dark': 'Sombre', 'highcontrast': 'Contraste élevé', 'yes': 'Oui', 'no': 'Non',
+                    'increase': 'Augmenter', 'decrease': 'Diminuer', 'reset': 'Réinitialiser', 'pdf': 'PDF', 'sheet': 'Feuille',
+                    'txt': 'TXT', 'important': 'Important uniquement', 'do': 'Faire', 'close': 'Fermer'
+                },
+                'footer': {
+                    'briefDescription': 'Votre plateforme de référence pour maîtriser le développement web et les langages de programmation.',
+                    'communityTitle': 'Communauté',
+                    'community': {
+                        'facebook': 'Facebook', 'twitter': 'Twitter', 'github': 'GitHub', 'youtube': 'YouTube', 'upscrolled': 'UpScrolled'
+                    },
+                    'aboutSupportTitle': 'À propos et support',
+                    'aboutSupport': {
+                        'aboutUs': 'À propos', 'contactSupport': 'Contacter le support', 'privacyPolicy': 'Politique de confidentialité', 'termsOfService': 'Conditions d\'utilisation'
+                    },
+                    'copyright': '© 2026 Code Learning Platform. Tous droits réservés.'
+                },
+                'installButton': 'Installer l’application'
+            }
+        };
+        // ----- Arabic -----
+        window.DHEtranslations.ar['lesson-ch01-les02'] = {
+            'document': { 'title': 'صفحة HTML الأولى لك – منصة تعلم البرمجة' },
+            'page': { 'title': 'صفحة HTML الأولى لك', 'subtitle': 'الفصل 1: البدء مع HTML' },
+            'content': {
+                'intro': 'إنشاء أول صفحة HTML لك هو الخطوة الأولى المثيرة في تطوير الويب. في هذا الدرس، ستبني صفحة ويب حقيقية من الصفر وتراها تظهر في متصفحك.',
+                'stepByStepHeading': 'دليل خطوة بخطوة',
+                // step1
+                'step1_prefix': '1. افتح محرر نصوص:',
+                'step1_text': 'يمكنك استخدام أي محرر نصوص عادي – Notepad (ويندوز)، TextEdit (ماك في وضع النص العادي)، أو محرر أكواد مثل VS Code أو Sublime Text أو Atom.',
+                // step2
+                'step2_prefix': '2. اكتب هيكل HTML الأساسي:',
+                'step2_text_before_doctype': 'يبدأ كل مستند HTML بإعلان ',
+                'step2_doctype': '<!DOCTYPE html>',
+                'step2_text_after_doctype': '، يليه عنصر الجذر ',
+                'step2_html': '<html>',
+                'step2_text_after_html': ' الذي يحتوي على قسمي ',
+                'step2_head': '<head>',
+                'step2_text_after_head': ' و ',
+                'step2_body': '<body>',
+                'step2_text_after_body': '.',
+                // step3
+                'step3_prefix': '3. أضف محتوى إلى الجسم:',
+                'step3_text_before_body': 'داخل ',
+                'step3_body': '<body>',
+                'step3_text_after_body': '، ضع على الأقل عنوان (',
+                'step3_h1': '<h1>',
+                'step3_text_after_h1': ') وفقرة (',
+                'step3_p': '<p>',
+                'step3_text_after_p': ').',
+                // step4
+                'step4_prefix': '4. احفظ الملف:',
+                'step4_text_before_code1': 'اختر اسمًا مثل ',
+                'step4_code1': 'myfirstpage.html',
+                'step4_text_between': ' وتأكد أن الامتداد ',
+                'step4_code2': '.html',
+                'step4_text_after_code2': ' (وليس ',
+                'step4_text_extra': '.txt). في المحرر، اختر "نوع الملف: كل الملفات" أو أضف ',
+                'step4_code_html': '.html',
+                'step4_text_final': ' صراحة.',
+                // step5
+                'step5_prefix': '5. افتح في متصفح:',
+                'step5_text': 'حدد موقع الملف المحفوظ، انقر بزر الماوس الأيمن واختر "فتح باستخدام" متصفح الويب المفضل لديك (كروم، فايرفوكس، إيدج، إلخ). سترى صفحتك معروضة!',
+                // example
+                'exampleHeading': 'مثال كامل وبسيط',
+                'basicExample': 'انسخ الكود التالي في محرر النصوص الخاص بك:',
+                // explanation
+                'explanationHeading': 'ماذا يفعل كل جزء',
+                'explanationCode1': '<!DOCTYPE html>',
+                'explanationText1': 'يخبر المتصفح أن هذا مستند HTML5.',
+                'explanationCode2': '<html>',
+                'explanationText2': 'هو العنصر الجذر الذي يغلف كل المحتوى.',
+                'explanationCode3': '<head>',
+                'explanationText3': 'يحتوي على معلومات وصفية، مثل <title> الصفحة (الموضح في علامة تبويب المتصفح).',
+                'explanationCode4': '<body>',
+                'explanationText4': 'يحتوي على كل ما هو مرئي في الصفحة – العناوين، الفقرات، الصور، إلخ.',
+                'explanationCode5': '<h1> و <p>',
+                'explanationText5': 'عنوان من المستوى الأول وفقرة.',
+                // viewing
+                'viewingHeading': 'عرض وتفقد صفحتك',
+                'viewing': 'بمجرد فتح الصفحة في المتصفح، يمكنك النقر بزر الماوس الأيمن في أي مكان واختيار "عرض مصدر الصفحة" لرؤية كود HTML الخام. يمكنك أيضًا فتح أدوات المطور (F12) لتفقد العناصر ورؤية DOM وتجربة تغييرات حية – طريقة رائعة للتعلم!',
+                // tips
+                'tipsHeading': 'نصائح للمبتدئين',
+                'tip1_prefix': 'احفظ ملفك دائمًا بامتداد ',
+                'tip1_code': '.html',
+                'tip1_suffix': '.',
+                'tip2': 'استخدم المسافات البادئة (مسافات أو علامات تبويب) لجعل الكود مقروءًا.',
+                'tip3': 'إذا لم تظهر صفحتك بشكل صحيح، تحقق من الأخطاء المطبعية – الأقواس المفقودة أو العلامات المكتوبة بشكل خاطئ هي أخطاء شائعة.',
+                'tip4': 'اجعل محرر النصوص والمتصفح جنبًا إلى جنب لترى التغييرات فور حفظك وتحديثك.',
+                // conclusion
+                'conclusion': 'تهانينا! لقد أنشأت للتو أول صفحة HTML لك. في الدرس التالي، سنستكشف الهيكل الكامل لمستند HTML بمزيد من التفاصيل، بما في ذلك قسم الرأس والبيانات الوصفية.'
+            },
+            'progress': {
+                'chapter': 'تقدم الفصل',
+                'course': 'تقدم الدورة',
+                'markCompleted': 'تحديد كمكتمل',
+                'markIncomplete': 'تحديد كغير مكتمل',
+                'savePdf': '📄 حفظ الدرس بصيغة PDF'
+            },
+            'navigation': {
+                'previous': 'السابق: ما هو HTML؟',
+                'next': 'التالي: هيكل مستند HTML'
+            },
+            'notifications': {
+                'welcome': 'مرحبًا بك في منصة تعلم البرمجة!',
+                'comingSoon': 'ضبط "{0}" إلى "{1}" - الميزة قيد التطوير. قريبًا',
+                'doAction': 'تفعيل "{0}" بالقيمة "{1}" - الميزة قيد التطوير. قريبًا',
+                'exportPDF': 'جاري فتح تصدير PDF...',
+                'exportTXT': 'تم تصدير النص بنجاح.',
+                'exportSheet': 'تم تصدير CSV بنجاح.',
+                'comingSoonGeneric': 'قريبًا! هذه الميزة قيد التطوير.',
+                'done': 'تم! تعيين {0} إلى {1}.'
+            },
+            'index': {
+                'header': {
+                    'title': 'منصة تعلم البرمجة',
+                    'subtitle': 'إتقان تطوير الويب ولغات البرمجة'
+                },
+                'dropdown': {
+                    'language': 'اللغة', 'mode': 'الوضع', 'fullscreen': 'ملء الشاشة', 'fontsize': 'حجم الخط',
+                    'export': 'تصدير البيانات', 'notifications': 'الإشعارات', 'en': 'الإنجليزية', 'fr': 'الفرنسية', 'ar': 'العربية',
+                    'light': 'فاتح', 'dark': 'داكن', 'highcontrast': 'تباين عال', 'yes': 'نعم', 'no': 'لا',
+                    'increase': 'زيادة', 'decrease': 'تقليل', 'reset': 'إعادة تعيين', 'pdf': 'PDF', 'sheet': 'ورقة',
+                    'txt': 'نص', 'important': 'المهم فقط', 'do': 'تنفيذ', 'close': 'إغلاق'
+                },
+                'footer': {
+                    'briefDescription': 'منصتك المثالية لإتقان تطوير الويب ولغات البرمجة.',
+                    'communityTitle': 'المجتمع',
+                    'community': {
+                        'facebook': 'فيسبوك', 'twitter': 'تويتر', 'github': 'جيت‌هب', 'youtube': 'يوتيوب', 'upscrolled': 'أب‌سكرولد'
+                    },
+                    'aboutSupportTitle': 'حول والدعم',
+                    'aboutSupport': {
+                        'aboutUs': 'معلومات عنا', 'contactSupport': 'اتصل بالدعم', 'privacyPolicy': 'سياسة الخصوصية', 'termsOfService': 'شروط الخدمة'
+                    },
+                    'copyright': '© 2026 منصة تعلم البرمجة. جميع الحقوق محفوظة.'
+                },
+                'installButton': 'تثبيت التطبيق'
+            }
+        };
+        // Set the page prefix
+        window.DHEPagePrefix = 'lesson-ch01-les02';
+    </script>
+    
+    <!-- ===== PROGRESS MANAGEMENT SCRIPT ===== -->
+    <script>
+(function() {
+  const COURSE = window.DHECourse || 'html';
+  const CHAPTER_ID = window.DHECurrentChapter;
+  const LESSON_ID = window.DHECurrentLesson;
+  const courseData = window.DHECourseData?.[COURSE];
+  if (!courseData) {
+    console.error('Course data not found');
+    return;
+  }
+  // Find the current chapter object
+  const currentChapter = courseData.chapters.find(ch => ch.id === CHAPTER_ID);
+  if (!currentChapter) {
+    console.error('Chapter not found:', CHAPTER_ID);
+    return;
+  }
+  const chapterLessonIds = currentChapter.lessons.map(l => l.id);
+  const allLessonIds = courseData.chapters.flatMap(ch => ch.lessons.map(l => l.id));
+  const CHAPTER_LESSONS = chapterLessonIds.length;
+  const TOTAL_COURSE_LESSONS = allLessonIds.length;
+
+  // In‑memory fallback for when localStorage is unavailable
+  let memoryProgress = {};
+
+  function getProgress() {
+    try {
+      const stored = localStorage.getItem('DHELessonProgress');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Progress: Failed to read from localStorage, using in‑memory fallback', e);
+      if (window.DHEIndexNotifications) {
+        window.DHEIndexNotifications.instance.show(
+          'localStorageError',
+          'notifications.localStorageError',
+          'Could not load your progress. Changes will not persist after this session.',
+          'warning'
+        );
+      }
+      return memoryProgress;
+    }
+    return {};
+  }
+
+  function saveProgress(progress) {
+    try {
+      localStorage.setItem('DHELessonProgress', JSON.stringify(progress));
+      memoryProgress = {}; // clear fallback after successful save
+    } catch (e) {
+      console.warn('Progress: Failed to save to localStorage, keeping in memory only', e);
+      memoryProgress = { ...progress };
+      if (window.DHEIndexNotifications) {
+        window.DHEIndexNotifications.instance.show(
+          'localStorageError',
+          'notifications.localStorageError',
+          'Could not save your progress. Changes will not persist after this session.',
+          'warning'
+        );
+      }
+    }
+  }
+
+  function updateProgressUI() {
+    const progress = getProgress();
+    // Chapter progress
+    let chapterCompletedCount = 0;
+    chapterLessonIds.forEach(id => {
+      if (progress[id]) chapterCompletedCount++;
+    });
+    // Course progress
+    let courseCompletedCount = 0;
+    allLessonIds.forEach(id => {
+      if (progress[id]) courseCompletedCount++;
+    });
+    // Update DOM elements
+    document.getElementById('chapterProgressText').textContent =
+      `${chapterCompletedCount}/${CHAPTER_LESSONS}`;
+    document.getElementById('chapterProgressFill').style.width =
+      (chapterCompletedCount / CHAPTER_LESSONS) * 100 + '%';
+    document.getElementById('courseProgressText').textContent =
+      `${courseCompletedCount}/${TOTAL_COURSE_LESSONS}`;
+    document.getElementById('courseProgressFill').style.width =
+      (courseCompletedCount / TOTAL_COURSE_LESSONS) * 100 + '%';
+
+    // Toggle "Mark Completed" button text
+    const btn = document.getElementById('markCompletedBtn');
+    const isCompleted = progress[LESSON_ID] || false;
+    if (isCompleted) {
+      btn.classList.add('completed');
+    } else {
+      btn.classList.remove('completed');
+    }
+    if (window.DHEIndexTranslator) {
+      const key = isCompleted ? 'progress.markIncomplete' : 'progress.markCompleted';
+      const translation = window.DHEIndexTranslator.getTranslation(key);
+      if (translation) btn.textContent = translation;
+    }
+  }
+
+  function toggleCompletion() {
+    const progress = getProgress();
+    progress[LESSON_ID] = !progress[LESSON_ID];
+    saveProgress(progress);
+    updateProgressUI();
+    if (window.DHEIndexNotifications) {
+      const status = progress[LESSON_ID] ? 'completed' : 'marked incomplete';
+      window.DHEIndexNotifications.instance.show(
+        'lesson-toggle', null, `Lesson ${status}.`, 'success'
+      );
+    }
+  }
+
+  function init() {
+    const btn = document.getElementById('markCompletedBtn');
+    if (btn) btn.addEventListener('click', toggleCompletion);
+    updateProgressUI();
+    document.addEventListener('languageChanged', updateProgressUI);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+    </script>
+    <!-- ===== SCRIPT FOR PDF SAVE BUTTON ===== -->
+    <script>
+        (function() {
+            const pdfBtn = document.getElementById('saveLessonPdfBtn');
+            if (pdfBtn) {
+                pdfBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+        })();
+    </script>
+    <!-- ===== CUSTOM EXPORT EXTRACTORS TO INCLUDE PROGRESS ===== -->
+    <script>
+        // Override export extractors for this page to include lesson progress
+        window.DHEPageExportTextExtractor = function() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('DHEIndexSettings') || '{}');
+                const progress = JSON.parse(localStorage.getItem('DHELessonProgress') || '{}');
+                const output = {
+                    settings: settings,
+                    progress: progress,
+                    lesson: 'html-ch01-les02',
+                    note: 'This export includes lesson completion data.'
+                };
+                return JSON.stringify(output, null, 2);
+            } catch (e) {
+                console.warn('Export text extractor failed, returning empty data', e);
+                return JSON.stringify({
+                    error: 'Could not read localStorage data',
+                    lesson: 'html-ch01-les02',
+                    note: 'Export data may be incomplete.'
+                }, null, 2);
+            }
+        };
+        window.DHEPageExportSheetExtractor = function() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('DHEIndexSettings') || '{}');
+                const progress = JSON.parse(localStorage.getItem('DHELessonProgress') || '{}');
+                const data = [['Key', 'Value']];
+                data.push(['Export Type', 'Lesson Progress Export']);
+                data.push(['Lesson ID', 'html-ch01-les02']);
+                // Flatten settings
+                Object.entries(settings).forEach(([k, v]) => {
+                    data.push([`setting.${k}`, JSON.stringify(v)]);
+                });
+                // Flatten progress
+                Object.entries(progress).forEach(([k, v]) => {
+                    data.push([`progress.${k}`, v ? 'completed' : 'incomplete']);
+                });
+                return data;
+            } catch (e) {
+                console.warn('Export sheet extractor failed, returning minimal data', e);
+                return [['Error', 'Could not read localStorage data']];
+            }
+        };
+    </script>
+    <!-- ===== SUPABASE SCRIPTS (added) ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase.js"></script>
+    <!-- ===== GLOBAL SCRIPTS ===== -->
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/notifications.js"></script>
+    <script src="scripts/modes.js"></script>
+    <script src="scripts/screen.js"></script>
+    <script src="scripts/font.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/options.js"></script>
+    <!-- ===== Service Worker & Install Prompt ===== -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
+        // Install prompt handling
+        let deferredPrompt;
+        const installButton = document.getElementById('installAppBtn');
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installButton) installButton.style.display = 'inline-block';
+        });
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            });
+        }
+        window.addEventListener('appinstalled', () => {
+            console.log('App was installed.');
+            if (installButton) installButton.style.display = 'none';
+            // Update install status in settings
+            if (window.DHEIndexNotifications?.instance?.updateInstallStatus) {
+                window.DHEIndexNotifications.instance.updateInstallStatus(true);
+            }
+        });
+    </script>
+</body>
+</html>

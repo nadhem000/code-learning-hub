@@ -1,3 +1,449 @@
+# 📋 Project TODOs: Code Learning Platform – HTML Lessons
+### **Integration Plan: Optional Sign‑In with Supabase + Local Storage Fallback**
+
+This plan outlines how to add an **optional user authentication system** (using Supabase) that syncs user settings and lesson progress between the cloud and the browser’s `localStorage`.  
+Existing functionality remains unchanged for anonymous users; signed‑in users benefit from cross‑device persistence.  
+All steps are designed to be **non‑breaking** and can be implemented incrementally.
+
+---
+
+#### **Step 0: Prerequisites**  
+- Create a Supabase project and obtain the **anon key** and **project URL**.
+- Define two tables in Supabase:
+  - `user_settings` – columns: `user_id` (uuid, references auth.users), `settings` (jsonb), `updated_at` (timestamp)
+  - `user_progress` – columns: `user_id` (uuid), `progress` (jsonb), `updated_at` (timestamp)
+
+---
+
+#### **Step 1: Add Supabase Client Library & Initialisation**  
+**Goal:** Make Supabase available on all pages.
+anon key:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlidGpkbHVpZGJlZ2VhaHFucGJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNzUwNjQsImV4cCI6MjA4Njk1MTA2NH0.DWa5vQY5EwfIzv9cX7iQp2EujV2Q3yd-q0tz0cxGSlc
+api url:
+https://ybtjdluidbegeahqnpbk.supabase.co
+
+- **New file:** `scripts/supabase.js`  
+  - Initialises the Supabase client using the anon key and URL.
+  - Exports functions: `signIn`, `signUp`, `signOut`, `getCurrentUser`, `onAuthStateChange`, and data helpers (`fetchSettings`, `saveSettings`, `fetchProgress`, `saveProgress`).
+
+- **Modified files (all HTML pages):**  
+  - `index.html`
+  - `about.html`
+  - `card-html.html`
+  - `DHE-cardHtml-ch01-les01.html`, `DHE-cardHtml-ch01-les02.html`, … (all lesson pages)  
+  - Add script tags **before** other custom scripts:
+    ```html
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase.js"></script>
+    ```
+
+---
+
+#### **Step 2: Authentication UI in Header**  
+**Goal:** Provide sign‑in/sign‑up controls and a modal for authentication.
+
+- **Modified files (all HTML pages):**  
+  - In the header’s dropdown (`#dropdownMenu`), add a new group:
+    - When **not signed in**: a “Sign In” button (opens modal).
+    - When **signed in**: display user email + a “Sign Out” button.
+  - Add a hidden modal (similar to the existing lessons modal) containing:
+    - Email & password fields.
+    - Toggle between “Sign In” and “Sign Up”.
+    - (Optional) “Continue with Google” button.
+
+- The modal’s behaviour (show/hide, form submission) will be handled by a new script (see Step 3) or added to `supabase.js`.
+
+---
+
+#### **Step 3: Create Data Synchronisation Module**  
+**Goal:** Centralise all reads/writes of settings and progress, automatically choosing the correct storage (Supabase if signed in and online, else `localStorage`).
+
+- **New file:** `scripts/dataSync.js`  
+  - Provides high‑level methods:
+    - `getSettings()` / `saveSettings(settings)`
+    - `getProgress()` / `saveProgress(progress)`
+    - `syncOnSignIn()` – merges local and remote data after login.
+    - `syncOnSignOut()` – optionally uploads pending changes before logout.
+  - Listens to `onAuthStateChange` (from `supabase.js`) to trigger sync.
+  - Handles online/offline detection and queues pending updates when offline.
+
+- **Modified files:** (None yet, but this module will be used in the next step.)
+
+---
+
+#### **Step 4: Refactor Existing Modules to Use `dataSync`**  
+**Goal:** Replace all direct `localStorage` access with calls to the new central module.
+
+- **Modified files:**  
+  - `scripts/notifications.js` – replace `localStorage.getItem/setItem` with `dataSync.getSettings()` / `dataSync.saveSettings()`.
+  - `scripts/modes.js` – replace direct reads/writes with `dataSync`.
+  - `scripts/font.js` – replace `localStorage` operations with `dataSync`.
+  - `scripts/screen.js` – replace `loadSetting` with `dataSync.getSettings()`.
+  - `scripts/export.js` – replace `_getSettings()` with `dataSync.getSettings()`.
+  - `scripts/options.js` – indirectly uses `notifications.updateSetting`, which now uses `dataSync`.
+
+- **Lesson pages:**  
+  - The inline progress‑management script (inside each lesson HTML) will be removed and replaced by a shared script.
+  - **New file:** `scripts/lessonProgress.js` – contains the same logic but uses `dataSync` instead of raw `localStorage`.
+  - **Modified lesson HTML files:**  
+    - Remove the `<script>` block that handles progress.
+    - Add `<script src="scripts/lessonProgress.js"></script>` after `translations.js`.
+
+- **Script loading order** in all HTML files must now be:
+  ```
+  supabase.js → dataSync.js → translations.js → notifications.js → … (other modules) → lessonProgress.js (on lesson pages)
+  ```
+
+---
+
+#### **Step 5: Implement Merge Logic & Timestamps**  
+**Goal:** Resolve conflicts when both local and remote data exist, using `updated_at` timestamps.
+
+- **Modified file:** `scripts/dataSync.js`  
+  - When saving settings or progress, always attach a `_meta.lastSaved` timestamp (already present for settings; add it for progress).
+  - In `syncOnSignIn()`:
+    - Fetch remote data.
+    - Compare timestamps: if remote is newer, download and overwrite local; if local is newer, upload; if equal or one missing, use the existing one.
+  - Ensure the merge is atomic and notifies relevant parts of the app (e.g., update UI after sync).
+
+- **Modified file:** `scripts/lessonProgress.js` – now uses `dataSync.saveProgress()`, which automatically adds the timestamp.
+
+---
+
+#### **Step 6: Online / Offline Handling**  
+**Goal:** Keep data consistent when the network becomes available again.
+
+- **Modified file:** `scripts/dataSync.js`  
+  - Listen to `online` / `offline` events.
+  - When coming online and the user is signed in, automatically trigger a full sync.
+  - (Optional) When saving while signed in but offline, store the change locally and mark it as pending. On reconnect, flush pending updates.
+
+---
+
+#### **Step 7: Enhance Export (Optional)**  
+**Goal:** Include user information in exports when signed in.
+
+- **Modified file:** `scripts/export.js`  
+  - In `_extractText()` and `_extractSheetData()`, if a user is signed in, include `userId` and a note that this data is synced with the cloud.
+
+---
+
+#### **Step 8: Documentation & Testing**  
+**Goal:** Update project documentation and verify no regressions.
+
+- **Modified file:** `README.md`  
+  - Add a section about the new optional sign‑in feature.
+  - Mention that data is now synchronised across devices when logged in.
+
+- **Testing:**  
+  - Anonymous users should continue to work exactly as before.
+  - Sign‑in, sign‑up, and sign‑out should work without affecting existing local data until sync is performed.
+  - Data should persist after page reload and across devices after login.
+  - Offline usage should fall back to `localStorage` and sync when back online.
+
+---
+
+### **Summary of Files to Change / Create**
+
+| Step | New Files                     | Modified Files                                                                                                                                                                                                                     |
+|------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | `scripts/supabase.js`         | All HTML files (add Supabase script tags)                                                                                                                                                                                          |
+| 2    | –                             | All HTML files (add account dropdown group & sign‑in modal)                                                                                                                                                                        |
+| 3    | `scripts/dataSync.js`         | –                                                                                                                                                                                                                                   |
+| 4    | `scripts/lessonProgress.js`   | `notifications.js`, `modes.js`, `font.js`, `screen.js`, `export.js`, `options.js` (indirect), and all lesson HTML files (replace inline progress script with `lessonProgress.js`)                                                |
+| 5    | –                             | `dataSync.js`, `lessonProgress.js`                                                                                                                                                                                                 |
+| 6    | –                             | `dataSync.js`                                                                                                                                                                                                                       |
+| 7    | –                             | `export.js` (optional)                                                                                                                                                                                                              |
+| 8    | –                             | `README.md`                                                                                                                                                                                                                         |
+
+This plan ensures that the existing platform remains fully functional while progressively adding the optional sign‑in feature. Each step can be developed, tested, and deployed independently without breaking current behaviour.
+This document consolidates implementation notes, limitations, and potential enhancements identified from the lesson files (`DHE-cardHtml-ch01-les01.html` and `DHE-cardHtml-ch01-les02.html`). Each item is categorized, and where applicable, step‑by‑step implementation guidance is provided.
+
+---
+
+## 1. Progress Tracking & Persistence
+
+### 🔹 **Full Chapter Progress Calculation**
+**Current Limitation:**  
+The chapter progress bar currently counts only the current lesson (or uses a hardcoded set of lesson IDs). It does not dynamically aggregate completion status of all lessons within a chapter.
+
+**Steps to Implement:**
+1. Define a central configuration file (e.g., `course-structure.json`) that lists all chapters, lessons, and their IDs.
+2. In each lesson page, load the configuration and determine the list of lesson IDs belonging to the same chapter.
+3. Retrieve completion flags from `localStorage` for each lesson ID and calculate the chapter progress.
+4. Update the progress bar and text accordingly.
+
+**Additional Considerations:**
+- Store the course structure in a way that can be shared across pages (e.g., a global JavaScript variable or fetched via API).
+- Handle edge cases when new lessons are added or IDs change.
+
+---
+
+### 🔹 **Dynamic Lesson ID List (Remove Hardcoding)**
+**Current Limitation:**  
+All lesson IDs are hardcoded in the progress calculation script (`allLessonIds` array). This is brittle and requires manual updates when lessons are added/removed.
+
+**Steps to Implement:**
+1. Create a central metadata file (JSON or JS) that exports the complete lesson hierarchy.
+2. Replace hardcoded arrays with a function that reads from this metadata.
+3. Use the same metadata for both chapter and course progress calculations.
+4. Optionally generate lesson pages dynamically from this metadata to ensure consistency.
+
+---
+
+### 🔹 **Synchronize Progress Across Devices**
+**Current Status:**  
+Progress is stored only in `localStorage` of the current browser. Users cannot resume progress on another device.
+
+**Steps to Implement:**
+1. Add user authentication (e.g., email/password or OAuth).
+2. Create a backend API to save/load progress.
+3. On page load, fetch remote progress and merge with local storage.
+4. Provide a “Sync” button or automatic sync on interval.
+
+---
+
+### 🔹 **Progress Reset Option**
+**Feature Request:**  
+Allow users to reset progress for a chapter or the entire course.
+
+**Steps to Implement:**
+1. Add a “Reset Chapter Progress” button in the progress section.
+2. Show a confirmation dialog.
+3. Remove completion flags for all lessons in that chapter from `localStorage` (and backend if synced).
+4. Update UI immediately.
+
+---
+
+### 🔹 **Progress Indicators on Index/Course Overview**
+**Current Status:**  
+The main index page may not show per‑lesson progress.
+
+**Steps to Implement:**
+1. On the course overview page, read progress from `localStorage`.
+2. Display a checkmark or progress dot next to each lesson link.
+3. Optionally show a small progress bar per chapter.
+
+---
+
+## 2. Localization & UI Text
+
+### 🔹 **Dynamic Toggle of “Mark Completed” / “Mark Incomplete” Button Text**
+**Current Limitation:**  
+The button text is set via `data-i18n` statically. When the lesson is completed, the script manually changes the text using the translator, but this approach is fragile and not automatically updated when the language changes.
+
+**Steps to Implement:**
+1. Define two translation keys: `progress.markCompleted` and `progress.markIncomplete`.
+2. In the progress update function, after toggling the completion state, set the button’s `data-i18n` attribute to the appropriate key.
+3. Re-run the translation function (e.g., `DHEIndexTranslator.translatePage()`) to update the text without manual string concatenation.
+4. Ensure the translator listens to the `languageChanged` event and updates the button accordingly.
+
+**Alternative:** Use two separate buttons and show/hide them based on completion state.
+
+---
+
+### 🔹 **Missing Translations for New UI Elements**
+**Current Status:**  
+Any new UI elements added (e.g., reset buttons, sync indicators) need translation keys in all supported languages.
+
+**Steps to Implement:**
+1. Identify all user‑facing strings and add them to the translation objects (en, fr, ar) under appropriate namespaces.
+2. Update the HTML elements with `data-i18n` attributes.
+3. Test language switching to ensure all texts update.
+
+---
+
+## 3. Code Quality & Maintainability
+
+### 🔹 **Centralize Course Structure Data**
+**Current Status:**  
+Lesson IDs, chapter counts, and total lesson counts are duplicated in each lesson file.
+
+**Steps to Implement:**
+1. Create a separate JavaScript file (e.g., `course-data.js`) that exports:
+   ```javascript
+   window.COURSE_DATA = {
+     chapters: [
+       { id: 'ch01', title: '...', lessons: ['les01', 'les02', ...] },
+       ...
+     ],
+     totalLessons: 25
+   };
+   ```
+2. Include this script before the page‑specific progress script.
+3. Replace hardcoded arrays with references to `COURSE_DATA`.
+4. Compute chapter lesson IDs dynamically based on current chapter (which can be deduced from the page URL or a meta tag).
+
+---
+
+### 🔹 **Refactor Duplicated Progress Script**
+**Current Status:**  
+The progress management script is identical in both lesson files (except `LESSON_ID`). This violates DRY.
+
+**Steps to Implement:**
+1. Move the common progress logic into a shared JavaScript file, e.g., `lesson-progress.js`.
+2. Parameterize the script by setting a global `CURRENT_LESSON_ID` before including the shared script.
+3. Include the shared script in each lesson page, reducing code duplication and easing maintenance.
+
+---
+
+### 🔹 **Error Handling for localStorage**
+**Current Status:**  
+No error handling if `localStorage` is unavailable or throws an exception (e.g., in private browsing modes).
+
+**Steps to Implement:**
+1. Wrap all `localStorage` accesses in try/catch blocks.
+2. Provide fallback (e.g., in‑memory storage) and notify the user that progress won’t be saved.
+3. Gracefully degrade functionality.
+
+---
+
+## 4. Features & Enhancements
+
+### 🔹 **PDF Export Improvements**
+**Current Status:**  
+PDF export uses the browser’s print dialog and print styles. This may produce inconsistent results across browsers and doesn’t include the progress section by design.
+
+**Steps to Implement:**
+1. Enhance print styles to optionally include progress bars (if desired).
+2. Consider using a dedicated PDF library (e.g., jsPDF) to generate a more polished PDF with metadata and custom styling.
+3. Add a “Download PDF” button that triggers the library instead of `window.print()`.
+
+---
+
+### 🔹 **Export Functionality Unification**
+**Current Status:**  
+Each lesson defines its own export extractors (`DHEPageExportTextExtractor`, `DHEPageExportSheetExtractor`). These are very similar.
+
+**Steps to Implement:**
+1. Move export logic to a shared script that reads the current lesson ID from a global variable.
+2. Use the centralized course data to include all lesson progress in the export (not just the current lesson).
+3. Provide a unified export dialog allowing users to choose data scope (current lesson, chapter, whole course).
+
+---
+
+### 🔹 **Notifications System Enhancements**
+**Current Status:**  
+Notifications are shown for lesson completion, but the system could be more robust.
+
+**Steps to Implement:**
+1. Add notification types (success, error, info) with appropriate icons.
+2. Allow notifications to be dismissed manually.
+3. Implement a notification queue if multiple notifications appear at once.
+4. Persist important notifications (e.g., sync errors) until acknowledged.
+
+---
+
+### 🔹 **Keyboard Navigation & Accessibility**
+**Current Status:**  
+The interface is mostly accessible, but some interactive elements may lack proper ARIA labels or keyboard focus indicators.
+
+**Steps to Implement:**
+1. Audit all buttons, links, and form controls for ARIA attributes (e.g., `aria-pressed` for toggle buttons).
+2. Ensure focus order follows a logical sequence.
+3. Add skip‑to‑content links for screen reader users.
+4. Test with keyboard-only navigation and screen readers.
+
+---
+
+### 🔹 **Service Worker & Offline Support**
+**Current Status:**  
+A service worker is registered, but its caching strategy is not defined in the provided files.
+
+**Steps to Implement:**
+1. Define a caching strategy (e.g., stale‑while‑revalidate for lesson pages, cache‑first for assets).
+2. Precache essential pages (index, first few lessons) for offline access.
+3. Provide an offline indicator when the user is offline.
+4. Allow users to download entire course for offline study.
+
+---
+
+### 🔹 **Analytics Integration**
+**Feature Request:**  
+Track user progress, time spent on lessons, and completion rates to improve the platform.
+
+**Steps to Implement:**
+1. Choose an analytics provider (e.g., Google Analytics, Plausible).
+2. Track events: lesson start, lesson complete, chapter complete, course complete.
+3. Ensure compliance with privacy regulations (GDPR, CCPA) – obtain consent.
+
+---
+
+### 🔹 **Bookmarking / “Continue Where You Left Off”**
+**Feature Request:**  
+Remember the last visited lesson and offer a “Continue” button on the homepage.
+
+**Steps to Implement:**
+1. Store the last accessed lesson ID and timestamp in `localStorage`.
+2. On the index page, display a “Resume” link if a recent lesson exists.
+3. Update the stored lesson ID whenever a user visits a lesson page.
+
+---
+
+## 5. Testing & Quality Assurance
+
+### 🔹 **RTL Layout Testing**
+**Current Status:**  
+RTL adjustments are present (e.g., `html[dir="rtl"]` rules), but full RTL support for all dynamic content may not be tested.
+
+**Steps to Implement:**
+1. Test the interface with Arabic language selected.
+2. Verify that all UI elements (buttons, progress bars, navigation) mirror correctly.
+3. Check that code samples remain LTR inside RTL context (already partially handled).
+4. Test on different screen sizes.
+
+---
+
+### 🔹 **Cross‑Browser Compatibility**
+**Current Status:**  
+The platform uses modern CSS features that may not work on older browsers.
+
+**Steps to Implement:**
+1. Define a browser support matrix (e.g., last 2 versions of Chrome, Firefox, Safari, Edge).
+2. Use Autoprefixer or manually add vendor prefixes if needed.
+3. Test on target browsers and devices.
+4. Provide fallbacks for unsupported features (e.g., CSS variables).
+
+---
+
+### 🔹 **Automated Tests**
+**Feature Request:**  
+Add unit tests for progress logic and integration tests for critical user flows.
+
+**Steps to Implement:**
+1. Set up a testing framework (e.g., Jest for unit tests, Playwright for E2E).
+2. Write tests for:
+   - Progress calculation functions.
+   - localStorage read/write.
+   - Translation switching.
+   - Navigation between lessons.
+3. Run tests in CI pipeline.
+
+---
+
+## 6. Documentation & Deployment
+
+### 🔹 **Inline Code Comments**
+**Current Status:**  
+Some comments exist, but complex logic (e.g., progress update) could benefit from more explanation.
+
+**Steps to Implement:**
+1. Review all JavaScript and add JSDoc comments for functions.
+2. Explain non‑obvious workarounds or future considerations (like the notes already present).
+3. Maintain a changelog.
+
+### 🔹 **Deployment Checklist**
+- [ ] Ensure all external scripts (translations, notifications, etc.) are minified and combined.
+- [ ] Configure cache headers for static assets.
+- [ ] Set up a CI/CD pipeline to auto‑deploy on push.
+- [ ] Monitor for broken links (e.g., `coming-soon` placeholders).
+
+---
+
+*This TODO list is a living document. Prioritize items based on user feedback and development resources.*
+
+
+
 **all options/features** regardless of status (working, placeholder, coming soon, or just named):
 
 ## **Navigation & User Interface**

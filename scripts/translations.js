@@ -14,11 +14,23 @@ class DHEIndexTranslator {
     }
 
     loadLanguage() {
-        const saved = localStorage.getItem('DHEIndexSettings');
-        if (saved) {
-            const settings = JSON.parse(saved);
-            if (settings.language && this.translations[settings.language]) {
-                this.currentLang = settings.language;
+        try {
+            const saved = localStorage.getItem('DHEIndexSettings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                if (settings.language && this.translations[settings.language]) {
+                    this.currentLang = settings.language;
+                }
+            }
+        } catch (e) {
+            console.warn('DHEIndexTranslator: Failed to load language from localStorage, using default', e);
+            if (window.DHEIndexNotifications) {
+                window.DHEIndexNotifications.instance.show(
+                    'localStorageError',
+                    'notifications.localStorageError',
+                    'Could not load language preference. Using default.',
+                    'warning'
+                );
             }
         }
         this.setDocumentDirection();
@@ -29,10 +41,24 @@ class DHEIndexTranslator {
         if (this.translations[lang]) {
             this.currentLang = lang;
             // Save to settings
-            const saved = localStorage.getItem('DHEIndexSettings');
-            let settings = saved ? JSON.parse(saved) : {};
-            settings.language = lang;
-            localStorage.setItem('DHEIndexSettings', JSON.stringify(settings));
+            try {
+                const saved = localStorage.getItem('DHEIndexSettings');
+                let settings = saved ? JSON.parse(saved) : {};
+                settings.language = lang;
+                settings._meta = settings._meta || {};
+                settings._meta.lastSaved = new Date().toISOString();
+                localStorage.setItem('DHEIndexSettings', JSON.stringify(settings));
+            } catch (e) {
+                console.warn('DHEIndexTranslator: Failed to save language', e);
+                if (window.DHEIndexNotifications) {
+                    window.DHEIndexNotifications.instance.show(
+                        'localStorageError',
+                        'notifications.localStorageError',
+                        'Could not save language preference.',
+                        'warning'
+                    );
+                }
+            }
             // Update UI
             this.translatePage();
             this.setDocumentDirection();
@@ -80,12 +106,10 @@ class DHEIndexTranslator {
         if (!key.startsWith('DHE.translation.')) {
             fullKey = `DHE.translation.${this.pagePrefix}.${key}`;
         }
-
         const parts = fullKey.split('.');
         // Remove 'DHE', 'translation' -> the rest includes the page prefix
         const path = parts.slice(2);
         let current = this.translations[this.currentLang];
-
         for (const part of path) {
             if (current && current[part] !== undefined) {
                 current = current[part];
@@ -96,11 +120,12 @@ class DHEIndexTranslator {
         return current;
     }
 
-_formatString(str, params = []) {
-    return str.replace(/{(\d+)}/g, (match, index) => {
-        return params[index] !== undefined ? params[index] : match;
-    });
-}
+    _formatString(str, params = []) {
+        return str.replace(/{(\d+)}/g, (match, index) => {
+            return params[index] !== undefined ? params[index] : match;
+        });
+    }
+
     getTranslatedString(key, fallback = '') {
         const translation = this.getTranslation(key);
         return translation !== undefined ? translation : fallback;

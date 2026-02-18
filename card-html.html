@@ -647,7 +647,11 @@
         window.DHEPagePrefix = 'card-html';
     </script>
 
+    <!-- ===== SUPABASE SCRIPTS (added) ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase.js"></script>
     <!-- ===== GLOBAL SCRIPTS (unchanged) ===== -->
+<script src="scripts/course-structure.js"></script>
     <script src="scripts/translations.js"></script>
     <script src="scripts/notifications.js"></script>
     <script src="scripts/modes.js"></script>
@@ -664,11 +668,9 @@
         .catch(err => console.error('SW registration failed:', err));
     });
   }
-
   // Install prompt handling
   let deferredPrompt;
   const installButton = document.getElementById('installAppBtn');
-
   window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67+ from automatically showing the prompt
     e.preventDefault();
@@ -677,7 +679,6 @@
     // Show the install button (if it exists)
     if (installButton) installButton.style.display = 'inline-block';
   });
-
   if (installButton) {
     installButton.addEventListener('click', async () => {
       if (!deferredPrompt) return;
@@ -692,11 +693,14 @@
       installButton.style.display = 'none';
     });
   }
-
   // Optionally, hide the button if the app is already installed
   window.addEventListener('appinstalled', () => {
     console.log('App was installed.');
     if (installButton) installButton.style.display = 'none';
+    // Update install status in settings
+    if (window.DHEIndexNotifications?.instance?.updateInstallStatus) {
+      window.DHEIndexNotifications.instance.updateInstallStatus(true);
+    }
   });
 </script>
 </body>

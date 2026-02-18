@@ -1,91 +1,102 @@
-// font.js – Font Size Management (scalable, persistent)
-// Now sets both page‑specific and global (index) CSS custom properties
-class DHEFont {
+// modes.js - Mode Management System (Light/Dark/High Contrast)
+// Now applies both page‑specific and global (index) mode classes
+class DHEModes {
     constructor() {
-        this.prefix = window.DHEPagePrefix || 'index';   // for page‑specific variable
-        this.globalPrefix = 'index';                      // for global variable (header/footer)
-        this.storageKey = 'DHEIndexSettings';
-        this.defaultMultiplier = 1.0;
-        this.multiplier = this.defaultMultiplier;
-        this.min = 0.6;
-        this.max = 1.8;
+        this.prefix = window.DHEPagePrefix || 'index';          // for page‑specific classes
+        this.globalPrefix = 'index';                             // for global (header/footer) classes
+        this.modeClasses = {
+            dark: `DHE-${this.prefix}-mode-dark`,
+            highcontrast: `DHE-${this.prefix}-mode-highcontrast`
+        };
+        this.globalModeClasses = {
+            dark: `DHE-${this.globalPrefix}-mode-dark`,
+            highcontrast: `DHE-${this.globalPrefix}-mode-highcontrast`
+        };
+        this.currentMode = 'light';
         this.init();
     }
 
     init() {
-        this.loadSetting();
-        this.apply();
+        this.loadMode();
+        this.applyMode(this.currentMode);
     }
 
-    loadSetting() {
-        const saved = localStorage.getItem(this.storageKey);
-        if (saved) {
-            try {
+    loadMode() {
+        try {
+            const saved = localStorage.getItem('DHEIndexSettings');
+            if (saved) {
                 const settings = JSON.parse(saved);
-                if (typeof settings.fontSizeMultiplier === 'number') {
-                    this.multiplier = Math.min(this.max, Math.max(this.min, settings.fontSizeMultiplier));
+                if (settings.mode) {
+                    this.currentMode = settings.mode;
                 }
-            } catch (e) {
-                console.warn('DHEFont: Failed to parse settings', e);
             }
+        } catch (e) {
+            console.warn('DHEModes: Failed to load mode from localStorage, using light', e);
+            this._notify('localStorageError', 'Could not load theme mode. Using light.');
         }
     }
 
-    saveSetting() {
-        const saved = localStorage.getItem(this.storageKey);
-        let settings = saved ? JSON.parse(saved) : {};
-        settings.fontSizeMultiplier = this.multiplier;
-        localStorage.setItem(this.storageKey, JSON.stringify(settings));
+    applyMode(mode) {
+        // Remove all possible mode classes (both page and global)
+        const allClasses = [
+            ...Object.values(this.modeClasses),
+            ...Object.values(this.globalModeClasses)
+        ];
+        allClasses.forEach(cls => {
+            document.body.classList.remove(cls);
+        });
+
+        if (mode === 'dark' || mode === 'highcontrast') {
+            // Add both page‑specific and global classes
+            document.body.classList.add(this.modeClasses[mode]);
+            document.body.classList.add(this.globalModeClasses[mode]);
+        }
+        // Light mode: no extra classes (both removed)
     }
 
-    apply() {
-        // Set both page‑specific and global font scale variables
-        document.documentElement.style.setProperty(
-            `--DHE-${this.prefix}-font-scale`,
-            this.multiplier
-        );
-        document.documentElement.style.setProperty(
-            `--DHE-${this.globalPrefix}-font-scale`,
-            this.multiplier
-        );
+    setMode(mode) {
+        if (mode === this.currentMode) return;
+        this.currentMode = mode;
+        this.applyMode(mode);
+        // Persist using the existing settings system
+        if (window.DHEIndexNotifications) {
+            window.DHEIndexNotifications.instance.updateSetting('mode', mode);
+        } else {
+            this._saveModeDirectly(mode);
+        }
+        // Notify the rest of the application
+        document.dispatchEvent(new CustomEvent('modeChanged', { detail: { mode } }));
     }
 
-    increase() {
-        this.multiplier = Math.min(this.max, this.multiplier * 1.1);
-        this.saveSetting();
-        this.apply();
-        this._dispatchEvent('increase');
-    }
-
-    decrease() {
-        this.multiplier = Math.max(this.min, this.multiplier * 0.9);
-        this.saveSetting();
-        this.apply();
-        this._dispatchEvent('decrease');
-    }
-
-    reset() {
-        this.multiplier = this.defaultMultiplier;
-        this.saveSetting();
-        this.apply();
-        this._dispatchEvent('reset');
-    }
-
-    setFontSize(action) {
-        switch (action) {
-            case 'increase': this.increase(); break;
-            case 'decrease': this.decrease(); break;
-            case 'reset':    this.reset();    break;
-            default: console.warn(`DHEFont: unknown action "${action}"`);
+    _saveModeDirectly(mode) {
+        try {
+            const saved = localStorage.getItem('DHEIndexSettings');
+            let settings = saved ? JSON.parse(saved) : {};
+            settings.mode = mode;
+            settings._meta = settings._meta || {};
+            settings._meta.lastSaved = new Date().toISOString();
+            localStorage.setItem('DHEIndexSettings', JSON.stringify(settings));
+        } catch (e) {
+            console.warn('DHEModes: Failed to save mode directly', e);
+            this._notify('localStorageError', 'Could not save theme mode.');
         }
     }
 
-    _dispatchEvent(action) {
-        document.dispatchEvent(new CustomEvent('fontSizeChanged', {
-            detail: { multiplier: this.multiplier, action }
-        }));
+    getMode() {
+        return this.currentMode;
+    }
+
+    _notify(key, fallback) {
+        if (window.DHEIndexNotifications) {
+            window.DHEIndexNotifications.instance.show(
+                `modes-${key}`,
+                `notifications.${key}`,
+                fallback,
+                'warning'
+            );
+        }
     }
 }
 
 // Instantiate globally
-window.DHEFont = new DHEFont();
+window.DHEModes = new DHEModes();

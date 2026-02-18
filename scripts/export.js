@@ -44,7 +44,12 @@ class DHEExport {
     _extractText() {
         // Allow custom override (kept for backward compatibility)
         if (typeof window.DHEPageExportTextExtractor === 'function') {
-            return window.DHEPageExportTextExtractor();
+            try {
+                return window.DHEPageExportTextExtractor();
+            } catch (e) {
+                console.warn('DHEExport: Custom text extractor failed, using default', e);
+                this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
+            }
         }
         // Default: return pretty‑printed settings JSON
         const settings = this._getSettings();
@@ -54,7 +59,12 @@ class DHEExport {
     _extractSheetData() {
         // Allow custom override
         if (typeof window.DHEPageExportSheetExtractor === 'function') {
-            return window.DHEPageExportSheetExtractor();
+            try {
+                return window.DHEPageExportSheetExtractor();
+            } catch (e) {
+                console.warn('DHEExport: Custom sheet extractor failed, using default', e);
+                this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
+            }
         }
         // Default: convert settings object to key‑value CSV
         const settings = this._getSettings();
@@ -73,13 +83,14 @@ class DHEExport {
     // Helper: retrieve and parse DHEIndexSettings from localStorage
     // -------------------------------------------------------------
     _getSettings() {
-        const saved = localStorage.getItem('DHEIndexSettings');
-        if (saved) {
-            try {
+        try {
+            const saved = localStorage.getItem('DHEIndexSettings');
+            if (saved) {
                 return JSON.parse(saved);
-            } catch (e) {
-                console.warn('DHEExport: Failed to parse settings', e);
             }
+        } catch (e) {
+            console.warn('DHEExport: Failed to read settings from localStorage', e);
+            this._showNotification('localStorageError', 'Could not access saved settings. Using defaults.', 'warning');
         }
         return {};
     }
