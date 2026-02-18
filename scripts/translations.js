@@ -101,23 +101,53 @@ class DHEIndexTranslator {
     }
 
     getTranslation(key) {
-        // If key does NOT start with the full prefix, add the page prefix
-        let fullKey = key;
-        if (!key.startsWith('DHE.translation.')) {
-            fullKey = `DHE.translation.${this.pagePrefix}.${key}`;
-        }
-        const parts = fullKey.split('.');
-        // Remove 'DHE', 'translation' -> the rest includes the page prefix
-        const path = parts.slice(2);
-        let current = this.translations[this.currentLang];
-        for (const part of path) {
-            if (current && current[part] !== undefined) {
-                current = current[part];
-            } else {
-                return undefined;
+        // If key already has the full prefix, use it directly
+        if (key.startsWith('DHE.translation.')) {
+            const parts = key.split('.');
+            const path = parts.slice(2); // remove 'DHE', 'translation'
+            let current = this.translations[this.currentLang];
+            for (const part of path) {
+                if (current && current[part] !== undefined) {
+                    current = current[part];
+                } else {
+                    return undefined;
+                }
             }
+            return current;
         }
-        return current;
+
+        // Key does not start with DHE.translation. – we need to build the full path
+        // If the key already starts with the current page prefix (e.g., "index.installButton" on the homepage),
+        // then we only need to prepend "DHE.translation."
+        if (key.startsWith(this.pagePrefix + '.')) {
+            // Key is already prefixed with the page, so we just add DHE.translation.
+            const fullKey = `DHE.translation.${key}`;
+            const parts = fullKey.split('.');
+            const path = parts.slice(2); // remove 'DHE', 'translation'
+            let current = this.translations[this.currentLang];
+            for (const part of path) {
+                if (current && current[part] !== undefined) {
+                    current = current[part];
+                } else {
+                    return undefined;
+                }
+            }
+            return current;
+        } else {
+            // Key does not start with page prefix, so we add both page prefix and the key
+            const fullKey = `DHE.translation.${this.pagePrefix}.${key}`;
+            const parts = fullKey.split('.');
+            const path = parts.slice(2); // remove 'DHE', 'translation'
+            let current = this.translations[this.currentLang];
+            for (const part of path) {
+                if (current && current[part] !== undefined) {
+                    current = current[part];
+                } else {
+                    return undefined;
+                }
+            }
+            return current;
+        }
     }
 
     _formatString(str, params = []) {
