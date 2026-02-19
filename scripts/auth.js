@@ -51,8 +51,8 @@
                 <span class="DHE-auth-close">&times;</span>
                 <h2 id="authModalTitle" data-i18n="index.auth.signInTitle">Sign In</h2>
                 <form id="authForm">
-                    <input type="email" id="authEmail" placeholder="Email" required>
-                    <input type="password" id="authPassword" placeholder="Password" required>
+                    <input type="email" id="authEmail" placeholder="Email" required autocomplete="email">
+                    <input type="password" id="authPassword" placeholder="Password" required autocomplete="current-password">
                     <button type="submit" id="authSubmitBtn" data-i18n="index.auth.signIn">Sign In</button>
                 </form>
                 <p>
