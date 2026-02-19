@@ -33,7 +33,7 @@ function onAuthStateChange(callback) {
   return supabaseClient.auth.onAuthStateChange(callback);
 }
 
-// ---------- Data helpers (settings & progress) – assume tables exist as per schema ----------
+// ---------- Data helpers (settings & progress) ----------
 async function fetchSettings(userId) {
   const { data, error } = await supabaseClient
     .from('user_settings')
@@ -72,6 +72,17 @@ async function saveProgress(userId, progress) {
   return data;
 }
 
+// ---------- Statistics (new) ----------
+async function fetchStatistics() {
+  const { data, error } = await supabaseClient
+    .from('app_statistics')
+    .select('*')
+    .eq('id', 1)
+    .single();
+  if (error) throw error;
+  return data;
+}
+
 // Attach everything to a global object for use by other scripts
 window.DHESupabase = {
   client: supabaseClient,
@@ -83,5 +94,6 @@ window.DHESupabase = {
   fetchSettings,
   saveSettings,
   fetchProgress,
-  saveProgress
+  saveProgress,
+  fetchStatistics
 };
