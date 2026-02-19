@@ -34,6 +34,7 @@ class DHEExport {
     }
 
     async _extractText() {
+        // Allow page‑specific override
         if (typeof window.DHEPageExportTextExtractor === 'function') {
             try {
                 return await window.DHEPageExportTextExtractor();
@@ -42,11 +43,35 @@ class DHEExport {
                 this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
             }
         }
+
+        // Default extractor: include settings and, if signed in, user info
         const settings = await this._getSettings();
-        return JSON.stringify(settings, null, 2);
+        const result = { settings };
+
+        // Include user information if signed in
+        try {
+            if (window.DHESupabase && typeof window.DHESupabase.getCurrentUser === 'function') {
+                const { data } = await window.DHESupabase.getCurrentUser();
+                const user = data?.user;
+                if (user) {
+                    result.user = {
+                        id: user.id,
+                        email: user.email,
+                        synced: true,
+                        note: 'This data is synchronised with the cloud.'
+                    };
+                }
+            }
+        } catch (e) {
+            console.warn('DHEExport: Failed to retrieve user info for export', e);
+            // Continue without user info
+        }
+
+        return JSON.stringify(result, null, 2);
     }
 
     async _extractSheetData() {
+        // Allow page‑specific override
         if (typeof window.DHEPageExportSheetExtractor === 'function') {
             try {
                 return await window.DHEPageExportSheetExtractor();
@@ -55,14 +80,39 @@ class DHEExport {
                 this._showNotification('exportError', 'Custom export failed, using default data.', 'warning');
             }
         }
+
+        // Default sheet extractor
         const settings = await this._getSettings();
-        const data = [['Setting', 'Value']];
+        const data = [];
+
+        // Add user info rows if signed in
+        try {
+            if (window.DHESupabase && typeof window.DHESupabase.getCurrentUser === 'function') {
+                const { data: userData } = await window.DHESupabase.getCurrentUser();
+                const user = userData?.user;
+                if (user) {
+                    data.push(['User ID', user.id]);
+                    data.push(['Email', user.email]);
+                    data.push(['Sync Status', 'Synced with cloud']);
+                    data.push([]); // blank separator
+                }
+            }
+        } catch (e) {
+            console.warn('DHEExport: Failed to retrieve user info for sheet export', e);
+            // Continue without user info
+        }
+
+        // Header row
+        data.push(['Setting', 'Value']);
+
+        // Flatten settings
         Object.entries(settings).forEach(([key, value]) => {
             const val = (typeof value === 'object' && value !== null)
                 ? JSON.stringify(value)
                 : String(value);
             data.push([key, val]);
         });
+
         return data;
     }
 

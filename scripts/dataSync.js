@@ -13,6 +13,7 @@
     let online = navigator.onLine;
     // In-memory queue for pending updates (also persisted to localStorage)
     let pendingQueue = [];
+
     // -------------------------------------------------------------
     // Initialisation – load queue, listen to auth & network
     // -------------------------------------------------------------
@@ -45,14 +46,20 @@
             processQueue();
         }
     }
+
+    // MODIFIED: Sync order – first full sync, then process queue
     function handleOnline() {
         online = true;
         if (currentUser) {
-            processQueue();
-            // Optionally full sync (remote may have changed while offline)
-            fullSync().catch(err => console.warn('Full sync after online failed:', err));
+            // First sync remote to get latest data (merge)
+            fullSync().catch(err => console.warn('Full sync after online failed:', err))
+                .finally(() => {
+                    // Then process any pending updates (they will be applied on top of synced data)
+                    processQueue();
+                });
         }
     }
+
     // -------------------------------------------------------------
     // Queue management
     // -------------------------------------------------------------
@@ -65,6 +72,7 @@
             pendingQueue = [];
         }
     }
+
     function saveQueue() {
         try {
             localStorage.setItem(QUEUE_KEY, JSON.stringify(pendingQueue));
@@ -72,10 +80,25 @@
             console.warn('DHEDataSync: Failed to save queue', e);
         }
     }
+
     function addToQueue(operation, data) {
         pendingQueue.push({ operation, data, timestamp: new Date().toISOString() });
         saveQueue();
     }
+
+    // MODIFIED: Remove all items of a given operation type from the queue
+    function removeFromQueue(operation) {
+        pendingQueue = pendingQueue.filter(item => item.operation !== operation);
+        saveQueue();
+    }
+
+    // MODIFIED: Replace any existing items of the given operation with a new one
+    function replaceInQueue(operation, data) {
+        pendingQueue = pendingQueue.filter(item => item.operation !== operation);
+        pendingQueue.push({ operation, data, timestamp: new Date().toISOString() });
+        saveQueue();
+    }
+
     async function processQueue() {
         if (!online || !currentUser) return; // can't process while offline or not logged in
         while (pendingQueue.length > 0) {
@@ -95,6 +118,7 @@
             }
         }
     }
+
     // -------------------------------------------------------------
     // Internal read/write from localStorage (fallback)
     // -------------------------------------------------------------
@@ -107,6 +131,7 @@
             return {};
         }
     }
+
     function saveLocalSettings(settings) {
         try {
             localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(settings));
@@ -114,6 +139,7 @@
             console.warn('DHEDataSync: Failed to save local settings', e);
         }
     }
+
     function getLocalProgress() {
         try {
             const saved = localStorage.getItem(STORAGE_KEY_PROGRESS);
@@ -123,6 +149,7 @@
             return {};
         }
     }
+
     function saveLocalProgress(progress) {
         try {
             localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(progress));
@@ -130,6 +157,7 @@
             console.warn('DHEDataSync: Failed to save local progress', e);
         }
     }
+
     // -------------------------------------------------------------
     // Supabase upload/download (assumes signed in)
     // -------------------------------------------------------------
@@ -137,26 +165,31 @@
         if (!currentUser) throw new Error('No user signed in');
         await window.DHESupabase.saveSettings(currentUser.id, settings);
     }
+
     async function downloadSettings() {
         if (!currentUser) throw new Error('No user signed in');
         const remote = await window.DHESupabase.fetchSettings(currentUser.id);
         return remote || {};
     }
+
     async function uploadProgress(progress) {
         if (!currentUser) throw new Error('No user signed in');
         await window.DHESupabase.saveProgress(currentUser.id, progress);
     }
+
     async function downloadProgress() {
         if (!currentUser) throw new Error('No user signed in');
         const remote = await window.DHESupabase.fetchProgress(currentUser.id);
         return remote || {};
     }
+
     // -------------------------------------------------------------
     // Timestamp helpers
     // -------------------------------------------------------------
     function getTimestamp(obj) {
         return obj?._meta?.lastSaved || '1970-01-01T00:00:00.000Z';
     }
+
     // -------------------------------------------------------------
     // Public API: getSettings / saveSettings
     // -------------------------------------------------------------
@@ -186,6 +219,7 @@
             return getLocalSettings();
         }
     }
+
     async function saveSettings(settings) {
         // Always update local
         saveLocalSettings(settings);
@@ -193,16 +227,19 @@
             // Signed in and online → upload immediately
             try {
                 await uploadSettings(settings);
+                // MODIFIED: Remove any pending saveSettings from queue (they are now obsolete)
+                removeFromQueue('saveSettings');
             } catch (err) {
                 console.warn('DHEDataSync: Failed to upload settings, queueing', err);
-                addToQueue('saveSettings', settings);
+                replaceInQueue('saveSettings', settings);
             }
         } else if (currentUser && !online) {
             // Signed in but offline → queue for later
-            addToQueue('saveSettings', settings);
+            replaceInQueue('saveSettings', settings);
         }
         // If not signed in, nothing else to do
     }
+
     // -------------------------------------------------------------
     // Public API: getProgress / saveProgress
     // -------------------------------------------------------------
@@ -227,61 +264,70 @@
             return getLocalProgress();
         }
     }
+
     async function saveProgress(progress) {
         // Add/update timestamp before saving
         const progressWithMeta = { ...progress };
         if (!progressWithMeta._meta) progressWithMeta._meta = {};
         progressWithMeta._meta.lastSaved = new Date().toISOString();
-
         saveLocalProgress(progressWithMeta);
         if (currentUser && online) {
             try {
                 await uploadProgress(progressWithMeta);
+                // MODIFIED: Remove any pending saveProgress from queue
+                removeFromQueue('saveProgress');
             } catch (err) {
                 console.warn('DHEDataSync: Failed to upload progress, queueing', err);
-                addToQueue('saveProgress', progressWithMeta);
+                replaceInQueue('saveProgress', progressWithMeta);
             }
         } else if (currentUser && !online) {
-            addToQueue('saveProgress', progressWithMeta);
+            replaceInQueue('saveProgress', progressWithMeta);
         }
     }
+
     // -------------------------------------------------------------
     // Sync on sign‑in: merge local and remote, then set final state
     // -------------------------------------------------------------
     async function syncOnSignIn() {
         if (!currentUser) return;
+
         // Settings
         try {
             const local = getLocalSettings();
             const remote = await downloadSettings().catch(() => null);
             const finalSettings = mergeSettings(local, remote);
-            // Save final to both stores
             saveLocalSettings(finalSettings);
+
             if (online) {
                 await uploadSettings(finalSettings).catch(err => {
                     console.warn('Upload after merge failed, will queue', err);
-                    addToQueue('saveSettings', finalSettings);
+                    replaceInQueue('saveSettings', finalSettings);
                 });
+                // If upload succeeded, remove any pending settings from queue
+                removeFromQueue('saveSettings');
             } else {
                 // offline, queue for later
-                addToQueue('saveSettings', finalSettings);
+                replaceInQueue('saveSettings', finalSettings);
             }
         } catch (err) {
             console.warn('DHEDataSync: Settings sync failed', err);
         }
+
         // Progress (similar)
         try {
             const local = getLocalProgress();
             const remote = await downloadProgress().catch(() => null);
             const finalProgress = mergeProgress(local, remote);
             saveLocalProgress(finalProgress);
+
             if (online) {
                 await uploadProgress(finalProgress).catch(err => {
                     console.warn('Upload after merge failed, will queue', err);
-                    addToQueue('saveProgress', finalProgress);
+                    replaceInQueue('saveProgress', finalProgress);
                 });
+                removeFromQueue('saveProgress');
             } else {
-                addToQueue('saveProgress', finalProgress);
+                replaceInQueue('saveProgress', finalProgress);
             }
         } catch (err) {
             console.warn('DHEDataSync: Progress sync failed', err);
@@ -290,6 +336,7 @@
         // Notify the rest of the app that data has been synced
         document.dispatchEvent(new CustomEvent('dataSynced'));
     }
+
     // Merge using timestamp: whichever is newer, or if one missing, use the other
     function mergeSettings(local, remote) {
         if (!remote) return local;
@@ -298,6 +345,7 @@
         const remoteTime = getTimestamp(remote);
         return localTime >= remoteTime ? local : remote;
     }
+
     function mergeProgress(local, remote) {
         if (!remote) return local;
         if (!local) return remote;
@@ -305,6 +353,7 @@
         const remoteTime = getTimestamp(remote);
         return localTime >= remoteTime ? local : remote;
     }
+
     // -------------------------------------------------------------
     // Sync on sign‑out: upload any pending changes (optional)
     // -------------------------------------------------------------
@@ -315,6 +364,7 @@
         }
         // No further action – user will lose ability to sync after sign-out
     }
+
     // -------------------------------------------------------------
     // Full sync (used when coming online)
     // -------------------------------------------------------------
@@ -322,6 +372,7 @@
         if (!currentUser || !online) return;
         await syncOnSignIn(); // same logic: merge remote into local
     }
+
     // -------------------------------------------------------------
     // Expose public API
     // -------------------------------------------------------------
@@ -334,6 +385,7 @@
         syncOnSignIn,
         syncOnSignOut,
     };
+
     // Start listening
     init();
 })();

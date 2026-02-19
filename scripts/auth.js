@@ -1,8 +1,6 @@
-// scripts/auth.js – Authentication UI (modal) and placeholder logic
-// Depends on: supabase.js, translations.js, notifications.js (optional)
-
+// scripts/auth.js – Authentication UI (modal) and real Supabase integration
+// Depends on: supabase.js, translations.js, notifications.js
 (function() {
-    // Wait for DOM and translator to be ready
     function initAuth() {
         const signInBtn = document.getElementById('authSignInBtn');
         if (!signInBtn) return; // No auth UI on this page
@@ -20,20 +18,34 @@
             showModal(modal);
         });
 
-        // Sign Out button placeholder (will be handled later)
+        // Sign Out button – real implementation
         const signOutBtn = document.getElementById('authSignOutBtn');
         if (signOutBtn) {
-            signOutBtn.addEventListener('click', () => {
-                alert('Sign out not yet implemented (Step 03).');
+            signOutBtn.addEventListener('click', async () => {
+                try {
+                    await window.DHESupabase.signOut();
+                    // UI will update via onAuthStateChange listener
+                } catch (error) {
+                    showNotification('signOutError', 'notifications.signOutError', 'Sign out failed. Please try again.', 'error');
+                }
             });
         }
+
+        // Check current user on load and update UI
+        updateAuthUI();
+
+        // Listen for auth changes (sign in/out) from Supabase
+        window.DHESupabase.onAuthStateChange((event, session) => {
+            updateAuthUI();
+            // The dataSync module already listens to this, so it will handle syncing.
+        });
     }
 
     function createModal() {
         const modal = document.createElement('div');
         modal.id = 'authModal';
         modal.className = 'DHE-auth-modal';
-        modal.style.display = 'none'; // hidden by default
+        modal.style.display = 'none';
         modal.innerHTML = `
             <div class="DHE-auth-modal-content">
                 <span class="DHE-auth-close">&times;</span>
@@ -63,33 +75,70 @@
 
         let isSignUpMode = false;
 
-        // Close modal when clicking on X or outside
         closeBtn.addEventListener('click', () => hideModal(modal));
         window.addEventListener('click', (event) => {
             if (event.target === modal) hideModal(modal);
         });
 
-        // Toggle between Sign In and Sign Up
         authToggleLink.addEventListener('click', (e) => {
             e.preventDefault();
             isSignUpMode = !isSignUpMode;
             updateModalTexts(isSignUpMode, authModalTitle, authSubmitBtn, authToggleLink);
         });
 
-        // Form submission placeholder
-        authForm.addEventListener('submit', (e) => {
+        // Form submission – real Supabase calls
+        authForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
-            alert(`Auth not yet implemented (Step 03). Mode: ${isSignUpMode ? 'Sign Up' : 'Sign In'}\nEmail: ${email}`);
+
+            try {
+                if (isSignUpMode) {
+                    // SIGN UP
+                    const { data, error } = await window.DHESupabase.signUp(email, password);
+                    if (error) throw error;
+
+                    // If email confirmation is enabled, show a message
+                    if (data?.user?.identities?.length === 0) {
+                        // User already registered but not confirmed? Usually Supabase returns an error in that case.
+                        // For safety, we handle generic success.
+                    }
+                    showNotification('signUpSuccess', 'notifications.signUpSuccess', 'Sign up successful! Please check your email to confirm your account.', 'success');
+                    hideModal(modal);
+                } else {
+                    // SIGN IN
+                    const { data, error } = await window.DHESupabase.signIn(email, password);
+                    if (error) throw error;
+
+                    showNotification('signInSuccess', 'notifications.signInSuccess', 'Signed in successfully!', 'success');
+                    hideModal(modal);
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                let message = error.message || 'Authentication failed.';
+                // Show user-friendly translation if available
+                showNotification('authError', null, message, 'error');
+            }
         });
 
-        // Google button placeholder
-        googleBtn.addEventListener('click', () => {
-            alert('Google sign-in not yet implemented (Step 03).');
+        // Google sign-in
+        googleBtn.addEventListener('click', async () => {
+            try {
+                const { error } = await window.DHESupabase.client.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin // or a specific callback URL
+                    }
+                });
+                if (error) throw error;
+                // The OAuth redirect will leave the page, so no need to close modal here
+            } catch (error) {
+                console.error('Google sign-in error:', error);
+                showNotification('googleAuthError', null, error.message, 'error');
+            }
         });
 
-        // Initial translation (in case language changes after modal is created)
+        // Update texts when language changes
         document.addEventListener('languageChanged', () => {
             updateModalTexts(isSignUpMode, authModalTitle, authSubmitBtn, authToggleLink);
         });
@@ -97,30 +146,64 @@
 
     function updateModalTexts(isSignUpMode, titleEl, submitBtnEl, toggleLinkEl) {
         if (!window.DHEIndexTranslator) return;
-        const translator = window.DHEIndexTranslator;
+        const t = window.DHEIndexTranslator;
         if (isSignUpMode) {
-            titleEl.textContent = translator.getTranslation('index.auth.signUpTitle') || 'Sign Up';
-            submitBtnEl.textContent = translator.getTranslation('index.auth.signUpTitle') || 'Sign Up';
-            toggleLinkEl.textContent = translator.getTranslation('index.auth.haveAccount') || 'Already have an account? Sign In';
+            titleEl.textContent = t.getTranslation('index.auth.signUpTitle') || 'Sign Up';
+            submitBtnEl.textContent = t.getTranslation('index.auth.signUpTitle') || 'Sign Up';
+            toggleLinkEl.textContent = t.getTranslation('index.auth.haveAccount') || 'Already have an account? Sign In';
         } else {
-            titleEl.textContent = translator.getTranslation('index.auth.signInTitle') || 'Sign In';
-            submitBtnEl.textContent = translator.getTranslation('index.auth.signIn') || 'Sign In';
-            toggleLinkEl.textContent = translator.getTranslation('index.auth.noAccount') || "Don't have an account? Sign Up";
+            titleEl.textContent = t.getTranslation('index.auth.signInTitle') || 'Sign In';
+            submitBtnEl.textContent = t.getTranslation('index.auth.signIn') || 'Sign In';
+            toggleLinkEl.textContent = t.getTranslation('index.auth.noAccount') || "Don't have an account? Sign Up";
         }
     }
 
     function showModal(modal) {
-        // Ensure translations are up-to-date before showing
         const titleEl = modal.querySelector('#authModalTitle');
         const submitBtnEl = modal.querySelector('#authSubmitBtn');
         const toggleLinkEl = modal.querySelector('#authToggleLink');
-        // Reset to Sign In mode every time modal opens (optional)
+        // Reset to Sign In mode every time modal opens
         updateModalTexts(false, titleEl, submitBtnEl, toggleLinkEl);
         modal.style.display = 'block';
     }
 
     function hideModal(modal) {
         modal.style.display = 'none';
+    }
+
+    // Update header UI based on current user
+    async function updateAuthUI() {
+        try {
+            const { data: { user } } = await window.DHESupabase.getCurrentUser();
+            const signInBtn = document.getElementById('authSignInBtn');
+            const signOutBtn = document.getElementById('authSignOutBtn');
+            const userEmailSpan = document.getElementById('authUserEmail');
+
+            if (user) {
+                // User is signed in
+                if (signInBtn) signInBtn.style.display = 'none';
+                if (signOutBtn) signOutBtn.style.display = 'inline-block';
+                if (userEmailSpan) {
+                    userEmailSpan.textContent = user.email;
+                    userEmailSpan.style.display = 'inline';
+                }
+            } else {
+                // No user
+                if (signInBtn) signInBtn.style.display = 'inline-block';
+                if (signOutBtn) signOutBtn.style.display = 'none';
+                if (userEmailSpan) userEmailSpan.style.display = 'none';
+            }
+        } catch (error) {
+            console.warn('Failed to update auth UI:', error);
+        }
+    }
+
+    function showNotification(id, translationKey, fallback, type) {
+        if (window.DHEIndexNotifications) {
+            window.DHEIndexNotifications.instance.show(id, translationKey, fallback, type);
+        } else {
+            alert(fallback); // fallback if notifications not available
+        }
     }
 
     // Start when DOM is ready
