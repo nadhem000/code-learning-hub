@@ -13,6 +13,9 @@
     let online = navigator.onLine;
     // In-memory queue for pending updates (also persisted to localStorage)
     let pendingQueue = [];
+let saveSettingsTimeout;
+let saveProgressTimeout;
+let saveProgressTimeout;
 
     // -------------------------------------------------------------
     // Initialisation – load queue, listen to auth & network
@@ -220,25 +223,26 @@
         }
     }
 
-    async function saveSettings(settings) {
-        // Always update local
-        saveLocalSettings(settings);
+async function saveSettings(settings) {
+    // Always update local immediately
+    saveLocalSettings(settings);
+
+    // Debounce the remote upload
+    if (saveSettingsTimeout) clearTimeout(saveSettingsTimeout);
+    saveSettingsTimeout = setTimeout(async () => {
         if (currentUser && online) {
-            // Signed in and online → upload immediately
             try {
                 await uploadSettings(settings);
-                // MODIFIED: Remove any pending saveSettings from queue (they are now obsolete)
                 removeFromQueue('saveSettings');
             } catch (err) {
                 console.warn('DHEDataSync: Failed to upload settings, queueing', err);
                 replaceInQueue('saveSettings', settings);
             }
         } else if (currentUser && !online) {
-            // Signed in but offline → queue for later
             replaceInQueue('saveSettings', settings);
         }
-        // If not signed in, nothing else to do
-    }
+    }, 500); // Wait 500ms after the last call before actually uploading
+}
 
     // -------------------------------------------------------------
     // Public API: getProgress / saveProgress
@@ -265,16 +269,17 @@
         }
     }
 
-    async function saveProgress(progress) {
-        // Add/update timestamp before saving
-        const progressWithMeta = { ...progress };
-        if (!progressWithMeta._meta) progressWithMeta._meta = {};
-        progressWithMeta._meta.lastSaved = new Date().toISOString();
-        saveLocalProgress(progressWithMeta);
+async function saveProgress(progress) {
+    const progressWithMeta = { ...progress };
+    if (!progressWithMeta._meta) progressWithMeta._meta = {};
+    progressWithMeta._meta.lastSaved = new Date().toISOString();
+    saveLocalProgress(progressWithMeta);
+
+    if (saveProgressTimeout) clearTimeout(saveProgressTimeout);
+    saveProgressTimeout = setTimeout(async () => {
         if (currentUser && online) {
             try {
                 await uploadProgress(progressWithMeta);
-                // MODIFIED: Remove any pending saveProgress from queue
                 removeFromQueue('saveProgress');
             } catch (err) {
                 console.warn('DHEDataSync: Failed to upload progress, queueing', err);
@@ -283,7 +288,8 @@
         } else if (currentUser && !online) {
             replaceInQueue('saveProgress', progressWithMeta);
         }
-    }
+    }, 500);
+}
 
     // -------------------------------------------------------------
     // Sync on sign‑in: merge local and remote, then set final state
