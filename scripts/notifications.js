@@ -189,10 +189,11 @@ class DHEIndexNotifications {
 
     // --- Update install status in metadata ---
     updateInstallStatus(installed) {
-        this.currentSettings._meta = this.currentSettings._meta || {};
-        this.currentSettings._meta.installed = installed;
-        this.saveSettings(); // async
-    }
+       this.currentSettings._meta = this.currentSettings._meta || {};
+       this.currentSettings._meta.installed = installed;
+       console.log('Saving settings with installed:', installed, this.currentSettings);
+       this.saveSettings();
+   }
 
     remove(id) {
         const notification = document.getElementById(`notification-${id}`);
