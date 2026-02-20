@@ -15,7 +15,7 @@
     let pendingQueue = [];
 let saveSettingsTimeout;
 let saveProgressTimeout;
-let saveProgressTimeout;
+
 
     // -------------------------------------------------------------
     // Initialisation – load queue, listen to auth & network

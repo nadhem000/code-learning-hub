@@ -53,7 +53,7 @@
                 <div id="authSignInForm">
                     <h2 id="authModalTitle" data-i18n="index.auth.signInTitle">Sign In</h2>
                     <form id="authForm">
-                        <input type="email" id="authEmail" placeholder="Email" required>
+                        <input type="email" id="authEmail" placeholder="Email" autocomplete="username" required>
                         <input type="password" id="authPassword" placeholder="Password" autocomplete="current-password" required>
                         <div style="text-align: right; margin-bottom: 1rem;">
                             <a href="#" id="forgotPasswordLink" data-i18n="index.auth.forgotPassword">Forgot password?</a>
