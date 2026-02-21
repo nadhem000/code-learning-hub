@@ -189,11 +189,18 @@ class DHEIndexNotifications {
 
     // --- Update install status in metadata ---
     updateInstallStatus(installed) {
-       this.currentSettings._meta = this.currentSettings._meta || {};
-       this.currentSettings._meta.installed = installed;
-       console.log('Saving settings with installed:', installed, this.currentSettings);
-       this.saveSettings();
-   }
+    this.currentSettings._meta = this.currentSettings._meta || {};
+    this.currentSettings._meta.installed = installed;
+    this.saveSettings();
+
+    // If the app was just installed, increment the cloud counter
+    if (installed && window.DHESupabase) {
+        window.DHESupabase.client.rpc('increment_installations')
+            .then(({ error }) => {
+                if (error) console.warn('Failed to increment installation counter:', error);
+            });
+    }
+}
 
     remove(id) {
         const notification = document.getElementById(`notification-${id}`);
