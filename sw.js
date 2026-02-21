@@ -1,4 +1,4 @@
-const CACHE_NAME = 'codehub-v1';
+const CACHE_NAME = 'codehub-v2';
 const OFFLINE_PAGE = '/offline.html';
 
 // Files to precache – add/remove as your project grows
@@ -91,4 +91,5 @@ self.addEventListener('fetch', event => {
 - Cache‑first strategy for static assets (CSS, JS, images).
 - Network‑first strategy for HTML pages (fallback to cache).
 - Offline fallback page (`/offline.html`) –  must create this file (a simple “You are offline” message).
+
 - Automatic cleanup of old caches when a new service worker activates. */
